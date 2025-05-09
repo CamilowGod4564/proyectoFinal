@@ -13,8 +13,9 @@ public class PoobkemonLoader {
 		HashMap<String,Type> types = new HashMap<>();
 		Class<?> clase = Class.forName("domain.Type");
 		Constructor<?> constructor = clase.getConstructors()[0];
-        
-		try(BufferedReader br = new BufferedReader(new FileReader(path))) {
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
+		
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
 			String line;
 			String newTypeName = null;
 			ArrayList<String> ar1 = new ArrayList<>();
@@ -64,6 +65,7 @@ public class PoobkemonLoader {
 	public HashMap<String,Status> loadStatuses(String path){
 		HashMap<String,Status> statuses = new HashMap<>();
 		Map<String, Class<? extends Status>> classType = new HashMap<>();
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
 		classType.put("INDEFINITEONGOINGDAMAGE", IndefiniteOnGoingDamage.class);
 		classType.put("INDEFINITEACTIONBLOCKING", IndefiniteActionBlocking.class);
 		classType.put("FINITEACTIONBLOCKING", FiniteActionBlocking.class);
@@ -71,7 +73,7 @@ public class PoobkemonLoader {
 		classType.put("HEALTHBASEDDAMAGE", HealthBasedDamage.class);
 		classType.put("SELFHARMACTIONBLOCKING", SelfHarmActionBlocking.class);
 		        
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(",");
@@ -100,13 +102,14 @@ public class PoobkemonLoader {
 	public HashMap<String,Movement> loadMovements( HashMap<String,Type> types,HashMap<String,Status> statuses,String path){
 		HashMap<String,Movement> movements = new HashMap<>();
 		Map<String, Class<? extends Movement>> classType = new HashMap<>();
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
 		classType.put("SPECIALSTATUS", SpecialStatus.class);
 		classType.put("SPECIAL", Special.class);
 		classType.put("PHYSICAL", Physical.class);
 		classType.put("DIRECTDAMAGE", DirectDamage.class);
 		//classType.put("STATUSMOVEMENT", StatusMovement.class); falta codigo de eso
 		        
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(",");
@@ -140,14 +143,15 @@ public class PoobkemonLoader {
 	public TreeMap<String,Pokemon> loadPokemons(String path,Map<String,Movement> movements,HashMap<String,Type> types) {
 		Pattern bracketsPattern = Pattern.compile("\\[(.*?)\\]");
 		Pattern bracesPattern = Pattern.compile("\\{(.*?)\\}");
-		
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
+
 	    TreeMap<String,Pokemon> pokemons = new TreeMap<>();
 	    Class<Pokemon> pokemonClass = Pokemon.class;
 	    Constructor<?> constructor = pokemonClass.getConstructors()[0];
 	    Class<?>[] paramTypes = constructor.getParameterTypes();
 	    ArrayList<Type> pokemonTypes = new ArrayList<>();
 	 
-	    try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+	    try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
 	    	String line;
 	        while ((line = br.readLine()) != null) {
 	            String[] fields = line.split(",", paramTypes.length);
@@ -184,10 +188,11 @@ public class PoobkemonLoader {
 	public HashMap<String,Item> loadItems(String path){
 		HashMap<String,Item> items = new HashMap<>();
 		Map<String, Class<? extends Item>> classType = new HashMap<>();
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
 		classType.put("POTION", Potion.class);
 		classType.put("REVIVE", Revive.class);
 		        
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] fields = line.split(",");

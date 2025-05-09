@@ -1,16 +1,17 @@
 package domain;
 
+
 import java.util.*;
 
 public class dsadas {
 	public static void main(String[] args) {
         try {
         	PoobkemonLoader p = new PoobkemonLoader();
-            HashMap<String, Type> tipos = p.loadTypes("src/game_info/TypesPoobkemon.txt");
-            HashMap<String, Status> statuses = p.loadStatuses("src/game_info/StatusesPoobkemon.txt");
-            HashMap<String, Movement> movements = p.loadMovements(tipos,statuses,"src/game_info/MovementsPoobkemon.txt");
-            HashMap<String, Item> items = p.loadItems("src/game_info/ItemsPoobkemon.txt");
-            TreeMap<String,Pokemon> pokemons = p.loadPokemons("src/game_info/PokemonsPoobkemon.txt",movements,tipos);
+            HashMap<String, Type> tipos = p.loadTypes("TypesPoobkemon.txt");
+            HashMap<String, Status> statuses = p.loadStatuses("StatusesPoobkemon.txt");
+            HashMap<String, Movement> movements = p.loadMovements(tipos,statuses,"MovementsPoobkemon.txt");
+            HashMap<String, Item> items = p.loadItems("ItemsPoobkemon.txt");
+            TreeMap<String,Pokemon> pokemons = p.loadPokemons("PokemonsPoobkemon.txt",movements,tipos);
  
             for (String tipo : tipos.keySet()) {
                 System.out.println(tipo + ": " + tipos.get(tipo));
@@ -32,4 +33,5 @@ public class dsadas {
             e.printStackTrace();
         }
 	}
+	
 }
