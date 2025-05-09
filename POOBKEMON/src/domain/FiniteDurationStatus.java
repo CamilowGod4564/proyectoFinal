@@ -10,16 +10,18 @@ public abstract class FiniteDurationStatus extends Status {
 		super(name, maxDuration,removeTemporarilyOnSwitch,removeOnSwitch); //maxDuration its just duration tbh
 		this.minDuration = minDuration;
 	}
-	public boolean  isGonnaBeApplied() {
-		if((currentDuration == 0 || pokemonLosesStatusBefore()) && currentDuration > minDuration) {
-			return false;
-		}
-		return true;
-	}
 
 	public boolean pokemonLosesStatusBefore() {
-	    boolean loses = randomBool.nextBoolean();
-	    return loses;
+	    return randomBool.nextBoolean();
 	}
 	
+	@Override
+	protected void makeStatusWork(Pokemon pokemon) {
+		if((currentDuration == 0 || pokemonLosesStatusBefore()) && currentDuration >= minDuration) {
+			finishStatus(pokemon);
+		}else {
+			currentDuration -= 1;
+			statusLogic(pokemon);
+		}
+	}
 }

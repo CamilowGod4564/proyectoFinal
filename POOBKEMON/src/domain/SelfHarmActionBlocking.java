@@ -4,32 +4,32 @@ import java.util.Random;
 
 public class SelfHarmActionBlocking extends FiniteActionBlocking {
 	
-	double chanceOfApplying;
-	Random random = new Random();
+	protected double chanceOfApplying;
+	protected Random random = new Random();
+	boolean wasApplied;
 	
 	public SelfHarmActionBlocking(String name, int maxDuration, boolean removeTemporarilyOnSwitch,boolean removeOnSwitch, int minDuration, double chanceOfApplying) {
 		super(name, maxDuration, removeTemporarilyOnSwitch, removeOnSwitch, minDuration);
 		this.chanceOfApplying = chanceOfApplying;
+		this.wasApplied = false;
 	}
-	@Override
-	public void apply(Pokemon pokemon) {
-		if(isGonnaBeApplied()) {
-			if(!pokemon.getIsGonnaFail() && failChance()) {
-				pokemon.turnGonnaFail();
-				pokemon.receiveDamage((int)(50*pokemon.getAttack())/pokemon.getDefense());
-				//problema pq se queda asi no se que hacer
-			}
-		}else {
-			finishStatus(pokemon);
-		}
-	}
+
 	
-	private boolean failChance() {
+	private boolean winChance() {
 		return random.nextDouble()<chanceOfApplying;
 	}
+	
 	@Override
-	public void finishStatus(Pokemon pokemon) {
-		pokemon.turnGonnaFail();
-		pokemon.delStatus(this);
+	public void statusLogic(Pokemon pokemon) {
+		if(wasApplied) {
+			pokemon.turnGonnaFail();
+			wasApplied = false;
+		}
+		if(winChance()) {
+			makePokemonUseless(pokemon);
+			//pokemon se debe cortar las venas aca
+			wasApplied = true;
+		}
 	}
 }
+

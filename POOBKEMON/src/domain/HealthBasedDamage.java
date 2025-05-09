@@ -9,10 +9,9 @@ public class HealthBasedDamage extends IndefiniteOnGoingDamage{
 	}
 	
 	@Override
-	public void apply(Pokemon pokemon) {
-		if(!isFreezed) {
-			damage= (int) (pokemon.getHealth() / proportion);
-			pokemon.receiveDamage(damage);
-			}	
+	protected void statusLogic(Pokemon pokemon) {
+		damage= (int) (pokemon.getHealth() / proportion);
+		makePokemonGetHurt(pokemon, damage);
 	}
+	
 }

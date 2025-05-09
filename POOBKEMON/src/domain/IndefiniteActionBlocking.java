@@ -1,9 +1,7 @@
 package domain;
-import java.util.Random;
 
-public class IndefiniteActionBlocking extends IndefiniteDurationStatus{
-	double chanceOfLoseStatus;
-	Random random = new Random();
+public class IndefiniteActionBlocking extends IndefiniteDurationStatus implements Blocking{
+	
 
 	public IndefiniteActionBlocking(String name, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,double chanceOfLoseStatus) {
 		super(name, removeTemporarilyOnSwitch, removeOnSwitch);
@@ -16,20 +14,15 @@ public class IndefiniteActionBlocking extends IndefiniteDurationStatus{
 	}
 
 	@Override
-	public void apply(Pokemon pokemon) {
-		if(!pokemon.getIsGonnaFail()) {
-			pokemon.turnGonnaFail();
-		}else {
-			finishStatus(pokemon);
-		}
+	protected void statusLogic(Pokemon pokemon) {
+		makePokemonUseless(pokemon);
 	}
 	
 	@Override
 	public void finishStatus(Pokemon pokemon) {
-		 if( random.nextDouble() < chanceOfLoseStatus ) {
-			 pokemon.turnGonnaFail();
-			 pokemon.delStatus(this);
-		 }
+		if(pokemon.getIsGonnaFail()) {
+			pokemon.turnGonnaFail();	
+		}
+		pokemon.delStatus(this);
 	}
-			
 }

@@ -50,10 +50,13 @@ public abstract class Status {
 	}
 	
 	public abstract Status copy();
-	public abstract void apply(Pokemon pokemon);
-
 	
-	
-	
+	public void apply(Pokemon pokemon) {
+		if(!isFreezed) {
+			makeStatusWork(pokemon);
+		}
+	}
+	protected abstract void makeStatusWork(Pokemon pokemon);
+	protected abstract void statusLogic(Pokemon pokemon);
 }
 

@@ -1,6 +1,6 @@
 package domain;
 
-public class FiniteActionBlocking extends FiniteDurationStatus{
+public class FiniteActionBlocking extends FiniteDurationStatus implements Blocking{
 	
 
 
@@ -10,24 +10,19 @@ public class FiniteActionBlocking extends FiniteDurationStatus{
 
 	@Override
 	public void finishStatus(Pokemon pokemon) {
-		pokemon.turnGonnaFail();
+		if(pokemon.getIsGonnaFail()) {
+			pokemon.turnGonnaFail();
+		}
 		pokemon.delStatus(this);
 	}
 
 	@Override
 	public Status copy() {
-		
-		return null;
+		return new FiniteActionBlocking(name, duration, removeTemporarilyOnSwitch,removeOnSwitch, minDuration );
 	}
 
 	@Override
-	public void apply(Pokemon pokemon) {
-		if(isGonnaBeApplied()) {
-			if(!pokemon.getIsGonnaFail()) {
-				pokemon.turnGonnaFail();
-			}
-		}else {
-			finishStatus(pokemon);
-		}
+	protected void statusLogic(Pokemon pokemon) {
+		makePokemonUseless(pokemon);
 	}
 }
