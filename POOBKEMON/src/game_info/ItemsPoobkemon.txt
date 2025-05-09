@@ -1,0 +1,2 @@
+Potion,SuperPotion,200
+Revive,Revive

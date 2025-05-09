@@ -1,0 +1,35 @@
+*Planta
+-strongAgainst
+=agua
+=mas cosas xd 
+-InmuneAgainst 
+=tierra
+-UnneffectiveAgainst 
+=electricity
+
+*Electric
+-strongAgainst
+=agua
+=mas cosas xd 
+-InmuneAgainst 
+=tierra
+-UnneffectiveAgainst 
+=electricity
+
+*ASDJHAS
+-strongAgainst
+=agua
+=mas cosas xd 
+-InmuneAgainst 
+=tierra
+-UnneffectiveAgainst 
+=electricity
+
+*XDXD
+-strongAgainst
+=agua
+=mas cosas xd 
+-InmuneAgainst 
+=tierra
+-UnneffectiveAgainst 
+=electricity

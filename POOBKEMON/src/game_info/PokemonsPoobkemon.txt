@@ -1,0 +1,1 @@
+Pikachu,35,100,55,40,50,50,[Electric,Planta],{adios,name}

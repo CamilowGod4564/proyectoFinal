@@ -1,0 +1,2 @@
+SpecialStatus,adios,20,Planta,100,0.5,curse
+Physical,name,20,Planta,100
