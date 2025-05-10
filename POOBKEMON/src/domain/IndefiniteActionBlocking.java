@@ -4,7 +4,7 @@ public class IndefiniteActionBlocking extends IndefiniteDurationStatus implement
 	
 
 	public IndefiniteActionBlocking(String name, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,double chanceOfLoseStatus) {
-		super(name, removeTemporarilyOnSwitch, removeOnSwitch);
+		super(name, removeTemporarilyOnSwitch, removeOnSwitch, chanceOfLoseStatus);
 		this.chanceOfLoseStatus = chanceOfLoseStatus;
 	}
 

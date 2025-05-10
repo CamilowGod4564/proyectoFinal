@@ -3,8 +3,8 @@ package domain;
 public class HealthBasedDamage extends IndefiniteOnGoingDamage{
 	double proportion;
 	
-	public HealthBasedDamage(String name, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,double proportion) {
-		super(name, removeTemporarilyOnSwitch, removeOnSwitch,0);
+	public HealthBasedDamage(String name, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,double chanceOfLoseStatus,double proportion) {
+		super(name, removeTemporarilyOnSwitch, removeOnSwitch,chanceOfLoseStatus, 0);
 		this.proportion = proportion;
 	}
 	

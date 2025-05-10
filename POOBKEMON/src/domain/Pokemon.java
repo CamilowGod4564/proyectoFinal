@@ -13,6 +13,7 @@ public class Pokemon {
 	private int specialAttack;
 	private int specialDefense;
 	private boolean gonnaFail;
+	private boolean canEscape;
 	private TreeMap<String,Movement> movements;
 	private ArrayList<Type> types;
 	
@@ -28,14 +29,14 @@ public class Pokemon {
 	        this.specialAttack = specialAttack;
 	        this.specialDefense = specialDefense;
 	        this.gonnaFail = false;
+	        this.canEscape = true;
 	        this.movements = new TreeMap<>();
 	        this.types = types;
 	    }
 	 
 	 
 	public Pokemon copy() {
-		Pokemon p = new Pokemon(name,level, health, attack, defense,specialAttack,specialDefense,types);
-		return p;
+		return new Pokemon(name,level, health, attack, defense,specialAttack,specialDefense,types);
 	}
 	
 	public boolean isFainteed() {
@@ -137,6 +138,15 @@ public class Pokemon {
 
 	public boolean getIsGonnaFail() {
 		return gonnaFail;
+	}
+	
+	public void turnCanEscape() {
+		canEscape = !canEscape;
+	}
+
+
+	public boolean getCanEscape() {
+		return canEscape;
 	}
 
 

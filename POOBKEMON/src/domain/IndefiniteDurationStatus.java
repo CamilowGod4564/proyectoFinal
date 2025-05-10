@@ -4,11 +4,12 @@ import java.util.Random;
 
 public abstract class IndefiniteDurationStatus extends Status {
 	
-	double chanceOfLoseStatus;
-	Random random = new Random();
+	protected double chanceOfLoseStatus;
+	protected Random random = new Random();
 	
-	public IndefiniteDurationStatus(String name, boolean removeTemporarilyOnSwitch,boolean removeOnSwitch) {
+	public IndefiniteDurationStatus(String name, boolean removeTemporarilyOnSwitch,boolean removeOnSwitch, double chanceOfLoseStatus) {
 		super(name, 1, removeTemporarilyOnSwitch, removeOnSwitch);
+		this.chanceOfLoseStatus = chanceOfLoseStatus;
 	}
 	@Override
 	protected void makeStatusWork(Pokemon pokemon) {
