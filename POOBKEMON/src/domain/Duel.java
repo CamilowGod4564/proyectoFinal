@@ -35,9 +35,8 @@ public abstract class Duel {
 	public void playerUseMovement(String movement){
 		playingPlayer.usePokemonMovement(movement, waitingPlayer.getPlayingPokemon());		
 	}
-	public void playerChangePokemon(Pokemon newPokemon,Pokemon oldPokemon) {
-		playerDeselectPokemon(oldPokemon);
-		playerSelectPokemon(newPokemon);
+	public void playerChangePokemon(Pokemon newPokemon) {
+		playingPlayer.changePlayingPokemon(newPokemon);
 	}
 	public void playerSurrender() {
 		finish();

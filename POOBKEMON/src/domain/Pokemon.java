@@ -149,10 +149,24 @@ public class Pokemon {
 		return canEscape;
 	}
 
-
+	
+	public TreeMap<String,Status> getStatuses(){
+		return statuses;
+	}
+	
 	public TreeMap<String,Movement> getMovements() {
 		return movements;
 	}
 	
+	public void retireFromBattle() {
+		for(Status s : statuses.values()) {
+			s.removeOnSwitch(this);
+		}
+	}
+	public void joinBattle() {
+		for(Status s : statuses.values()) {
+			s.reStartStatus();
+		}
+	}
 	
 }

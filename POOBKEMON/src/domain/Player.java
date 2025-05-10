@@ -49,6 +49,12 @@ public class Player {
 	        //exception
 	    }
 	}
+	public void changePlayingPokemon(Pokemon newPlayingPokemon) {
+		playingPokemon.retireFromBattle();
+		newPlayingPokemon.joinBattle();
+		setPlayingPokemon(newPlayingPokemon);
+	}
+	
 	public void usePokemonMovement(String movement,Pokemon targetPokemon) {
 		playingPokemon.useMovement(movement, targetPokemon);
 	}
