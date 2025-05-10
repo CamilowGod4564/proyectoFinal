@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Pokemon {
 	private String name;
+	private String pokedexNumber;
 	private int level;
 	private int health;
 	private int currentHealth;
@@ -18,8 +19,9 @@ public class Pokemon {
 	private ArrayList<Type> types;
 	
 	
-	 public Pokemon(String name, int level, int health, int attack, int defense, int specialAttack, int specialDefense,ArrayList<Type> types) {
-	        this.name = name;
+	 public Pokemon(String pokedexNumber,String name, int level, int health, int attack, int defense, int specialAttack, int specialDefense,ArrayList<Type> types) {
+	        this.pokedexNumber = pokedexNumber;
+		 	this.name = name;
 	        this.level = level;
 	        this.health = health;
 	        this.currentHealth = health; 
@@ -35,8 +37,13 @@ public class Pokemon {
 	    }
 	 
 	 
+	public String getPokedexNumber() {
+		return pokedexNumber;
+	}
+
+
 	public Pokemon copy() {
-		return new Pokemon(name,level, health, attack, defense,specialAttack,specialDefense,types);
+		return new Pokemon(pokedexNumber,name,level, health, attack, defense,specialAttack,specialDefense,types);
 	}
 	
 	public boolean isFainteed() {
@@ -168,5 +175,9 @@ public class Pokemon {
 			s.reStartStatus();
 		}
 	}
-	
+	public void applyActualStatuses() {
+		for(Status s: statuses.values()) {
+			s.apply(this);
+		}
+	}
 }

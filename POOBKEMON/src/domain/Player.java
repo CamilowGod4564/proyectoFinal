@@ -50,9 +50,12 @@ public class Player {
 	    }
 	}
 	public void changePlayingPokemon(Pokemon newPlayingPokemon) {
+		if(playingPokemon.getCanEscape()) {
 		playingPokemon.retireFromBattle();
 		newPlayingPokemon.joinBattle();
 		setPlayingPokemon(newPlayingPokemon);
+		}
+		//exceptcion si no
 	}
 	
 	public void usePokemonMovement(String movement,Pokemon targetPokemon) {

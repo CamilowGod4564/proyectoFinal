@@ -6,18 +6,27 @@ public abstract class Duel {
 	Player playingPlayer;
 	Player waitingPlayer;
 	
-	public void start() {
-		
+	public void applyPokemonsStatuses() {
+		for (Pokemon p :playingPlayer.getPokemonTeam()) {
+			p.applyActualStatuses();
+		}
+		for (Pokemon p :waitingPlayer.getPokemonTeam()) {
+			p.applyActualStatuses();
+		}
 	}
 	
 	public void finish() {
 		//mejor maneja el fin de juego con excepciones
 	}
 	
-	public void assignPlayers(Player p1,Player p2) {
-		playingPlayer = p1;
-		waitingPlayer = p2;
+	public void createPlayer(String name) {
+		if(playingPlayer == null) {
+			playingPlayer = new Player(name);
+		}else if (!(playingPlayer == null) && waitingPlayer == null) {
+			waitingPlayer = new Player(name);
+		}
 	}
+	
 	public void changePlayingPlayer() {
 		Player p0 = waitingPlayer;
 		waitingPlayer = playingPlayer;
@@ -52,4 +61,15 @@ public abstract class Duel {
 	public String getPlayingPlayerName() {
 		return playingPlayer.getName();
 	}
+
+	public Pokemon getWaitingPlayerPlayingPokemon() {
+		return waitingPlayer.getPlayingPokemon();
+	}
+
+	public void changePokemonAutomatically() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }
