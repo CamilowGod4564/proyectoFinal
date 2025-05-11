@@ -359,11 +359,54 @@ public class PoobkemonGUI extends JFrame {
         butonContinue.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 limpiarJFrame();
-                PokedexGUI pokedex = new PokedexGUI();
-                add(pokedex);
+                pokedexProvicional();
             }
         });
     };
+    
+    private void pokedexProvicional(){
+        ImageIcon fondo = new ImageIcon(getClass().getResource("/recursos/fondo1.png"));
+        JPanel fondoFinal = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        setContentPane(fondoFinal);
+        setLayout(new GridLayout(2,0));
+
+        //PARTE SUPERIOR (pokemones y caracteristicas)
+
+        JPanel panelSuperior = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+
+        // Panel superior - 40%
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 0.8;
+        JPanel topPanel = new JPanel();
+        topPanel.setBackground(Color.BLUE);
+        panelSuperior.add(topPanel, gbc);
+
+        // Panel inferior - 60%
+        gbc.gridy = 1;
+        gbc.weighty = 0.2;
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setBackground(Color.GREEN);
+        panelSuperior.add(bottomPanel, gbc);
+
+        JPanel panelInferior = new JPanel(new BorderLayout());
+
+
+        //revisar si se puede quirar el .
+        fondoFinal.add(panelSuperior);
+
+
+
+    }
 
 
     /**
