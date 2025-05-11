@@ -5,7 +5,7 @@ public class FiniteActionBlocking extends FiniteDurationStatus implements Blocki
 
 
 	public FiniteActionBlocking(String name,int maxDuration, boolean removeTemporarilyOnSwitch,boolean removeOnSwitch, int minDuration ) {
-		super(name, maxDuration, removeOnSwitch, removeOnSwitch, minDuration);
+		super(name, maxDuration, removeTemporarilyOnSwitch,removeOnSwitch , minDuration);
 	}
 
 	@Override

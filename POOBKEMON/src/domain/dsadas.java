@@ -10,28 +10,30 @@ public class dsadas {
             HashMap<String, Type> tipos = p.loadTypes("TypesPoobkemon.txt");
             HashMap<String, Status> statuses = p.loadStatuses("StatusesPoobkemon.txt");
             HashMap<String, Movement> movements = p.loadMovements(tipos,statuses,"MovementsPoobkemon.txt");
-            HashMap<String, Item> items = p.loadItems("ItemsPoobkemon.txt");
             TreeMap<String,Pokemon> pokemons = p.loadPokemons("PokemonsPoobkemon.txt",movements,tipos);
- 
-            for (String tipo : tipos.keySet()) {
-                System.out.println(tipo + ": " + tipos.get(tipo));
-            }
-            for (String status : statuses.keySet()) {
-                System.out.println(status + ": " + statuses.get(status));
-            }
+            
+            
+            
             for (String status : movements.keySet()) {
                 System.out.println(status + ": " + movements.get(status));
-            }
-            for (String status : items.keySet()) {
-                System.out.println(status + ": " + items.get(status));
             }
             for (String status : pokemons.keySet()) {
                 System.out.println(status + ": " + pokemons.get(status));
             }
             
+            Pokemon pokemon_prueba =  pokemons.get("SCEPTILE");
+            System.out.println(pokemon_prueba.getCurrentHealth());
+            pokemons.get("PIKACHU").useMovement("Thunderbolt", pokemon_prueba);
+            System.out.println(pokemon_prueba.getCurrentHealth());
+            for(String s : pokemon_prueba.getStatuses().keySet()) {
+            	System.out.println(s);
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
+        	
 	}
+	
 	
 }

@@ -1,2 +1,46 @@
-SpecialStatus,adios,20,Planta,100,0.5,curse
-Physical,name,20,Planta,100
+PHYSICAL,Tackle,35,Normal,40
+PHYSICAL,Leaf Blade,15,Grass,90
+PHYSICAL,Quick Attack,30,Normal,40
+PHYSICAL,Double Kick,30,Fighting,30
+PHYSICAL,Iron Tail,15,Steel,100
+PHYSICAL,Rock Slide,10,Rock,75
+PHYSICAL,Aerial Ace,20,Flying,60
+PHYSICAL,Slash,20,Normal,70
+PHYSICAL,Brick Break,15,Fighting,75
+PHYSICAL,Headbutt,15,Normal,70
+PHYSICAL,Return,20,Normal,100
+PHYSICAL,Metal Claw,35,Steel,50
+PHYSICAL,Rock Tomb,15,Rock,60
+PHYSICAL,Dragon Claw,15,Dragon,80
+PHYSICAL,Peck,35,Flying,35
+PHYSICAL,Facade,20,Normal,70
+SPECIAL,Surf,15,Water,90
+SPECIAL,Hydro Pump,5,Water,110
+SPECIAL,Swift,20,Normal,60
+SPECIAL,Flame Burst,15,Fire,70
+SPECIAL,Shadow Ball,15,Ghost,80
+SPECIAL,Psychic,10,Psychic,90
+SPECIAL,Mud Shot,15,Ground,55
+SPECIAL,Signal Beam,15,Bug,75
+SPECIAL,Fire Blast,5,Fire,110
+SPECIAL,Overheat,5,Fire,130
+SPECIAL,Thunder,10,Electric,110
+SPECIAL,Dragon Breath,20,Dragon,60
+SPECIAL,Water Gun,25,Water,40
+SPECIAL,Hyper Beam,5,Normal,150
+SPECIAL,Giga Drain,10,Grass,75
+SPECIAL,Water Pulse,20,Water,60
+SPECIALSTATUS,Sludge Bomb,10,Poison,90,0.3,Poison
+SPECIALSTATUS,Flamethrower,15,Fire,90,0.1,Burn
+SPECIALSTATUS,Ice Beam,10,Ice,90,0.1,Frozen
+SPECIALSTATUS,Thunderbolt,15,Electric,90,0.1,Fatigue
+SPECIALSTATUS,Dream Eater,15,Psychic,100,1.0,Sleep
+SPECIALSTATUS,Leech Seed,10,Grass,0,1.0,LeechSeed
+SPECIALSTATUS,Hex,10,Ghost,65,1.0,Curse
+SPECIALSTATUS,Body Slam,15,Normal,85,0.3,Fatigue
+SPECIALSTATUS,Fire Fang,15,Fire,65,0.1,Burn
+SPECIALSTATUS,Ice Fang,15,Ice,65,0.1,Frozen
+SPECIALSTATUS,Thunder Fang,15,Electric,65,0.1,Fatigue
+SPECIALSTATUS,Iron Head,15,Steel,80,0.3,Flinch
+SPECIALSTATUS,Bite,25,Dark,60,0.3,Flinch
+SPECIALSTATUS,Poison Fang,15,Poison,50,0.5,Poison

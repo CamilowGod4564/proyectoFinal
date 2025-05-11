@@ -9,6 +9,7 @@ public class Pokemon {
 	private int health;
 	private int currentHealth;
 	private int attack;
+	private int currentAttack;
 	private TreeMap<String,Status> statuses; 
 	private int defense;
 	private int specialAttack;
@@ -34,6 +35,7 @@ public class Pokemon {
 	        this.canEscape = true;
 	        this.movements = new TreeMap<>();
 	        this.types = types;
+	        this.currentAttack = attack;
 	    }
 	 
 	 
@@ -125,7 +127,7 @@ public class Pokemon {
 	}
 	
 	public int getAttack() {
-		return attack;
+		return currentAttack;
 	}
 
 
@@ -180,4 +182,13 @@ public class Pokemon {
 			s.apply(this);
 		}
 	}
+	public void setNewAttack(int newAttack) {
+		currentAttack = newAttack;
+	}
+	
+	public int getRealAttack() {
+		return attack;
+	}
+	
+	
 }

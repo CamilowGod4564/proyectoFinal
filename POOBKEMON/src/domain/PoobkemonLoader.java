@@ -24,7 +24,7 @@ public class PoobkemonLoader {
 			int cont = 0;
 			
 			while((line = br.readLine()) != null) {
-				line = line.strip();
+				line = line.strip().toUpperCase();
 	            if (line.isEmpty()) continue;
 	            if(!line.startsWith("*")) {
 	            	if(line.startsWith("-")) {
@@ -32,6 +32,7 @@ public class PoobkemonLoader {
 	            	}
 	            	if(line.startsWith("=")) {
 	            		line = line.substring(1).strip();
+	            		if (line == "N/A") continue;
 	            		switch(cont) {
 	            			case 1:
 	            				ar1.add(line);
@@ -72,10 +73,12 @@ public class PoobkemonLoader {
 		classType.put("FINITEDURATIONSTATUS", FiniteDurationStatus.class);
 		classType.put("HEALTHBASEDDAMAGE", HealthBasedDamage.class);
 		classType.put("SELFHARMACTIONBLOCKING", SelfHarmActionBlocking.class);
+		classType.put("WEAKENDAMAGEHEALTHBASEDDAMAGE", WeakenDamageHealthBasedDamage.class);
 		        
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
+            	line = line.toUpperCase();
                 String[] fields = line.split(",");
                 String statusType = fields[0].toUpperCase();
                 Class<? extends Status> clase = classType.get(statusType);
@@ -94,7 +97,7 @@ public class PoobkemonLoader {
                 statuses.put(s.getName(),s);
             }
         } catch (Exception e) {
-           //excepcion
+           //exception
         }
 
         return statuses;
@@ -112,6 +115,7 @@ public class PoobkemonLoader {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = br.readLine()) != null) {
+            	line = line.toUpperCase();
                 String[] fields = line.split(",");
                 String movementType = fields[0].toUpperCase();
                 Class<? extends Movement> clase = classType.get(movementType);
@@ -154,6 +158,7 @@ public class PoobkemonLoader {
 	    try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
 	    	String line;
 	        while ((line = br.readLine()) != null) {
+	        	line = line.toUpperCase();
 	            String[] fields = line.split(",", paramTypes.length);
 	            Object[] parameters = new Object[paramTypes.length];
 	            for (int i = 0; i < paramTypes.length-1; i++) {
@@ -194,7 +199,7 @@ public class PoobkemonLoader {
 		        
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine().toUpperCase()) != null) {
                 String[] fields = line.split(",");
                 String itemsType = fields[0].toUpperCase();
                 Class<? extends Item> clase = classType.get(itemsType);
