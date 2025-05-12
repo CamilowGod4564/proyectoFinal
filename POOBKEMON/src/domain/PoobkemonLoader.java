@@ -67,6 +67,9 @@ public class PoobkemonLoader {
 		HashMap<String,Status> statuses = new HashMap<>();
 		Map<String, Class<? extends Status>> classType = new HashMap<>();
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
+		classType.put("FINITEMOBILITYAlTER", FiniteMobilityAlter.class);
+		classType.put("INDEFINITEMOBILITYAlTER", IndefiniteMobilityAlter.class);
+		classType.put("OPTIONALINDEFINITEBLOCKING", OptionalIndefiniteBlocking.class);
 		classType.put("INDEFINITEONGOINGDAMAGE", IndefiniteOnGoingDamage.class);
 		classType.put("INDEFINITEACTIONBLOCKING", IndefiniteActionBlocking.class);
 		classType.put("FINITEACTIONBLOCKING", FiniteActionBlocking.class);
@@ -74,6 +77,7 @@ public class PoobkemonLoader {
 		classType.put("HEALTHBASEDDAMAGE", HealthBasedDamage.class);
 		classType.put("SELFHARMACTIONBLOCKING", SelfHarmActionBlocking.class);
 		classType.put("WEAKENDAMAGEHEALTHBASEDDAMAGE", WeakenDamageHealthBasedDamage.class);
+		classType.put("FINITEONGOINGDAMAGE", FiniteOnGoingDamage.class);
 		        
         try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
@@ -82,7 +86,6 @@ public class PoobkemonLoader {
                 String[] fields = line.split(",");
                 String statusType = fields[0].toUpperCase();
                 Class<? extends Status> clase = classType.get(statusType);
-
                 if (clase == null) {
                     throw new IllegalArgumentException("Tipo desconocido: " + statusType); //cambiar esta exception
                 }
@@ -129,8 +132,14 @@ public class PoobkemonLoader {
                 for (int i = 0; i < parameterTypes.length; i++) {
                 	if(parameterTypes[i] == Type.class) {
                 		parameters[i] = types.get(fields[i + 1]);
+                		 if (parameters[i] == null) {
+                		        throw new IllegalArgumentException("Tipo no encontrado: " + fields[i + 1]);
+                		    }
                 	}else if(parameterTypes[i] == Status.class){
                 		parameters[i] = statuses.get(fields[i + 1]);
+                		if (parameters[i] == null) {
+                	        throw new IllegalArgumentException("Estado no encontrado: " + fields[i + 1]);
+                	    }
                 	}else {
                     parameters[i] = convertirValor(fields[i + 1], parameterTypes[i]);
                 	}

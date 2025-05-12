@@ -1,5 +1,13 @@
-WeakenDamageHealthBasedDamage,Burn,true,false,0,0.0625,0.50,Fire,0.50
-HealthBasedDamage,Poison,0.125,
+WeakenDamageHealthBasedDamage,Burn,true,false,0,0.0625,Fire,0.50
+HealthBasedDamage,Poison,true,false,0,0.125,N/A
+HealthBasedDamage,Curse,false,true,0,0.25,Phantom
+HealthBasedDamage,LeechSeed,false,true,0,0.125,N/A
+OptionalIndefiniteBlocking,Paralysis,true,false,0,0.25,Electric
+IndefiniteActionBlocking,Frozen,false,true,0.20,Fire
+FiniteActionBlocking,Sleep,7,true,false,1,N/A
+SelfHarmActionBlocking,Confusion,4,false,true,1,0.33,N/A
+FiniteActionBlocking,Flinch,1,false,true,1,N/A
+FiniteActionBlocking,Fatigue,1,false,true,1,N/A
 
-(String name, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,
-			double chanceOfLoseStatus, double proportion,String inmuneType,double weakenProportion)
+
+

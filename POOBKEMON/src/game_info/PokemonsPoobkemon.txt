@@ -1,4 +1,4 @@
-025,Pikachu,35,100,55,40,50,50,[Electric],{Thunderbolt,Iron Tail,Quick Attack,Surf}
-257,Blaziken,50,160,120,70,110,70,[Fire,Fighting],{Flamethrower,Brick Break,Fire Fang,Double Kick}
-282,Gardevoir,50,150,65,65,125,115,[Psychic,Fairy],{Psychic,Shadow Ball,Dream Eater,Hex}
-254,Sceptile,50,145,105,85,105,85,[Grass],{Leaf Blade,Dragon Claw,Aerial Ace,Leech Seed}
+0025,Pikachu,35,100,55,40,50,50,[Electric],{Thunderbolt,Iron Tail,Quick Attack,Surf}
+0257,Blaziken,50,160,120,70,110,70,[Fire,Fighting],{Flamethrower,Brick Break,Fire Fang,Double Kick}
+0282,Gardevoir,50,150,65,65,125,115,[Psychic,Fairy],{Psychic,Shadow Ball,Dream Eater,Hex}
+0254,Sceptile,50,145,105,85,105,85,[Grass],{Leaf Blade,Dragon Claw,Aerial Ace,Leech Seed}

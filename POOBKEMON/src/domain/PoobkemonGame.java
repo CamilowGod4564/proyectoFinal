@@ -37,16 +37,38 @@ public class PoobkemonGame{
 		duel.createPlayer(trainerName);
 	}
 	
-	public void playerSelectPokemonForTeam(String pokemonName) {
-		duel.playerSelectPokemon(pokemons.get(pokemonName.toUpperCase()).copy());
+	public void confirmPlayers() {
+		duel.assignPlayers();
+	}
+	
+	public void playerSelectPokemonForTeam(Player player,String pokemonName) {
+		duel.playerSelectPokemon(player,pokemons.get(pokemonName.toUpperCase()).copy());
 		//try catch para mostrar que equipo completo
 	}
 	
-	public void playerDeselectPokemonForTeam(Pokemon pokemon) {
-		duel.playerDeselectPokemon(pokemon);
+	public void playerDeselectPokemonForTeam(Player player,Pokemon pokemon) {
+		duel.playerDeselectPokemon(player,pokemon);
 	}
 	
-	//cangepokemonMovements
+	public void playerSelectItem(Player player,String item) {
+		//hacer metodo en duel
+	}
+	public void playerDeselectItem(Player player,String item) {
+		//hacer metodo en duel
+	}
+	
+	public void cleanPlayers() {
+		duel.cleanPlayers();
+	}
+	public void cleanPokemons() {
+		duel.cleanPokemons();
+	}
+	public void cleanPlayersItems() {
+		duel.cleanItems();
+	}
+	
+	
+	// falta un changepokemonMovements mhmmm 
 	
 	//For consult
 	
@@ -105,6 +127,9 @@ public class PoobkemonGame{
 			duel.changePokemonAutomatically();
 		}
 	}
+	
+	
+	
 
 	
 }
