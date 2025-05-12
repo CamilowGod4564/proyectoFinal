@@ -7,6 +7,7 @@ public abstract class Duel {
 	Player p2;
 	Player playingPlayer;
 	Player waitingPlayer;
+	Player winner;
 	
 	public void applyPokemonsStatuses() {
 		for (Pokemon p :playingPlayer.getPokemonTeam()) {
@@ -17,10 +18,13 @@ public abstract class Duel {
 		}
 	}
 	
-	public void finish() {
-		//mejor maneja el fin de juego con excepciones
+	public void finish(Player player) {
+		if(player == playingPlayer) {
+			winner = waitingPlayer;
+		}else {
+			winner = playingPlayer;
+		}
 	}
-	
 	
 	public void createPlayer(String name) {
 		if(p1 == null) {
@@ -65,7 +69,7 @@ public abstract class Duel {
 		playingPlayer.changePlayingPokemon(newPokemon);
 	}
 	public void playerSurrender() {
-		finish();
+		finish(playingPlayer);
 	}
 	public ArrayList<Pokemon> getPlayerTeam() {
 		return playingPlayer.getPokemonTeam();
@@ -73,19 +77,32 @@ public abstract class Duel {
 	public Pokemon getPlayerPlayingPokemon() {
 		return playingPlayer.getPlayingPokemon();
 	}
-	public abstract void prepareTeams();
+	public abstract void prepareTeams(TreeMap<String,Pokemon> pokemons, HashMap<String,Movement> movements);
 
-	public String getPlayingPlayerName() {
-		return playingPlayer.getName();
+	public Player getPlayingPlayer() {
+		return playingPlayer;
+	}
+	
+	public Player getWaitingPlayer() {
+		return waitingPlayer;
 	}
 
 	public Pokemon getWaitingPlayerPlayingPokemon() {
 		return waitingPlayer.getPlayingPokemon();
 	}
 
-	public void changePokemonAutomatically() {
-		// TODO Auto-generated method stub
-		
+	public void changePokemonAutomatically(Player player) {
+		boolean wasntChanged = true;
+		for(Pokemon p :player.getPokemonTeam()) {
+			if(!p.isFainteed()) {
+				player.changePlayingPokemon(p);
+				wasntChanged= false;
+				break;
+			}
+		}
+		if(wasntChanged) {
+			finish(player); //player doesnt have any left pokemons
+		}
 	}
 
 	public void cleanPlayers() {
@@ -122,6 +139,8 @@ public abstract class Duel {
 			}
 		}
 	}
+	
+	
 	
 	
 	

@@ -33,6 +33,11 @@ public class PoobkemonGame{
 		}
 	}
 	
+	public void prepareTeams() {
+		duel.prepareTeams(pokemons,movements);
+	}
+	
+	
 	public void newPlayer(String trainerName) {
 		duel.createPlayer(trainerName);
 	}
@@ -121,10 +126,10 @@ public class PoobkemonGame{
 	
 	public void aPokemonFainted() {
 		if(duel.getPlayerPlayingPokemon().isFainteed()) {
-			duel.changePokemonAutomatically();
+			duel.changePokemonAutomatically(duel.getPlayingPlayer());
 		}
 		if(duel.getWaitingPlayerPlayingPokemon().isFainteed()) {
-			duel.changePokemonAutomatically();
+			duel.changePokemonAutomatically(duel.getWaitingPlayer());
 		}
 	}
 	
