@@ -53,7 +53,7 @@ public class PoobkemonGame{
 	public TreeMap<String,String>  getPokemons() {
 		TreeMap<String,String> numberNamePokemons = new TreeMap<>();
 		for(Pokemon p:pokemons.values()) {
-			numberNamePokemons.put(p.getName(), p.getPokedexNumber());
+			numberNamePokemons.put(p.getPokedexNumber(),p.getName());
 		}
 		return numberNamePokemons;
 	}
@@ -70,7 +70,6 @@ public class PoobkemonGame{
 		return duel.getPlayerTeam();
 	}
 	//get current player??
-	
 	
 	//Actions that the currentPlayer in Duel can do
 	
