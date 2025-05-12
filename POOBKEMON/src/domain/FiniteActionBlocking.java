@@ -1,11 +1,11 @@
 package domain;
 
 public class FiniteActionBlocking extends FiniteDurationStatus implements Blocking{
+
 	
 
-
-	public FiniteActionBlocking(String name,int maxDuration, boolean removeTemporarilyOnSwitch,boolean removeOnSwitch, int minDuration ) {
-		super(name, maxDuration, removeTemporarilyOnSwitch,removeOnSwitch , minDuration);
+	public FiniteActionBlocking(String name, int maxDuration, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,int minDuration, String inmuneType) {
+		super(name, maxDuration, removeTemporarilyOnSwitch, removeOnSwitch, minDuration, inmuneType);
 	}
 
 	@Override
@@ -18,11 +18,11 @@ public class FiniteActionBlocking extends FiniteDurationStatus implements Blocki
 
 	@Override
 	public Status copy() {
-		return new FiniteActionBlocking(name, duration, removeTemporarilyOnSwitch,removeOnSwitch, minDuration );
+		return new FiniteActionBlocking(name, duration, removeTemporarilyOnSwitch,removeOnSwitch, minDuration,inmuneType);
 	}
 
 	@Override
 	protected void statusLogic(Pokemon pokemon) {
-		makePokemonUseless(pokemon);
+		makePokemonUseless(pokemon,inmuneType);
 	}
 }

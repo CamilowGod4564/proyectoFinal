@@ -7,19 +7,21 @@ public abstract class Status {
 	boolean removeOnSwitch;
 	boolean removeTemporarilyOnSwitch;
 	protected boolean isFreezed;
+	protected String inmuneType;
 
 	/**
 	 * @param name
 	 * @param duration
 	 * @param actualDuration
 	 */
-	public Status(String name, int duration,boolean removeTemporarilyOnSwitch,boolean removeOnSwitch) {
+	public Status(String name, int duration,boolean removeTemporarilyOnSwitch,boolean removeOnSwitch,String inmuneType) {
 		this.name = name;
 		this.duration = duration;
 		this.currentDuration = duration;
 		this.removeOnSwitch = removeOnSwitch;
 		this.removeTemporarilyOnSwitch = removeTemporarilyOnSwitch;
 		this.isFreezed = false;
+		this.inmuneType =inmuneType;
 	}
 	
 	public String getName() {

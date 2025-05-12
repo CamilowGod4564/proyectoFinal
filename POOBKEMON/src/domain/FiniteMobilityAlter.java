@@ -2,13 +2,13 @@ package domain;
 
 public class FiniteMobilityAlter extends FiniteDurationStatus implements Kidnapping{
 
-	public FiniteMobilityAlter(String name, int maxDuration, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,int minDuration) {
-		super(name, maxDuration, removeTemporarilyOnSwitch, removeOnSwitch, minDuration);
+	public FiniteMobilityAlter(String name, int maxDuration, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,int minDuration,String inmuneType) {
+		super(name, maxDuration, removeTemporarilyOnSwitch, removeOnSwitch, minDuration, inmuneType);
 	}
 
 	@Override
 	public Status copy() {
-		return new FiniteMobilityAlter(name, duration, removeTemporarilyOnSwitch, removeOnSwitch, minDuration);
+		return new FiniteMobilityAlter(name, duration, removeTemporarilyOnSwitch, removeOnSwitch, minDuration, inmuneType);
 	}
 
 	@Override

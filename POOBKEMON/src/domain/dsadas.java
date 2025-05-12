@@ -12,7 +12,9 @@ public class dsadas {
             HashMap<String, Movement> movements = p.loadMovements(tipos,statuses,"MovementsPoobkemon.txt");
             TreeMap<String,Pokemon> pokemons = p.loadPokemons("PokemonsPoobkemon.txt",movements,tipos);
             
-            
+            for (String status : statuses.keySet()) {
+                System.out.println(status + ": " + statuses.get(status));
+            }
             
             for (String status : movements.keySet()) {
                 System.out.println(status + ": " + movements.get(status));

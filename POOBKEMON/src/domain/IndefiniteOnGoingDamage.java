@@ -2,21 +2,19 @@ package domain;
 
 public class IndefiniteOnGoingDamage extends IndefiniteDurationStatus implements Damaging{
 	int damage;
-	String typeInmuneToStatus;
 	
-	public IndefiniteOnGoingDamage(String name, boolean removeTemporarilyOnSwitch,boolean removeOnSwitch,double chanceOfLoseStatus,int damage,String typeInmuneToStatus) {
-		super(name,removeTemporarilyOnSwitch, removeOnSwitch, chanceOfLoseStatus);
+	public IndefiniteOnGoingDamage(String name, boolean removeTemporarilyOnSwitch,boolean removeOnSwitch,double chanceOfLoseStatus,int damage,String inmuneType) {
+		super(name,removeTemporarilyOnSwitch, removeOnSwitch, chanceOfLoseStatus,inmuneType);
 		this.damage = damage;
-		this.typeInmuneToStatus = typeInmuneToStatus;
 	}
 	
 	@Override
 	public Status copy() {
-		return new IndefiniteOnGoingDamage(name,removeTemporarilyOnSwitch,removeOnSwitch,chanceOfLoseStatus, damage,typeInmuneToStatus);
+		return new IndefiniteOnGoingDamage(name,removeTemporarilyOnSwitch,removeOnSwitch,chanceOfLoseStatus, damage,inmuneType);
 	}
 
 	@Override
 	protected void statusLogic(Pokemon pokemon) {
-		makePokemonGetHurt(pokemon, damage,typeInmuneToStatus);
+		makePokemonGetHurt(pokemon, damage,inmuneType);
 	}
 }

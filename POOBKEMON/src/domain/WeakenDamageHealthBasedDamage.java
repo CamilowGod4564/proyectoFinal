@@ -5,8 +5,8 @@ public class WeakenDamageHealthBasedDamage extends HealthBasedDamage{
 	double weakenProportion;
 	
 	public WeakenDamageHealthBasedDamage(String name, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,
-			double chanceOfLoseStatus, String typeInmuneToStatus, double proportion,double weakenProportion) {
-		super(name, removeTemporarilyOnSwitch, removeOnSwitch, chanceOfLoseStatus, typeInmuneToStatus, proportion);
+			double chanceOfLoseStatus, double proportion,String inmuneType,double weakenProportion) {
+		super(name, removeTemporarilyOnSwitch, removeOnSwitch, chanceOfLoseStatus, proportion, inmuneType);
 		this.weakenProportion =weakenProportion;
 	}
 	

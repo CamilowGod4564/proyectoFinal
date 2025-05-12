@@ -2,13 +2,13 @@ package domain;
 
 public class IndefiniteMobilityAlter extends IndefiniteDurationStatus implements Kidnapping{
 
-	public IndefiniteMobilityAlter(String name, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,double chanceOfLoseStatus) {
-		super(name, removeTemporarilyOnSwitch, removeOnSwitch, chanceOfLoseStatus);
+	public IndefiniteMobilityAlter(String name, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,double chanceOfLoseStatus,String inmuneType) {
+		super(name, removeTemporarilyOnSwitch, removeOnSwitch, chanceOfLoseStatus,inmuneType);
 	}
 
 	@Override
 	public Status copy() {
-		return new IndefiniteMobilityAlter(name, removeTemporarilyOnSwitch, removeOnSwitch, chanceOfLoseStatus);
+		return new IndefiniteMobilityAlter(name, removeTemporarilyOnSwitch, removeOnSwitch, chanceOfLoseStatus,inmuneType);
 	}
 
 	@Override

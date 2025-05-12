@@ -6,8 +6,8 @@ public abstract class FiniteDurationStatus extends Status {
 	private Random randomBool = new Random();
 	protected int minDuration;
 	
-	public FiniteDurationStatus(String name,int maxDuration, boolean removeTemporarilyOnSwitch,boolean removeOnSwitch, int minDuration ) {
-		super(name, maxDuration,removeTemporarilyOnSwitch,removeOnSwitch); //maxDuration its just duration tbh
+	public FiniteDurationStatus(String name,int maxDuration, boolean removeTemporarilyOnSwitch,boolean removeOnSwitch, int minDuration,String inmuneType) {
+		super(name, maxDuration,removeTemporarilyOnSwitch,removeOnSwitch,inmuneType); //maxDuration its just duration tbh
 		this.minDuration = minDuration;
 	}
 

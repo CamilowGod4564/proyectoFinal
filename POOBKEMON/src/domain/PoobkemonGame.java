@@ -29,6 +29,7 @@ public class PoobkemonGame{
 			duel = new NormalDuel();
 		}else if(mode == "Survival"){
 			duel = new SurvivalDuel();
+			//duel.createPlayer(mode);
 		}
 	}
 	
