@@ -1,6 +1,6 @@
 package presentation;
-
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +23,18 @@ public class PoobkemonGUI extends JFrame {
     private JButton butonExpertTrainer;
     private JButton butonContinue;
     private JButton butonBack;
+    private int numeroVista;
+
+    //POKEDEZ
+    private Boolean jugador;
+    private Boolean maquina;
+    private JButton agregarPlayer1;
+    private JButton agregarPlayer2;
+    private JButton pokedexSiguiente;
+    private JButton pokedexAnterior;
+    private String numeroPokemon;
+    private String rutaPokemon;
+    private JLabel pokemonGif;
 
 
     PoobkemonGUI(){
@@ -70,6 +82,7 @@ public class PoobkemonGUI extends JFrame {
 
 
     private void menuInicial() {
+        numeroVista = 1;
         ImageIcon fondo = new ImageIcon(getClass().getResource("/presentation/recursos/fondoPokemon2.gif"));
 
         JPanel fondoFinal = new JPanel() {
@@ -122,6 +135,7 @@ public class PoobkemonGUI extends JFrame {
     private void accionesMenuIniciales(){
         butonPressStart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                numeroVista = 2;
                 menuDeOpciones();
                 accionesMenuDeOpciones();
             }
@@ -161,7 +175,7 @@ public class PoobkemonGUI extends JFrame {
     private void accionesMenuDeOpciones(){
         butonIniciarPartida.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                numeroVista = 3;
                 menuDeSeleccion();
                 accionesmenuDeSeleccion();
 
@@ -170,7 +184,6 @@ public class PoobkemonGUI extends JFrame {
 
         butonOpciones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
             }
         });
 
@@ -358,14 +371,53 @@ public class PoobkemonGUI extends JFrame {
     private void accionesmenuDeSeleccion(){
         butonContinue.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                limpiarJFrame();
-                pokedexProvicional();
+
+                if(numeroVista == 3){
+                    numeroVista = 4;
+                    pokedex();
+                    accionesPokedex();
+                }
+            }
+        });
+        butonBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(numeroVista == 2){
+                    numeroVista = 1;
+                    menuInicial();
+                    accionesMenuIniciales();
+                }else if(numeroVista == 3){
+                    numeroVista = 2;
+                    menuDeOpciones();
+                    accionesMenuDeOpciones();
+                }else if(numeroVista == 4){
+                    numeroVista = 3;
+                    menuDeSeleccion();
+                    accionesmenuDeSeleccion();
+                }
+            }
+        });
+        butonJugadorVsJugador.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                jugador = true;
+                maquina = false;
+            }
+        });
+        butonJugadorVsMaquina.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                jugador = true;
+                maquina = true;
+            }
+        });
+        butonMaquinaVsMaquina.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                jugador = false;
+                maquina = false;
             }
         });
     };
-    
-    private void pokedexProvicional(){
-        ImageIcon fondo = new ImageIcon(getClass().getResource("/recursos/fondo1.png"));
+
+    private void pokedex(){
+        ImageIcon fondo = new ImageIcon(getClass().getResource("/presentation/recursos/fondoPokedex.png"));
         JPanel fondoFinal = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -374,40 +426,301 @@ public class PoobkemonGUI extends JFrame {
             }
         };
         setContentPane(fondoFinal);
-        setLayout(new GridLayout(2,0));
 
-        //PARTE SUPERIOR (pokemones y caracteristicas)
-
-        JPanel panelSuperior = new JPanel(new GridBagLayout());
+        setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+
         gbc.fill = GridBagConstraints.BOTH;
-
-        // Panel superior - 40%
         gbc.gridx = 0;
+
+        // PANEL SUPERIOR pokedex
         gbc.gridy = 0;
-        gbc.weightx = 1;
-        gbc.weighty = 0.8;
-        JPanel topPanel = new JPanel();
-        topPanel.setBackground(Color.BLUE);
-        panelSuperior.add(topPanel, gbc);
+        gbc.weighty = 0.4;
+        gbc.weightx = 1.0;
 
-        // Panel inferior - 60%
+        JPanel panelSuperior = new JPanel(new BorderLayout());
+        panelSuperior.setOpaque(false);
+
+        //DISTRIBUCION DEL PANEL SUPERIOR
+        pokedexSiguiente = new JButton(imagenEscalada("/presentation/recursos/pokedexSiguiente.png",1,8,1,8));
+        pokedexSiguiente.setHorizontalAlignment(SwingConstants.LEFT);
+        botonComoImagen(pokedexSiguiente);
+        pokedexSiguiente.setPreferredSize(new Dimension(getWidth()/3, 0));
+        panelSuperior.add(pokedexSiguiente,BorderLayout.EAST);
+
+        pokedexAnterior= new JButton(imagenEscalada("/presentation/recursos/pokedexAnterior.png",1,8,1,8));
+        pokedexAnterior.setHorizontalAlignment(SwingConstants.RIGHT);
+        botonComoImagen(pokedexAnterior);
+        pokedexAnterior.setPreferredSize(new Dimension(getWidth()/3, 0));
+        panelSuperior.add(pokedexAnterior,BorderLayout.WEST);
+
+        JPanel pantallaPokedex = new JPanel(new BorderLayout());
+
+        JButton superiorArriba = new JButton();
+        superiorArriba.setBackground(Color.BLACK);
+        superiorArriba.setPreferredSize(new Dimension(0, getHeight()/2));
+
+
+        pantallaPokedex.add(new JButton(),BorderLayout.EAST);
+        pantallaPokedex.add(new JButton(),BorderLayout.NORTH);
+        pantallaPokedex.add(superiorArriba,BorderLayout.SOUTH);
+        pantallaPokedex.add(new JLabel(),BorderLayout.WEST);
+
+
+        numeroPokemon = "0001";
+        rutaPokemon = "/presentation/recursos/animated/0001.gif";
+        pokemonGif = new JLabel(new ImageIcon(getClass().getResource(rutaPokemon)));
+        pokemonGif.setOpaque(false);
+
+        panelSuperior.add(pokemonGif,BorderLayout.CENTER);
+
+        add(panelSuperior, gbc);
+
+        // PANEL CENTRAL BOTONES
         gbc.gridy = 1;
-        gbc.weighty = 0.2;
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setBackground(Color.GREEN);
-        panelSuperior.add(bottomPanel, gbc);
+        gbc.weighty = 0.1;
+        gbc.weightx = 1.0;
 
+        JPanel botonesCentro = new JPanel(new GridLayout(0,3));
+        botonesCentro.setOpaque(false);
+
+        botonesCentro.add(new JLabel());
+
+        if(jugador && !maquina){
+            JPanel botonesDeAgregar = new JPanel(new GridLayout(0,2));
+            botonesDeAgregar.add(new JButton("Agregar A P1"));
+            botonesDeAgregar.add(new JButton("Agregar A P2"));
+            botonesCentro.add(botonesDeAgregar);
+        }
+        else if(jugador && maquina){
+            JButton agregarPlayer1 = new JButton("Agregar P1");
+            botonesCentro.add(agregarPlayer1);
+        }
+
+        botonesCentro.add(new JLabel());
+
+        add(botonesCentro, gbc);
+
+        // PANEL INFERIOR (POKEMONES SELECCIONADOS)
+        gbc.gridy = 2;
+        gbc.weighty = 0.5;
+        gbc.weightx = 1.0;
         JPanel panelInferior = new JPanel(new BorderLayout());
+        panelInferior.setOpaque(false);
 
 
-        //revisar si se puede quirar el .
-        fondoFinal.add(panelSuperior);
+        //DISTRIBUCION PANEL INFERIOR
+
+        JPanel esteInferior = new JPanel(new GridLayout(3,0));
+
+        butonContinue = new JButton(imagenEscalada("/presentation/recursos/continuar.png",1,9,1,10));
+        botonComoImagen(butonContinue);
+        butonBack = new JButton(imagenEscalada("/presentation/recursos/volver.png",1,9,1,10));
+        botonComoImagen(butonBack);
 
 
+        esteInferior.add(new JButton("ELIMINAR"));
+        esteInferior.add(butonContinue);
+        esteInferior.add(butonBack);
+
+        esteInferior.setOpaque(false);
+        esteInferior.setPreferredSize(new Dimension(getWidth()/5, 0));
+        panelInferior.add(esteInferior,BorderLayout.EAST);
+
+        JPanel oesteInferior = new JPanel();
+        oesteInferior.setOpaque(false);
+        panelInferior.add(oesteInferior,BorderLayout.WEST);
+
+        JPanel surInferior = new JPanel();
+        surInferior.setOpaque(false);
+        panelInferior.add(surInferior,BorderLayout.SOUTH);
+
+        JPanel norteInferior = new JPanel();
+        norteInferior.setOpaque(false);
+        panelInferior.add(norteInferior,BorderLayout.NORTH);
+
+        JPanel centroInferior = new JPanel(new GridLayout(2,7));
+        for(int i = 0;i<14;i++){
+            JLabel cuadroPokemon = new JLabel();
+            cuadroPokemon.setOpaque(true);
+            cuadroPokemon.setBackground(new Color(244, 80, 103, 170));
+            Border borde = BorderFactory.createLineBorder(new Color(193, 39, 45), 2);
+            cuadroPokemon.setBorder(borde);
+            centroInferior.add(cuadroPokemon);
+        }
+        centroInferior.setOpaque(false);
+        panelInferior.add(centroInferior,BorderLayout.CENTER);
+
+        add(panelInferior, gbc);
+        setVisible(true);
+    }
+    private void accionesPokedex(){
+        pokedexSiguiente.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int longitud = numeroPokemon.length();
+                int valor = Integer.parseInt(numeroPokemon);
+                valor++;
+                numeroPokemon = String.format("%0" + longitud + "d", valor);
+                rutaPokemon = "/presentation/recursos/animated/"+numeroPokemon+".gif";
+                pokemonGif.setIcon(new ImageIcon(getClass().getResource(rutaPokemon)));
+
+            }
+        });
+        pokedexAnterior.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int longitud = numeroPokemon.length();
+                int valor = Integer.parseInt(numeroPokemon);
+                valor--;
+                numeroPokemon = String.format("%0" + longitud + "d", valor);
+                rutaPokemon = "/presentation/recursos/animated/"+numeroPokemon+".gif";
+                pokemonGif.setIcon(new ImageIcon(getClass().getResource(rutaPokemon)));
+            }
+        });
+        butonContinue.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                if(numeroVista == 3){
+                    numeroVista = 4;
+                    pokedex();
+                    accionesPokedex();
+                }else if(numeroVista == 4){
+                    numeroVista = 5;
+                    duelo();
+                    accionesDuelo();
+                }
+            }
+        });
+        butonBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(numeroVista == 2){
+                    numeroVista = 1;
+                    menuInicial();
+                    accionesMenuIniciales();
+                }else if(numeroVista == 3){
+                    numeroVista = 2;
+                    menuDeOpciones();
+                    accionesMenuDeOpciones();
+                }else if(numeroVista == 4){
+                    numeroVista = 3;
+                    menuDeSeleccion();
+                    accionesmenuDeSeleccion();
+                }
+            }
+        });
 
     }
 
+    private void duelo(){
+        ImageIcon fondo = new ImageIcon(getClass().getResource("/presentation/recursos/combate.png"));
+        JPanel fondoFinal = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        setContentPane(fondoFinal);
+
+
+        fondoFinal.setLayout(new GridBagLayout());
+
+        JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setOpaque(false);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+
+        //PARTE SUPERIOR(peleaPokemon)
+        GridBagConstraints fondoGBC = new GridBagConstraints();
+        fondoGBC.gridx = 0;
+        fondoGBC.gridy = 0;
+        fondoGBC.weightx = 1.0;
+        fondoGBC.weighty = 1.0;
+        fondoGBC.fill = GridBagConstraints.BOTH;
+        fondoFinal.add(mainPanel, fondoGBC);
+
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 4;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.74;
+        JPanel top = new JPanel();
+
+        top.setLayout(new GridBagLayout());
+        GridBagConstraints topGbc = new GridBagConstraints();
+        topGbc.fill = GridBagConstraints.BOTH;
+
+// Panel izquierda arriba (0.5 altura, 0.4 ancho)
+        topGbc.gridx = 0;
+        topGbc.gridy = 0;
+        topGbc.weightx = 0.5;
+        topGbc.weighty = 0.5;
+        JPanel topLeftUp = new JPanel();
+        topLeftUp.setBackground(Color.WHITE);
+        top.add(topLeftUp, topGbc);
+
+// Panel izquierda abajo (0.5 altura, 0.4 ancho)
+        topGbc.gridy = 1;
+        topGbc.weighty = 0.5;
+        JPanel topLeftDown = new JPanel();
+        topLeftDown.setBackground(Color.PINK);
+        top.add(topLeftDown, topGbc);
+
+// Panel derecha arriba (0.2 altura, 0.6 ancho)
+        topGbc.gridx = 1;
+        topGbc.gridy = 0;
+        topGbc.weightx = 0.5  ;
+        topGbc.weighty = 0.2;  // Ajuste a 0.2 para el 20% de la altura
+        JPanel topRightUp = new JPanel();
+        topRightUp.setBackground(Color.YELLOW);
+        top.add(topRightUp, topGbc);
+
+// Panel derecha abajo (0.8 altura, 0.6 ancho)
+        topGbc.gridy = 1;
+        topGbc.weighty = 0.8;  // Ajuste a 0.8 para el 80% de la altura
+        JPanel topRightDown = new JPanel();
+        topRightDown.setBackground(Color.CYAN);
+        top.add(topRightDown, topGbc);
+
+
+
+        mainPanel.add(top, gbc);
+
+        //PARTE INFERIOR
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.weighty = 0.26;
+
+        gbc.gridx = 0;
+        gbc.weightx = 0.05;
+        JPanel p1 = new JPanel();
+        p1.setOpaque(false);
+        mainPanel.add(p1, gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 0.45;
+        JPanel p2 = new JPanel();
+        p2.setBackground(Color.BLUE);
+        mainPanel.add(p2, gbc);
+
+        gbc.gridx = 2;
+        gbc.weightx = 0.44;
+        JPanel p3 = new JPanel();
+        p3.setBackground(Color.MAGENTA);
+        mainPanel.add(p3, gbc);
+
+        gbc.gridx = 3;
+        gbc.weightx = 0.06;
+        JPanel p4 = new JPanel();
+        p4.setOpaque(false);
+        mainPanel.add(p4, gbc);
+
+        setVisible(true);
+
+    }
+    private void accionesDuelo(){
+
+    }
 
     /**
      * Metodo para configuara las imagenes que sean botones, quitando fondo, marco ETC...
@@ -417,6 +730,7 @@ public class PoobkemonGUI extends JFrame {
 
         b.setContentAreaFilled(false);
         b.setFocusPainted(false);
+
     }
 
     /**
