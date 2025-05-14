@@ -1,6 +1,6 @@
 package presentation;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +35,7 @@ public class PoobkemonGUI extends JFrame {
     private String numeroPokemon;
     private String rutaPokemon;
     private JLabel pokemonGif;
+    private JButton eliminarPokemones;
 
 
     PoobkemonGUI(){
@@ -126,7 +127,7 @@ public class PoobkemonGUI extends JFrame {
         gbc.gridy = 2;
         gbc.weighty = 0.2;
         gbc.weightx = 1.0;
-        add(new JLabel("ECI :D"), gbc);
+        add(new JLabel("HECHO POR: NIKOLAS Y CAMILO :d"), gbc);
 
 
         setVisible(true);
@@ -417,141 +418,144 @@ public class PoobkemonGUI extends JFrame {
     };
 
     private void pokedex(){
-        ImageIcon fondo = new ImageIcon(getClass().getResource("/presentation/recursos/fondoPokedex.png"));
-        JPanel fondoFinal = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
-            }
-        };
+
+        // FONDO DE PANTALLAS (por decidir)
+        JPanel fondoFinal = new JPanel();
         setContentPane(fondoFinal);
 
+        //DISTRIBUCION DE PANELES
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
 
-        // PANEL SUPERIOR pokedex
+        //PANEL SUPERIOR
         gbc.gridy = 0;
-        gbc.weighty = 0.4;
+        gbc.weighty = 0.6;
         gbc.weightx = 1.0;
-
         JPanel panelSuperior = new JPanel(new BorderLayout());
-        panelSuperior.setOpaque(false);
 
-        //DISTRIBUCION DEL PANEL SUPERIOR
-        pokedexSiguiente = new JButton(imagenEscalada("/presentation/recursos/pokedexSiguiente.png",1,8,1,8));
-        pokedexSiguiente.setHorizontalAlignment(SwingConstants.LEFT);
-        botonComoImagen(pokedexSiguiente);
-        pokedexSiguiente.setPreferredSize(new Dimension(getWidth()/3, 0));
-        panelSuperior.add(pokedexSiguiente,BorderLayout.EAST);
-
-        pokedexAnterior= new JButton(imagenEscalada("/presentation/recursos/pokedexAnterior.png",1,8,1,8));
-        pokedexAnterior.setHorizontalAlignment(SwingConstants.RIGHT);
-        botonComoImagen(pokedexAnterior);
-        pokedexAnterior.setPreferredSize(new Dimension(getWidth()/3, 0));
-        panelSuperior.add(pokedexAnterior,BorderLayout.WEST);
-
-        JPanel pantallaPokedex = new JPanel(new BorderLayout());
-
-        JButton superiorArriba = new JButton();
-        superiorArriba.setBackground(Color.BLACK);
-        superiorArriba.setPreferredSize(new Dimension(0, getHeight()/2));
+        JPanel pantallaPokemon = new JPanel();
+        pantallaPokemon.setPreferredSize(new Dimension(getWidth()/4,0));
 
 
-        pantallaPokedex.add(new JButton(),BorderLayout.EAST);
-        pantallaPokedex.add(new JButton(),BorderLayout.NORTH);
-        pantallaPokedex.add(superiorArriba,BorderLayout.SOUTH);
-        pantallaPokedex.add(new JLabel(),BorderLayout.WEST);
+        //BOTONES POKEMON E INFORMACION
+        JPanel informacionPokemon = new JPanel(new GridLayout(2,0));
+
+        //ESTADISTICAS POKEMON
+        JPanel estadisticasPokemon = new JPanel();
+        estadisticasPokemon.setBackground(Color.cyan);
+
+        informacionPokemon.add(estadisticasPokemon);
+
+        // BOTONES DE CAMBIAR POKEMON
+        pokedexSiguiente = new JButton();
+        pokedexAnterior = new JButton();
+
+        JPanel botonesPokemon = new JPanel(new GridLayout(0,2));
+        botonesPokemon.add(pokedexSiguiente);
+        botonesPokemon.add(pokedexAnterior);
+
+        informacionPokemon.add(botonesPokemon);
 
 
-        numeroPokemon = "0001";
-        rutaPokemon = "/presentation/recursos/animated/0001.gif";
-        pokemonGif = new JLabel(new ImageIcon(getClass().getResource(rutaPokemon)));
-        pokemonGif.setOpaque(false);
+        // PARTE DE SELECCIONAR ATAQUES POKEMON
+        JPanel ataquesPokemon = new JPanel(new GridLayout(3,1,0,10));
+        ataquesPokemon.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        panelSuperior.add(pokemonGif,BorderLayout.CENTER);
+        JPanel ataquesSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 0));
+        ataquesSuperior.add(new JComboBox<>(new String[]{"Opción 1A", "Opción 1B"}));
+        ataquesSuperior.add(new JComboBox<>(new String[]{"Opción 1C", "Opción 1D"}));
+
+        JPanel atquesInferior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 0));
+        atquesInferior.add(new JComboBox<>(new String[]{"Opción 2A", "Opción 2B"}));
+        atquesInferior.add(new JComboBox<>(new String[]{"Opción 2C", "Opción 2D"}));
+        ataquesPokemon.add(ataquesSuperior);
+        ataquesPokemon.add(atquesInferior);
+
+        if(jugador && !maquina){
+            JPanel agregarPokemon = new JPanel(new GridLayout(0,2));
+            agregarPlayer1 = new JButton("agregar a P1");
+            agregarPlayer2 = new JButton("agregar a P2");
+            agregarPokemon.add(agregarPlayer1);
+            agregarPokemon.add(agregarPlayer2);
+
+            ataquesPokemon.add(agregarPokemon);
+        } else if (jugador && maquina){
+            agregarPlayer1 = new JButton("agregar a player");
+            ataquesPokemon.add(agregarPlayer1);
+        }
+
+        ataquesPokemon.setPreferredSize(new Dimension(getWidth()/3,0));
+
+        panelSuperior.add(pantallaPokemon,BorderLayout.WEST);
+        panelSuperior.add(ataquesPokemon,BorderLayout.EAST);
+        panelSuperior.add(informacionPokemon,BorderLayout.CENTER);
 
         add(panelSuperior, gbc);
 
-        // PANEL CENTRAL BOTONES
+        //PANEL INFERIOR
         gbc.gridy = 1;
-        gbc.weighty = 0.1;
-        gbc.weightx = 1.0;
-
-        JPanel botonesCentro = new JPanel(new GridLayout(0,3));
-        botonesCentro.setOpaque(false);
-
-        botonesCentro.add(new JLabel());
-
-        if(jugador && !maquina){
-            JPanel botonesDeAgregar = new JPanel(new GridLayout(0,2));
-            botonesDeAgregar.add(new JButton("Agregar A P1"));
-            botonesDeAgregar.add(new JButton("Agregar A P2"));
-            botonesCentro.add(botonesDeAgregar);
-        }
-        else if(jugador && maquina){
-            JButton agregarPlayer1 = new JButton("Agregar P1");
-            botonesCentro.add(agregarPlayer1);
-        }
-
-        botonesCentro.add(new JLabel());
-
-        add(botonesCentro, gbc);
-
-        // PANEL INFERIOR (POKEMONES SELECCIONADOS)
-        gbc.gridy = 2;
-        gbc.weighty = 0.5;
+        gbc.weighty = 0.4;
         gbc.weightx = 1.0;
         JPanel panelInferior = new JPanel(new BorderLayout());
-        panelInferior.setOpaque(false);
+
+        JPanel personajes = new JPanel();
+        personajes.setLayout(new GridLayout(2,0));
+        personajes.setBorder(BorderFactory.createEmptyBorder(50, 20, 50, 10));
 
 
-        //DISTRIBUCION PANEL INFERIOR
+        personajes.add(new JButton());
+        personajes.add(new JButton());
 
-        JPanel esteInferior = new JPanel(new GridLayout(3,0));
+        personajes.setPreferredSize(new Dimension(getWidth()/6,0));
+        personajes.setBackground(Color.cyan);
 
-        butonContinue = new JButton(imagenEscalada("/presentation/recursos/continuar.png",1,9,1,10));
-        botonComoImagen(butonContinue);
-        butonBack = new JButton(imagenEscalada("/presentation/recursos/volver.png",1,9,1,10));
-        botonComoImagen(butonBack);
+        JPanel pokemones = new JPanel(new GridLayout(2,6));
+        pokemones.setBorder(BorderFactory.createEmptyBorder(50, 10, 50, 20));
+        pokemones.add(new JButton());
+        pokemones.add(new JButton());
+        pokemones.add(new JButton());
+        pokemones.add(new JButton());
+        pokemones.add(new JButton());
+        pokemones.add(new JButton());
+        pokemones.add(new JButton());
+        pokemones.add(new JButton());
+        pokemones.add(new JButton());
+        pokemones.add(new JButton());
+        pokemones.add(new JButton());
+        pokemones.add(new JButton());
+
+        pokemones.setBackground(Color.DARK_GRAY);
+
+        JPanel botonesFinales = new JPanel(new GridLayout(2,0));
+        eliminarPokemones = new JButton();
+        eliminarPokemones.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        JPanel atrasYcontinuar = new JPanel(new GridLayout(0,2));
+        butonContinue = new JButton();
+        butonBack = new JButton();
+        atrasYcontinuar.add(butonBack);
+        atrasYcontinuar.add(butonContinue);
+
+        botonesFinales.add(eliminarPokemones);
+        botonesFinales.add(atrasYcontinuar);
+
+        botonesFinales.setPreferredSize(new Dimension(getWidth()/4,0));
+
+        botonesFinales.setBackground(Color.GREEN);
+
+        panelInferior.add(personajes,BorderLayout.WEST);
+        panelInferior.add(pokemones,BorderLayout.CENTER);
+        panelInferior.add(botonesFinales,BorderLayout.EAST);
 
 
-        esteInferior.add(new JButton("ELIMINAR"));
-        esteInferior.add(butonContinue);
-        esteInferior.add(butonBack);
 
-        esteInferior.setOpaque(false);
-        esteInferior.setPreferredSize(new Dimension(getWidth()/5, 0));
-        panelInferior.add(esteInferior,BorderLayout.EAST);
-
-        JPanel oesteInferior = new JPanel();
-        oesteInferior.setOpaque(false);
-        panelInferior.add(oesteInferior,BorderLayout.WEST);
-
-        JPanel surInferior = new JPanel();
-        surInferior.setOpaque(false);
-        panelInferior.add(surInferior,BorderLayout.SOUTH);
-
-        JPanel norteInferior = new JPanel();
-        norteInferior.setOpaque(false);
-        panelInferior.add(norteInferior,BorderLayout.NORTH);
-
-        JPanel centroInferior = new JPanel(new GridLayout(2,7));
-        for(int i = 0;i<14;i++){
-            JLabel cuadroPokemon = new JLabel();
-            cuadroPokemon.setOpaque(true);
-            cuadroPokemon.setBackground(new Color(244, 80, 103, 170));
-            Border borde = BorderFactory.createLineBorder(new Color(193, 39, 45), 2);
-            cuadroPokemon.setBorder(borde);
-            centroInferior.add(cuadroPokemon);
-        }
-        centroInferior.setOpaque(false);
-        panelInferior.add(centroInferior,BorderLayout.CENTER);
 
         add(panelInferior, gbc);
+
+
+
         setVisible(true);
     }
     private void accionesPokedex(){
