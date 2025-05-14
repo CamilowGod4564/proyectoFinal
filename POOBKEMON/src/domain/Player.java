@@ -23,6 +23,8 @@ public class Player {
 	public String getName(){
 		return name;
 	}
+	
+	
 	public void addPokemon(Pokemon pokemon) {
 		if(pokemons.size()< 6) {
 			pokemons.add(pokemon);
@@ -33,6 +35,7 @@ public class Player {
 				//exception
 		}	
 	}
+	
 	public void removePokemon(Pokemon pokemon) {
 		 if (pokemons.contains(pokemon)) {
 		        pokemons.remove(pokemon);
@@ -78,4 +81,5 @@ public class Player {
 	public Bag getBag() {
 		return bag;
 	}
+	
 }

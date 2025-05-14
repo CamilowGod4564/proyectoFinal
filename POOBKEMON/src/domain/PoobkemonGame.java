@@ -147,7 +147,10 @@ public class PoobkemonGame{
 	}
 	
 	public String getWinner() {
-		return duel.getWinner().getName();
+		if(duel.getWinner() != null ) {
+			return duel.getWinner().getName();
+		}
+		return null;
 	}
 
 	

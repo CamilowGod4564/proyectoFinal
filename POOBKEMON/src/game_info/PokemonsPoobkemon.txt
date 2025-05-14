@@ -1,4 +1,5 @@
 0025,Pikachu,100,2000,55,40,50,50,[Electric],{Thunderbolt,Iron Tail,Quick Attack,Surf}
+0025,Bulbasaur,100,2000,55,40,50,50,[Electric],{Thunderbolt,Iron Tail,Quick Attack,Surf}
 0257,Blaziken,100,160,120,70,110,70,[Fire,Fighting],{Flamethrower,Brick Break,Fire Fang,Double Kick}
 0282,Gardevoir,100,150,65,65,125,115,[Psychic,Fairy],{Psychic,Shadow Ball,Dream Eater,Hex}
 0254,Sceptile,100,145,105,85,105,85,[Grass],{Leaf Blade,Dragon Claw,Aerial Ace,Leech Seed}
