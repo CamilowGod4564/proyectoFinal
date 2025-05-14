@@ -35,6 +35,6 @@ public abstract class Movement {
 		return type;
 	}
 
-	protected abstract Movement copy();
+	public abstract Movement copy();
 
 }

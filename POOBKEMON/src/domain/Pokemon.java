@@ -45,7 +45,11 @@ public class Pokemon {
 
 
 	public Pokemon copy() {
-		return new Pokemon(pokedexNumber,name,level, health, attack, defense,specialAttack,specialDefense,types);
+		Pokemon clone = new Pokemon(pokedexNumber,name,level, health, attack, defense,specialAttack,specialDefense,types);
+		for(Movement m : movements.values()) {
+			clone.addMovement(m.copy());
+		}
+		return clone;
 	}
 	
 	public boolean isFainteed() {

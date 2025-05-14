@@ -26,10 +26,5 @@ public class Physical extends DirectDamage {
 		int totalDamage = (int) (baseDamage*stab*totalEffectiveness*variation*criticalHit);
 		return totalDamage;
 	}
-
-	@Override
-	protected Movement copy() {
-		return new Physical(name, pp, type,power);
-	}
 	
 }

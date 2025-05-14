@@ -53,4 +53,9 @@ public abstract class DirectDamage extends Movement{
 			return 1;
 		}
 	}
+	
+	@Override
+	public Movement copy() {
+		return new Special(name, pp,type, power);
+	}
 }

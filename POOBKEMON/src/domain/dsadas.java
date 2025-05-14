@@ -6,6 +6,7 @@ import java.util.*;
 public class dsadas {
 	public static void main(String[] args) {
         try {
+        	PoobkemonGame g = new PoobkemonGame();
         	PoobkemonLoader p = new PoobkemonLoader();
             HashMap<String, Type> tipos = p.loadTypes("TypesPoobkemon.txt");
             HashMap<String, Status> statuses = p.loadStatuses("StatusesPoobkemon.txt");
@@ -23,22 +24,47 @@ public class dsadas {
             //for (String status : movements.keySet()) {
             //   System.out.println(status + ": " + movements.get(status));
             //}
-            //for (String status : pokemons.keySet()) {
-            //    System.out.println(status + ": " + pokemons.get(status));
-            //}
-            
-            Pokemon pokemon_prueba =  pokemons.get("SCEPTILE");
-            System.out.println(pokemon_prueba.getCurrentHealth());
-            pokemons.get("PIKACHU").useMovement("Thunderbolt", pokemon_prueba);
-            System.out.println(pokemon_prueba.getCurrentHealth());
-            for(String s : pokemon_prueba.getStatuses().keySet()) {
-            	System.out.println(s);
+            for (String status : pokemons.keySet()) {
+               System.out.println(status + ": " + pokemons.get(status).getMovements());
             }
+       
+            
+            g.setDuelMode("Normal");
+            
+            g.newPlayer("Nikolas");
+            g.newPlayer("Camilo");
+            
+            g.confirmPlayers();
+            
+            g.playerSelectPokemonForTeam("Nikolas","BLAZIKEN");
+            g.playerSelectPokemonForTeam("Camilo","Pikachu");
+            
+            g.confirmPlayers();
+            
+            g.nextTurn();
+            
+            System.out.println(g.getPlayerPokemons().get(0).getName());
+            System.out.println(g.getPlayerPokemons().get(0).getCurrentHealth());
+            
+            g.nextTurn();
+            
+            
+            System.out.println(g.getCurrentPokemon());
+            System.out.println(g.getPlayerPokemons().get(0).getMovements().firstKey());
+            g.attack(g.getCurrentPokemonMovements().get(0));
+            
+            g.nextTurn();
+            
+            System.out.println(g.getCurrentPokemon());
+            System.out.println(g.getPlayerPokemons().get(0).getCurrentHealth());
+            
+            g.nextTurn();
+            
+            System.out.println(g.getWinner());
             
         } catch (Exception e) {
             e.printStackTrace();
         }
 	}
-	
 	
 }

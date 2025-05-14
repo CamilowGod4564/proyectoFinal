@@ -28,8 +28,5 @@ public class Special extends DirectDamage{
 		return totalDamage;
 	}
 
-	@Override
-	protected Movement copy() {
-		return new Special(name, pp,type, power);
-	}
+
 }

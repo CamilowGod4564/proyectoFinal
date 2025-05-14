@@ -13,6 +13,8 @@ public class Player {
 	 */
 	public Player(String name) {
 		this.name = name;
+		this.pokemons = new ArrayList<>();
+		this.bag = new Bag();
 	}
 	
 	public ArrayList<Pokemon> getPokemonTeam() {
@@ -24,6 +26,9 @@ public class Player {
 	public void addPokemon(Pokemon pokemon) {
 		if(pokemons.size()< 6) {
 			pokemons.add(pokemon);
+			if(pokemons.size() == 1) {
+				playingPokemon = pokemon;
+			}
 			}else {
 				//exception
 		}	

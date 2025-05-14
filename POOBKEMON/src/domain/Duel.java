@@ -3,11 +3,11 @@ package domain;
 import java.util.*;
 
 public abstract class Duel {
-	Player p1;
-	Player p2;
-	Player playingPlayer;
-	Player waitingPlayer;
-	Player winner;
+	protected Player p1;
+	protected Player p2;
+	protected Player playingPlayer;
+	protected Player waitingPlayer;
+	protected Player winner;
 	
 	public void applyPokemonsStatuses() {
 		for (Pokemon p :playingPlayer.getPokemonTeam()) {
@@ -53,8 +53,12 @@ public abstract class Duel {
 		waitingPlayer = playingPlayer;
 		playingPlayer = p0;
 	}
-	public void playerSelectPokemon(Player p,Pokemon pokemon) {
-		p.addPokemon(pokemon);
+	public void playerSelectPokemon(String p,Pokemon pokemon) {
+		if(p1.getName().equals(p)) {
+			p1.addPokemon(pokemon);
+		}else if(p2.getName().equals(p)) {
+			p2.addPokemon(pokemon);
+		}
 	}
 	public void playerDeselectPokemon(Player p,Pokemon pokemon) {
 		p.removePokemon(pokemon); //tener cuidado que viene desde el GUI
@@ -138,6 +142,10 @@ public abstract class Duel {
 				p2.getBag().delItem(i.getName());
 			}
 		}
+	}
+
+	public Player getWinner() {
+		return winner;
 	}
 	
 	

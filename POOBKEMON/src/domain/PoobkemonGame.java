@@ -6,12 +6,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class PoobkemonGame{
-	TreeMap<String,Pokemon> pokemons;
-	HashMap<String,Movement> movements;
-	HashMap<String,Status> statuses;
-	HashMap<String,Type> types;
-	HashMap<String,Item> items;
-	Duel duel;
+	private TreeMap<String,Pokemon> pokemons;
+	private HashMap<String,Movement> movements;
+	private HashMap<String,Status> statuses;
+	private HashMap<String,Type> types;
+	private HashMap<String,Item> items;
+	private Duel duel;
 	
 	public PoobkemonGame() throws ClassNotFoundException, FileNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException {
 		PoobkemonLoader p =new PoobkemonLoader();
@@ -25,9 +25,9 @@ public class PoobkemonGame{
 	//Before duel
 	
 	public void setDuelMode(String mode) {
-		if(mode == "Normal") {
+		if("Normal".equals(mode)) {
 			duel = new NormalDuel();
-		}else if(mode == "Survival"){
+		}else if("Survival".equals(mode)){
 			duel = new SurvivalDuel();
 			//duel.createPlayer(mode);
 		}
@@ -46,7 +46,7 @@ public class PoobkemonGame{
 		duel.assignPlayers();
 	}
 	
-	public void playerSelectPokemonForTeam(Player player,String pokemonName) {
+	public void playerSelectPokemonForTeam(String player,String pokemonName) {
 		duel.playerSelectPokemon(player,pokemons.get(pokemonName.toUpperCase()).copy());
 		//try catch para mostrar que equipo completo
 	}
@@ -96,12 +96,21 @@ public class PoobkemonGame{
 	public ArrayList<Pokemon> getPlayerPokemons(){
 		return duel.getPlayerTeam();
 	}
+
+	public String getCurrentPokemon() {
+		return duel.getPlayerPlayingPokemon().getName();
+	}
+	
+	public ArrayList<String> getCurrentPokemonMovements(){
+		return new ArrayList<String> (duel.getPlayerPlayingPokemon().getMovements().keySet());
+	}
+	
 	//get current player??
 	
 	//Actions that the currentPlayer in Duel can do
 	
 	public void attack(String movement) {
-		duel.playerUseMovement(movement);
+		duel.playerUseMovement(movement.toUpperCase());
 		//try catch si no hay suficiente pp
 	}
 	public void useItem(String item) {
@@ -117,14 +126,18 @@ public class PoobkemonGame{
 	//During Battle 
 	
 	public void nextTurn() {
+		aPokemonFainted();
 		duel.changePlayingPlayer();
+		applyStatuses();
+		aPokemonFainted();
 	}
 	
-	public void applyStatuses() {
+	private void applyStatuses() {
 		duel.applyPokemonsStatuses();
 	}
 	
-	public void aPokemonFainted() {
+	private void aPokemonFainted() {
+		
 		if(duel.getPlayerPlayingPokemon().isFainteed()) {
 			duel.changePokemonAutomatically(duel.getPlayingPlayer());
 		}
@@ -133,8 +146,9 @@ public class PoobkemonGame{
 		}
 	}
 	
-	
-	
+	public String getWinner() {
+		return duel.getWinner().getName();
+	}
 
 	
 }
