@@ -61,7 +61,11 @@ public abstract class Duel {
 		}
 	}
 	public void playerDeselectPokemon(Player p,Pokemon pokemon) {
-		p.removePokemon(pokemon); //tener cuidado que viene desde el GUI
+		if(p1.getName().equals(p)) {
+			p1.removePokemon(pokemon);
+		}else if(p2.getName().equals(p)) {
+			p2.removePokemon(pokemon);
+		}
 	}
 	public void playerUseItem(String itemName) {
 		playingPlayer.useItem(itemName);
@@ -146,6 +150,23 @@ public abstract class Duel {
 
 	public Player getWinner() {
 		return winner;
+	}
+
+	public void playerSelectItem(String playerUsingTheItem,Item item) {
+		if(p1.getName().equals(playerUsingTheItem)) {
+			p1.addItem(item);
+		}else if(p2.getName().equals(playerUsingTheItem)) {
+			p2.addItem(item);
+		}
+	}
+
+	public void playerDeselectItem(String playerRemovingTheItem,String item) {
+		if(p1.getName().equals(playerRemovingTheItem)) {
+			p1.delItem(item);
+		}else if(p2.getName().equals(playerRemovingTheItem)) {
+			p2.delItem(item);
+		}
+		
 	}
 	
 	

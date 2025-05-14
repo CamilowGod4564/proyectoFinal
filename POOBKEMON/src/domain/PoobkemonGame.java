@@ -55,11 +55,11 @@ public class PoobkemonGame{
 		duel.playerDeselectPokemon(player,pokemon);
 	}
 	
-	public void playerSelectItem(Player player,String item) {
-		//hacer metodo en duel
+	public void playerSelectItem(String player,String item) {
+		duel.playerSelectItem(player,items.get(item));
 	}
-	public void playerDeselectItem(Player player,String item) {
-		//hacer metodo en duel
+	public void playerDeselectItem(String player,String item) {
+		duel.playerDeselectItem(player,item);
 	}
 	
 	public void cleanPlayers() {
@@ -72,8 +72,10 @@ public class PoobkemonGame{
 		duel.cleanItems();
 	}
 	
-	
-	// falta un changepokemonMovements mhmmm 
+	public void changePokemonMovements(Pokemon pokemon,String oldMov ,String newMov) {
+		pokemon.removeMovement(oldMov);
+		pokemon.addMovement(movements.get(newMov));
+	}
 	
 	//For consult
 	

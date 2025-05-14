@@ -105,14 +105,14 @@ public class Pokemon {
 	
 	public void addMovement(Movement movement) {
 		for(Type t:types) {
-		if (movement.getType().isStrongAgainst(t.getTypeName())) {
+		if (movement.getType().isStrongAgainst(t.getTypeName()) && movements.size() < 5) {
 			//raise exception
 		}
 	}
 		movements.put(movement.getName(), movement);
 	}
-	public void removeMovement(Movement movement) {
-		movements.remove(movement.getName());
+	public void removeMovement(String movement) {
+		movements.remove(movement);
 	}
 	public void cure(int hp) {
 		if(currentHealth + hp < health) {
