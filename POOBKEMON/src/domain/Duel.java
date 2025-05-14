@@ -170,7 +170,4 @@ public abstract class Duel {
 	}
 	
 	
-	
-	
-	
 }

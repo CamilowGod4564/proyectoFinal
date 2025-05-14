@@ -33,6 +33,7 @@ public class PoobkemonGame{
 		}
 	}
 	
+	
 	public void prepareTeams() {
 		duel.prepareTeams(pokemons,movements);
 	}
@@ -100,14 +101,22 @@ public class PoobkemonGame{
 	}
 
 	public String getCurrentPokemon() {
-		return duel.getPlayerPlayingPokemon().getName();
+		return duel.getPlayerPlayingPokemon().getName(); //cambiar para cumplir mejor con Solid
+	}
+	public int getCurrentPokemonHealth() {
+		return duel.getPlayerPlayingPokemon().getCurrentHealth(); //cambiar para cumplir mejor con Solid
 	}
 	
 	public ArrayList<String> getCurrentPokemonMovements(){
 		return new ArrayList<String> (duel.getPlayerPlayingPokemon().getMovements().keySet());
 	}
+	public String getOtherPokemon() {
+		return duel.getWaitingPlayer().getPlayingPokemon().getName(); //cambiar para cumplir mejor con Solid
+	}
 	
-	//get current player??
+	public int getOtherPokemonCurrentHealth() {
+		return duel.getWaitingPlayer().getPlayingPokemon().getCurrentHealth(); //cambiar para cumplir mejor con Solid
+	}
 	
 	//Actions that the currentPlayer in Duel can do
 	
