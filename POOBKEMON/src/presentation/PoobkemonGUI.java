@@ -1,15 +1,29 @@
 package presentation;
+import domain.PoobkemonGame;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Set;
 
 
 public class PoobkemonGUI extends JFrame {
+
+    private PoobkemonGame juego;
     private JLabel logoPoobkemon;
     private JButton butonPressStart;
     private JButton butonIniciarPartida;
@@ -24,6 +38,7 @@ public class PoobkemonGUI extends JFrame {
     private JButton butonContinue;
     private JButton butonBack;
     private int numeroVista;
+    private ArrayList<String> llavesPokemones;
 
     //POKEDEZ
     private Boolean jugador;
@@ -33,6 +48,7 @@ public class PoobkemonGUI extends JFrame {
     private JButton pokedexSiguiente;
     private JButton pokedexAnterior;
     private String numeroPokemon;
+    private int posicionPokemon;
     private String rutaPokemon;
     private JLabel pokemonGif;
     private JButton eliminarPokemones;
@@ -63,6 +79,32 @@ public class PoobkemonGUI extends JFrame {
         setVisible(true);
         animacionInicial();
 
+        try {
+			juego = new PoobkemonGame();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        llavesPokemones = new ArrayList<>(juego.getPokemons().keySet());
+
     }
 
     private void prepareAcctions() {
@@ -84,7 +126,7 @@ public class PoobkemonGUI extends JFrame {
 
     private void menuInicial() {
         numeroVista = 1;
-        ImageIcon fondo = new ImageIcon(getClass().getResource("/presentation/recursos/fondoPokemon2.gif"));
+        ImageIcon fondo = new ImageIcon(getClass().getResource("/presentation/recursos/fondoPrincipal.gif"));
 
         JPanel fondoFinal = new JPanel() {
             @Override
@@ -418,9 +460,14 @@ public class PoobkemonGUI extends JFrame {
     };
 
     private void pokedex(){
-
-        // FONDO DE PANTALLAS (por decidir)
-        JPanel fondoFinal = new JPanel();
+        ImageIcon fondo = new ImageIcon(getClass().getResource("/presentation/recursos/fondoPokedex.png"));
+        JPanel fondoFinal = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         setContentPane(fondoFinal);
 
         //DISTRIBUCION DE PANELES
@@ -434,47 +481,72 @@ public class PoobkemonGUI extends JFrame {
         gbc.weighty = 0.6;
         gbc.weightx = 1.0;
         JPanel panelSuperior = new JPanel(new BorderLayout());
+        panelSuperior.setOpaque(false);
 
-        JPanel pantallaPokemon = new JPanel();
-        pantallaPokemon.setPreferredSize(new Dimension(getWidth()/4,0));
+        //PANTALLA DEL POKEMON
+        posicionPokemon = 0;
+        numeroPokemon = llavesPokemones.get(posicionPokemon);
+        rutaPokemon = "/presentation/recursos/animated/"+numeroPokemon+".gif";
 
+        pokemonGif = new JLabel(new ImageIcon(getClass().getResource(rutaPokemon)));
+        pokemonGif.setOpaque(false);
+
+        pokemonGif.setPreferredSize(new Dimension(getWidth()/4,0));
+
+        JButton prueba = new JButton();
+        prueba.setPreferredSize(new Dimension(getWidth()/4,0));
+        prueba.setBorder(new EmptyBorder(10, 20, 10, 20));
 
         //BOTONES POKEMON E INFORMACION
         JPanel informacionPokemon = new JPanel(new GridLayout(2,0));
+        informacionPokemon.setOpaque(false);
 
         //ESTADISTICAS POKEMON
         JPanel estadisticasPokemon = new JPanel();
-        estadisticasPokemon.setBackground(Color.cyan);
+        estadisticasPokemon.setOpaque(false);
 
         informacionPokemon.add(estadisticasPokemon);
 
         // BOTONES DE CAMBIAR POKEMON
+
         pokedexSiguiente = new JButton();
+        botonComoImagen(pokedexSiguiente);
+
         pokedexAnterior = new JButton();
+        botonComoImagen(pokedexAnterior);
 
         JPanel botonesPokemon = new JPanel(new GridLayout(0,2));
-        botonesPokemon.add(pokedexSiguiente);
+        botonesPokemon.setOpaque(false);
         botonesPokemon.add(pokedexAnterior);
+        botonesPokemon.add(pokedexSiguiente);
+
 
         informacionPokemon.add(botonesPokemon);
 
 
         // PARTE DE SELECCIONAR ATAQUES POKEMON
+        String[] movimientosPokemon = juego.getMovements().toArray(new String[0]);
+        
+
         JPanel ataquesPokemon = new JPanel(new GridLayout(3,1,0,10));
         ataquesPokemon.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        ataquesPokemon.setOpaque(false);
 
-        JPanel ataquesSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 0));
-        ataquesSuperior.add(new JComboBox<>(new String[]{"Opción 1A", "Opción 1B"}));
-        ataquesSuperior.add(new JComboBox<>(new String[]{"Opción 1C", "Opción 1D"}));
+        JPanel ataquesSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        ataquesSuperior.setOpaque(false);
+        ataquesSuperior.add(new JComboBox<>(movimientosPokemon));
+        ataquesSuperior.add(new JComboBox<>(movimientosPokemon));
 
-        JPanel atquesInferior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 0));
-        atquesInferior.add(new JComboBox<>(new String[]{"Opción 2A", "Opción 2B"}));
-        atquesInferior.add(new JComboBox<>(new String[]{"Opción 2C", "Opción 2D"}));
+        JPanel ataquesInferior = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        ataquesInferior.setOpaque(false);
+        ataquesInferior.add(new JComboBox<>(movimientosPokemon));
+        ataquesInferior.add(new JComboBox<>(movimientosPokemon));
         ataquesPokemon.add(ataquesSuperior);
-        ataquesPokemon.add(atquesInferior);
+        ataquesPokemon.add(ataquesInferior);
 
         if(jugador && !maquina){
             JPanel agregarPokemon = new JPanel(new GridLayout(0,2));
+            agregarPokemon.setOpaque(false);
             agregarPlayer1 = new JButton("agregar a P1");
             agregarPlayer2 = new JButton("agregar a P2");
             agregarPokemon.add(agregarPlayer1);
@@ -488,7 +560,7 @@ public class PoobkemonGUI extends JFrame {
 
         ataquesPokemon.setPreferredSize(new Dimension(getWidth()/3,0));
 
-        panelSuperior.add(pantallaPokemon,BorderLayout.WEST);
+        panelSuperior.add(pokemonGif,BorderLayout.WEST);
         panelSuperior.add(ataquesPokemon,BorderLayout.EAST);
         panelSuperior.add(informacionPokemon,BorderLayout.CENTER);
 
@@ -561,10 +633,11 @@ public class PoobkemonGUI extends JFrame {
     private void accionesPokedex(){
         pokedexSiguiente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int longitud = numeroPokemon.length();
-                int valor = Integer.parseInt(numeroPokemon);
-                valor++;
-                numeroPokemon = String.format("%0" + longitud + "d", valor);
+                posicionPokemon++;
+                if(posicionPokemon == llavesPokemones.size()){
+                    posicionPokemon = 0;
+                }
+                numeroPokemon = llavesPokemones.get(posicionPokemon);
                 rutaPokemon = "/presentation/recursos/animated/"+numeroPokemon+".gif";
                 pokemonGif.setIcon(new ImageIcon(getClass().getResource(rutaPokemon)));
 
@@ -572,12 +645,14 @@ public class PoobkemonGUI extends JFrame {
         });
         pokedexAnterior.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int longitud = numeroPokemon.length();
-                int valor = Integer.parseInt(numeroPokemon);
-                valor--;
-                numeroPokemon = String.format("%0" + longitud + "d", valor);
+                posicionPokemon--;
+                if(posicionPokemon == -1){
+                    posicionPokemon = llavesPokemones.size()-1;
+                }
+                numeroPokemon = llavesPokemones.get(posicionPokemon);
                 rutaPokemon = "/presentation/recursos/animated/"+numeroPokemon+".gif";
                 pokemonGif.setIcon(new ImageIcon(getClass().getResource(rutaPokemon)));
+
             }
         });
         butonContinue.addActionListener(new ActionListener() {
