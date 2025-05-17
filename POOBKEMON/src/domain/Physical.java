@@ -13,6 +13,8 @@ public class Physical extends DirectDamage {
 		ArrayList<Double> effectivity = new ArrayList<>();
 		double totalEffectiveness = 1; //1 por que es el modulo de la multiplicacion Tpro reference
 		double baseDamage = (((((2.0*pokemon.getLevel())/5.0)+2)*power*((double)pokemon.getAttack()/targetPokemon.getDefense()))/50.0)+2;
+		//SE PUEDE SIMPLIFICAR
+		
 		double stab = super.getSTAB(pokemon); 
 		for(Type t:targetPokemon.getTypes()){
 			effectivity.add(getEffectiveness(t));

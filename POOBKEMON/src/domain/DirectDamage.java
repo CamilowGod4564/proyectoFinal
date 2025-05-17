@@ -36,7 +36,7 @@ public abstract class DirectDamage extends Movement{
 	public double getSTAB(Pokemon pokemon) {
 		for(Type t:pokemon.getTypes()) {
 			if (t==type) {
-				return 1.5;
+				return 1.5; //SE PUEDEN REDUCIR RETURNS
 			}
 		}
 		return 1;

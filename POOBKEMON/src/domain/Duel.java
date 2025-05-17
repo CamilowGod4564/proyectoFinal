@@ -3,7 +3,7 @@ package domain;
 import java.util.*;
 
 public abstract class Duel {
-	protected Player p1;
+	protected Player p1; //MEJORAR NOMBRES
 	protected Player p2;
 	protected Player playingPlayer;
 	protected Player waitingPlayer;

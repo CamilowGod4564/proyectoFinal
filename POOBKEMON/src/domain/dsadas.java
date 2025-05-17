@@ -14,9 +14,9 @@ public class dsadas {
             TreeMap<String,Pokemon> pokemons = p.loadPokemons("PokemonsPoobkemon.txt",movements,tipos);
             HashMap<String, Item> items = p.loadItems("ItemsPoobkemon.txt");
             
-            for (String status : items.keySet()) {
-            	System.out.println(status + ": " + items.get(status));
-            }
+            //for (String status : items.keySet()) {
+            //	System.out.println(status + ": " + items.get(status));
+            //}
             Item healingPotion = items.get("SUPERPOTION");
             System.out.println(healingPotion);
             
@@ -34,6 +34,9 @@ public class dsadas {
             //for (String status : pokemons.keySet()) {
             //   System.out.println(status + ": " + pokemons.get(status).getMovements());
             //}
+            
+            System.out.print(pokemons.get("GARDEVOIR").getCurrentHealth());
+            pokemons.get("SCEPTILE").useMovement("DRAGON CLAW", pokemons.get("PIKACHU"));
        
             
             g.setDuelMode("Normal");
@@ -41,7 +44,6 @@ public class dsadas {
             g.newPlayer("Nikolas");
             g.newPlayer("Camilo");
             
-            g.confirmPlayers();
             
             g.playerSelectPokemonForTeam("Nikolas","BLAZIKEN");
             g.playerSelectPokemonForTeam("Camilo","Pikachu");
