@@ -1,0 +1,271 @@
+package presentation;
+
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Hashtable;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
+public class SelectPanel extends Panel{
+
+
+	private JButton butonContinue;
+	private JButton butonJugadorVsJugador;
+	private JButton butonBack;
+	private JButton butonDefensiveTrainer;
+	private JButton butonAttackingTrainer;
+	private JButton butonChangingTrainer;
+	private JButton butonExpertTrainer;
+	private JButton butonJugadorVsMaquina;
+	private JButton butonMaquinaVsMaquina;
+	protected boolean jugador;
+	protected boolean maquina;
+
+	public SelectPanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
+		super(gui, prevPanel, nextPanel, backgroundImage);
+		SwingUtilities.invokeLater(() -> {
+		    prepareElements();
+		    prepareActions();
+		});
+	}
+
+	@Override
+	public void prepareElements() {
+
+        ImageIcon fondo = new ImageIcon(getClass().getResource("/presentation/recursos/fondo1.png"));
+        JPanel fondoFinal = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+
+        //LAYOUT PRINCIPAL
+        setLayout(new GridLayout(2,0));
+
+        // LAYOUT SUPERIOR (parte de arriba)
+        JPanel panelSuperior = new JPanel(new BorderLayout());
+        panelSuperior.setOpaque(false);
+
+        // PARTE SUPERIOR IZQUIERDA (zona de texto y gif Pokemon)
+        JPanel superiorIzquierda = new JPanel(new BorderLayout());
+        superiorIzquierda.setOpaque(false);
+
+        JLabel textoSeleccion = new JLabel(imagenEscalada("/presentation/recursos/texto1.png",1,4,1,6));
+        textoSeleccion.setHorizontalAlignment(SwingConstants.CENTER);
+        superiorIzquierda.add(textoSeleccion,BorderLayout.NORTH);
+
+        JLabel imagenApoyo = new JLabel(new ImageIcon(getClass().getResource("/presentation/recursos/snorlax.gif")));
+        imagenApoyo.setHorizontalAlignment(SwingConstants.CENTER);
+        imagenApoyo.setOpaque(false);
+        superiorIzquierda.add(imagenApoyo,BorderLayout.CENTER);
+
+        textoSeleccion.setPreferredSize(new Dimension(0, getWidth()/8));
+        superiorIzquierda.setPreferredSize(new Dimension(getWidth()*3/10, 0));
+
+
+        // PANEL SUPERIOR DERECHA (modos de juego)
+        JPanel superiorDerecha = new JPanel(new GridLayout(3,0));
+        superiorDerecha.setOpaque(false);
+
+        butonJugadorVsJugador = new JButton(imagenEscalada("/presentation/recursos/jugadorVsjugador.png",2,3,1,7));
+        botonComoImagen(butonJugadorVsJugador);
+        butonJugadorVsMaquina = new JButton(imagenEscalada("/presentation/recursos/jugadorVsmaquina.png",2,3,1,7));
+        botonComoImagen(butonJugadorVsMaquina);
+        butonMaquinaVsMaquina = new JButton(imagenEscalada("/presentation/recursos/maquinaVsmaquina.png",2,3,1,7));
+        botonComoImagen(butonMaquinaVsMaquina);
+
+        superiorDerecha.add(butonJugadorVsJugador);
+        superiorDerecha.add(butonJugadorVsMaquina);
+        superiorDerecha.add(butonMaquinaVsMaquina);
+
+
+        panelSuperior.add(superiorDerecha, BorderLayout.CENTER);
+        panelSuperior.add(superiorIzquierda, BorderLayout.WEST);
+
+
+        // LAYOUT INFERIOR
+        JPanel panelInferior = new JPanel(new BorderLayout());
+        panelInferior.setOpaque(false);
+
+        // PARTE INFERIOR IZQUIERDA (modos de maquina)
+        JPanel inferiorIzquierda = new JPanel(new BorderLayout());
+        inferiorIzquierda.setOpaque(false);
+
+        //BORDER LAYOUT PARTE DE LOS BOTONES
+        JLabel subNorte = new JLabel("Selecciona La dificultad de la maquina");
+        subNorte.setHorizontalAlignment(SwingConstants.CENTER);
+        subNorte.setOpaque(false);
+
+        subNorte.setPreferredSize(new Dimension(0, getHeight()/20));
+        inferiorIzquierda.add(subNorte,BorderLayout.NORTH);
+
+        JPanel subCenter = new JPanel(new GridLayout(2,2));
+        subCenter.setOpaque(false);
+
+        butonDefensiveTrainer = new JButton(imagenEscalada("/presentation/recursos/defensiveTrainer.png",1,6,1,6));
+        botonComoImagen(butonDefensiveTrainer);
+        butonAttackingTrainer = new JButton(imagenEscalada("/presentation/recursos/attackingTrainer.png",1,6,1,6));
+        botonComoImagen(butonAttackingTrainer);
+        butonChangingTrainer = new JButton(imagenEscalada("/presentation/recursos/changingTrainer.png",1,6,1,6));
+        botonComoImagen(butonChangingTrainer);
+        butonExpertTrainer= new JButton(imagenEscalada("/presentation/recursos/expertTrainer.png",1,6,1,6));
+        botonComoImagen(butonExpertTrainer);
+
+        subCenter.add(butonDefensiveTrainer);
+        subCenter.add(butonAttackingTrainer);
+        subCenter.add(butonChangingTrainer);
+        subCenter.add(butonExpertTrainer);
+
+        inferiorIzquierda.add(subCenter,BorderLayout.CENTER);
+
+        JPanel subWest = new JPanel();
+        subWest.setOpaque(false);
+        subWest.setPreferredSize(new Dimension(getWidth()/20, 0));
+        inferiorIzquierda.add(subWest,BorderLayout.EAST);
+
+        JPanel subEast = new JPanel();
+        subEast.setOpaque(false);
+        subEast.setPreferredSize(new Dimension(getWidth()/20,0 ));
+        inferiorIzquierda.add(subEast,BorderLayout.WEST);
+
+        JPanel subSouth = new JPanel();
+        subSouth.setOpaque(false);
+        subSouth.setPreferredSize(new Dimension(0, getHeight()/20));
+        inferiorIzquierda.add(subSouth,BorderLayout.SOUTH);
+
+        panelInferior.add(inferiorIzquierda, BorderLayout.WEST);
+
+        // INFERIOR DERECHA (modo de juego y botones de continuar y atras)
+        JPanel inferiorDerecha = new JPanel(new GridLayout(2,0));
+        inferiorDerecha.setOpaque(false);
+
+        // slider para modo de juego
+        JPanel sliderModo = new JPanel(new BorderLayout());
+        sliderModo.setOpaque(false);
+
+        JPanel subWestInf = new JPanel();
+        subWestInf.setOpaque(false);
+        subWestInf.setPreferredSize(new Dimension(getWidth()/20, 0));
+        sliderModo.add(subWestInf,BorderLayout.EAST);
+
+        JPanel subEastInf = new JPanel();
+        subEastInf.setOpaque(false);
+        subEastInf.setPreferredSize(new Dimension(getWidth()/20,0 ));
+        sliderModo.add(subEastInf,BorderLayout.WEST);
+
+        JLabel subNorthtInf = new JLabel("MODO DE JUEGO");
+        subNorthtInf.setHorizontalAlignment(SwingConstants.CENTER);
+        subNorthtInf.setOpaque(false);
+        subNorthtInf.setPreferredSize(new Dimension(0,getWidth()/20 ));
+        sliderModo.add(subNorthtInf,BorderLayout.NORTH);
+
+
+        JSlider seleccionarModo = new JSlider(0,1,0);
+        seleccionarModo.setOpaque(false);
+
+        seleccionarModo.setMajorTickSpacing(1);
+        seleccionarModo.setPaintTicks(true);
+        seleccionarModo.setSnapToTicks(true);
+        seleccionarModo.setPaintLabels(true);
+
+        Hashtable<Integer, JLabel> labelTable = new Hashtable<>();
+        labelTable.put(0, new JLabel("Normal"));
+        labelTable.put(1, new JLabel("Survival"));
+        seleccionarModo.setLabelTable(labelTable);
+
+        sliderModo.add(seleccionarModo,BorderLayout.CENTER);
+
+        inferiorDerecha.add(sliderModo);
+
+        JPanel opcionesFinales = new JPanel(new GridLayout(0,2));
+        opcionesFinales.setOpaque(false);
+
+        butonContinue = new JButton(imagenEscalada("/presentation/recursos/continuar.png",2,9,2,9));
+        botonComoImagen(butonContinue);
+        butonBack = new JButton(imagenEscalada("/presentation/recursos/volver.png",2,9,2,9));
+        botonComoImagen(butonBack);
+
+        opcionesFinales.add(butonContinue);
+        opcionesFinales.add(butonBack);
+
+        inferiorDerecha.add(opcionesFinales);
+
+        panelInferior.add(inferiorDerecha, BorderLayout.CENTER);
+
+
+        // Establecer dimensiones preferidas para controlar tamaños iniciales
+        inferiorIzquierda.setPreferredSize(new Dimension(getWidth()/2, 0)); // Ancho de 150px
+
+        add(panelSuperior);
+        add(panelInferior);
+
+
+        botonComoImagen(butonJugadorVsJugador);
+      
+        setupKeyBindings();
+	}
+
+	@Override
+	public void prepareActions() {
+		butonContinue.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	 gui.changePanel(PoobkemonGUIProvisional.POKEDEX_PANEL);
+            }
+        });
+        butonBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	gui.changePanel(PoobkemonGUIProvisional.INIT_PANEL); //cambiar eso a lo de opciones
+            }
+        });
+        
+        butonJugadorVsJugador.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                jugador = true;
+                maquina = false;
+            }
+        });
+        butonJugadorVsMaquina.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                jugador = true;
+                maquina = true;
+            }
+        });
+        butonMaquinaVsMaquina.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                jugador = false;
+                maquina = false;
+            }
+        });
+	}
+
+	/**
+    *
+    * @param ruta
+    * @param anchoN
+    * @param anchoD
+    * @param altoN
+    * @param altoD
+    * @return
+    */
+   private ImageIcon imagenEscalada(String ruta,int anchoN,int anchoD,int altoN,int altoD){
+
+
+       Image jugadorVsjugador = new ImageIcon(getClass().getResource(ruta)).getImage();
+       Image jugadorVsjugadorEscalada = jugadorVsjugador.getScaledInstance((getWidth()*anchoN)/anchoD, (getHeight()*altoN)/altoD, Image.SCALE_SMOOTH);
+       return new ImageIcon(jugadorVsjugadorEscalada);
+   }
+}
