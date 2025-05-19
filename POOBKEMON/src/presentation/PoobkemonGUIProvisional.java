@@ -5,25 +5,34 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import domain.*;
+
 public class PoobkemonGUIProvisional extends JFrame {
+
 	
-	// Card layout for managing panel transitions
+	public PoobkemonGame juego;
+	private ArrayList llavesPokemones;
+
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    
-    // All the panels from your UML diagram
+
     private InitPanel initPanel;
     private SelectPanel selectPanel;
     private PlayerPanel playerPanel;
     private PokedexPanel pokedexPanel;
     private ItemsPanel itemsPanel;
     private BattlePanel battlePanel;
+    
     
     // Constants for panel names
     public static final String INIT_PANEL = "InitPanel";
@@ -33,7 +42,7 @@ public class PoobkemonGUIProvisional extends JFrame {
     public static final String ITEMS_PANEL = "ItemsPanel";
     public static final String BATTLE_PANEL = "BattlePanel";
     
-    public PoobkemonGUIProvisional() {
+    public PoobkemonGUIProvisional() throws ClassNotFoundException, FileNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException {
     	
     	setTitle("Poobkemon Esmerald Edition");
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -53,30 +62,30 @@ public class PoobkemonGUIProvisional extends JFrame {
         initPanel = new InitPanel(this, null, null, "/presentation/recursos/fondoPrincipal.gif");
         selectPanel = new SelectPanel(this, initPanel, null, "/presentation/recursos/fondo1.png");
         playerPanel = new PlayerPanel(this, selectPanel, null, "/presentation/recursos/fondoPlayer.gif");
-        pokedexPanel = new PokedexPanel(this, playerPanel, null, "/presentation/recursos/fondoPokedex.gif");
+        pokedexPanel = new PokedexPanel(this, playerPanel, null, "/presentation/recursos/fondoPokedex.png");
         itemsPanel = new ItemsPanel(this, pokedexPanel, null, "/presentation/recursos/fondoItems.gif");
-        battlePanel = new BattlePanel(this, itemsPanel, null, "/presentation/recursos/fondoBattle.gif");
+        battlePanel = new BattlePanel(this, itemsPanel, null, "/presentation/recursos/BattallaPokemon.png");
 
-        // Add panels to the card layout
         mainPanel.add(initPanel, INIT_PANEL);
         mainPanel.add(selectPanel, SELECT_PANEL);
         mainPanel.add(playerPanel, PLAYER_PANEL);
         mainPanel.add(pokedexPanel, POKEDEX_PANEL);
         mainPanel.add(itemsPanel, ITEMS_PANEL);
         mainPanel.add(battlePanel, BATTLE_PANEL);
-        
-        // Start with the init panel
+
         cardLayout.show(mainPanel, INIT_PANEL);
-        
-        // Add the main panel to the frame
+
         add(mainPanel);
         
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                exit(); // Muestra el diálogo de confirmación
+                exit();
             }
         });
+      //Game Logic
+    	juego = new PoobkemonGame();
+    	llavesPokemones = new ArrayList<>(juego.getPokemons().keySet());
     }
     
     /**
@@ -88,12 +97,18 @@ public class PoobkemonGUIProvisional extends JFrame {
         mainPanel.revalidate(); 
         mainPanel.repaint();  
     }
-    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-        	PoobkemonGUIProvisional gui = new PoobkemonGUIProvisional();
-            gui.setVisible(true);
+        	PoobkemonGUIProvisional gui;
+			try {
+				gui = new PoobkemonGUIProvisional();
+				gui.setVisible(true);
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         });
     }
     
@@ -110,4 +125,8 @@ public class PoobkemonGUIProvisional extends JFrame {
             System.exit(0);
         }
     }
+
+	public ArrayList getLlavesPokemones() {
+		return llavesPokemones;
+	}
 }

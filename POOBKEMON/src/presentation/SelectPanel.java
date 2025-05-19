@@ -43,16 +43,6 @@ public class SelectPanel extends Panel{
 
 	@Override
 	public void prepareElements() {
-
-        ImageIcon fondo = new ImageIcon(getClass().getResource("/presentation/recursos/fondo1.png"));
-        JPanel fondoFinal = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(fondo.getImage(), 0, 0, getWidth(), getHeight(), this);
-            }
-        };
-
         //LAYOUT PRINCIPAL
         setLayout(new GridLayout(2,0));
 
