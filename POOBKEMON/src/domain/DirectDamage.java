@@ -1,7 +1,13 @@
 package domain;
 
-public abstract class DirectDamage extends Movement{
+import java.io.Serializable;
+
+public abstract class DirectDamage extends Movement implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected int power;
 	
 	public DirectDamage(String name, int pp,Type type,int power) {

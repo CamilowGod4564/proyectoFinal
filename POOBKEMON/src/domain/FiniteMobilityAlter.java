@@ -2,6 +2,11 @@ package domain;
 
 public class FiniteMobilityAlter extends FiniteDurationStatus implements Kidnapping{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public FiniteMobilityAlter(String name, int maxDuration, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,int minDuration,String inmuneType) {
 		super(name, maxDuration, removeTemporarilyOnSwitch, removeOnSwitch, minDuration, inmuneType);
 	}

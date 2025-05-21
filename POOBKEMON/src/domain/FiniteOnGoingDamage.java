@@ -2,6 +2,10 @@ package domain;
 
 public class FiniteOnGoingDamage extends FiniteDurationStatus implements Damaging{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int damage;
 
 	public FiniteOnGoingDamage(String name, int maxDuration, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,int minDuration,int damage,String inmuneType) {

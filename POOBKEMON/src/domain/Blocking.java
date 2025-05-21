@@ -1,5 +1,6 @@
 package domain;
 
+
 public interface Blocking {
 	public default void makePokemonUseless(Pokemon pokemon,String inmuneType) {
 		boolean shouldBeApplied = true;

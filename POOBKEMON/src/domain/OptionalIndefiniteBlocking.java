@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class OptionalIndefiniteBlocking extends IndefiniteActionBlocking{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Random random = new Random();
 	double chanceOfApplying;
 	boolean wasApplied;

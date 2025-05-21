@@ -2,6 +2,11 @@ package domain;
 
 public class Revive extends HealthItem{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Revive(String name) {
 		super(name,0);
 	}

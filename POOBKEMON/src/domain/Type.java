@@ -1,8 +1,13 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Type {
+public class Type implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String typeName;
 	ArrayList<String> strongAgainst;
 	ArrayList<String> inmuneAgainst;

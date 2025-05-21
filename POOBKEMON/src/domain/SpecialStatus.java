@@ -1,6 +1,10 @@
 package domain;
 
 public class SpecialStatus extends Special {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Status status;
 	double chanceOfApplying;
 	

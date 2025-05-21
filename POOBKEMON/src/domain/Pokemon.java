@@ -1,8 +1,13 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Pokemon {
+public class Pokemon implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String pokedexNumber;
 	private int level;

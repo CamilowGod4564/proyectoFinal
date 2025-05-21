@@ -2,10 +2,15 @@ package domain;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-public class PoobkemonGame{
+public class PoobkemonGame implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private TreeMap<String,Pokemon> pokemons;
 	private HashMap<String,Movement> movements;
 	private HashMap<String,Status> statuses;

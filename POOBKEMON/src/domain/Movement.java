@@ -1,7 +1,13 @@
 package domain;
 
-public abstract class Movement {
+import java.io.Serializable;
 
+public abstract class Movement implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String name;
 	protected int pp;
 	protected int currentPP;

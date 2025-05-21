@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class SelfHarmActionBlocking extends FiniteActionBlocking implements Damaging {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected double chanceOfApplying;
 	protected Random random = new Random();
 	boolean wasApplied;

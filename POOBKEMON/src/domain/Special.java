@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class Special extends DirectDamage{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Special(String name, int pp,Type type, int power) {
 		super(name, pp,type, power);
 	}

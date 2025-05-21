@@ -1,8 +1,13 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.*;
 
-public abstract class Duel {
+public abstract class Duel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected Player p1; //MEJORAR NOMBRES
 	protected Player p2;
 	protected Player playingPlayer;

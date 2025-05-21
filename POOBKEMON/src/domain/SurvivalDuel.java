@@ -3,6 +3,10 @@ package domain;
 import java.util.*;
 
 public class SurvivalDuel extends Duel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Random random;
 	
 	@Override

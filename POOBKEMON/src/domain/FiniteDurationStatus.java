@@ -3,6 +3,10 @@ package domain;
 import java.util.Random;
 
 public abstract class FiniteDurationStatus extends Status {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Random randomBool = new Random();
 	protected int minDuration;
 	

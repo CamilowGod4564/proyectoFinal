@@ -1,8 +1,14 @@
 package domain;
+import java.io.Serializable;
 import java.util.*;
 
-public class Bag {
-    private TreeMap<String, Integer> itemCounts; 
+public class Bag implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private TreeMap<String, Integer> itemCounts; 
     private TreeMap<String, Item> itemTemplates; 
 
     public Bag() {

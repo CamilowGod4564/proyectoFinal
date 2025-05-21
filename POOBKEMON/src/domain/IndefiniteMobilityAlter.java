@@ -2,6 +2,11 @@ package domain;
 
 public class IndefiniteMobilityAlter extends IndefiniteDurationStatus implements Kidnapping{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public IndefiniteMobilityAlter(String name, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,double chanceOfLoseStatus,String inmuneType) {
 		super(name, removeTemporarilyOnSwitch, removeOnSwitch, chanceOfLoseStatus,inmuneType);
 	}

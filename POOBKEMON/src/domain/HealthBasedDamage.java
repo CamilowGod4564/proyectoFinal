@@ -1,6 +1,10 @@
 package domain;
 
 public class HealthBasedDamage extends IndefiniteOnGoingDamage{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	double proportion;
 	
 	public HealthBasedDamage(String name, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,double chanceOfLoseStatus,double proportion,String inmuneType) {

@@ -4,6 +4,10 @@ import java.util.Random;
 
 public abstract class IndefiniteDurationStatus extends Status {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected double chanceOfLoseStatus;
 	protected Random random = new Random();
 	

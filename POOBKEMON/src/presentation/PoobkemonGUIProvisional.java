@@ -21,7 +21,7 @@ public class PoobkemonGUIProvisional extends JFrame {
 
 	
 	public PoobkemonGame juego;
-	private ArrayList llavesPokemones;
+	private ArrayList<String> llavesPokemones;
 
     private CardLayout cardLayout;
     private JPanel mainPanel;

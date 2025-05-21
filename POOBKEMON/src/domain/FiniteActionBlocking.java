@@ -4,6 +4,11 @@ public class FiniteActionBlocking extends FiniteDurationStatus implements Blocki
 
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public FiniteActionBlocking(String name, int maxDuration, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,int minDuration, String inmuneType) {
 		super(name, maxDuration, removeTemporarilyOnSwitch, removeOnSwitch, minDuration, inmuneType);
 	}

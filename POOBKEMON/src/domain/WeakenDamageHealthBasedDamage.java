@@ -2,6 +2,11 @@ package domain;
 
 public class WeakenDamageHealthBasedDamage extends HealthBasedDamage{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	double weakenProportion;
 	
 	public WeakenDamageHealthBasedDamage(String name, boolean removeTemporarilyOnSwitch, boolean removeOnSwitch,

@@ -1,6 +1,10 @@
 package domain;
 
 public abstract class HealthItem implements Item {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String name;
 	protected int recoverPoints;
 	/**
