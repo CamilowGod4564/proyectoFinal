@@ -47,7 +47,6 @@ public class PoobkemonGUIProvisional extends JFrame {
     	setTitle("Poobkemon Esmerald Edition");
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         int ancho = d.width;
-        int alto = d.height;
         int anchoFinal = (int)(ancho * 0.5);
         int altoFinal = (int)(anchoFinal * 2.0 / 3.0);
         setSize(anchoFinal,altoFinal);
@@ -126,7 +125,7 @@ public class PoobkemonGUIProvisional extends JFrame {
         }
     }
 
-	public ArrayList getLlavesPokemones() {
+	public ArrayList<String> getLlavesPokemones() {
 		return llavesPokemones;
 	}
 }

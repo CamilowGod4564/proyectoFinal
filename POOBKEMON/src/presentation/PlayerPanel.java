@@ -1,6 +1,5 @@
 package presentation;
 
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class PlayerPanel extends Panel{

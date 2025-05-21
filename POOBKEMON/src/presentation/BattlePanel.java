@@ -1,30 +1,47 @@
 package presentation;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.CardLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-
-import javax.swing.BorderFactory;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 public class BattlePanel extends Panel {
 
-	private JPanel panelBatalla;
-	private Container backgroundLabel;
-
-
+	private JPanel panelDerecho;
+	protected JPanel panelIzquierdo;
+	protected CardLayout layoutMovimientos;
+	private JButton attack;
+	private JButton changePokemon;
+	private JButton openBag;
+	private JButton run;
+	private JPanel texto;
+	private JLabel msg;
+	private JPanel movimientos;
+	private JPanel botonesMovimientos;
+	private JLabel nombrePokemonJugador;
+	private JLabel nombrePokemonEnemigo;
+	private JPanel parteSuperior;
+	private JPanel parteInferior;
+	private JPanel panelVidaEnemigo;
+	private JPanel panelPokemonEnemigo;
+	private JPanel panelPokemonAtacando;
+	private JPanel panelVidaAtacando;
+	private ImageIcon enemyIcon;
+	private JLabel enemyLabel;
+	private ImageIcon attackingIcon;
+	private JLabel attackingLabel;
+	private HealthBar enemyHealth;
+	private HealthBar playerHealth;
+	
 	public BattlePanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
 		super(gui, prevPanel, nextPanel, backgroundImage);
 		SwingUtilities.invokeLater(() -> {
@@ -39,7 +56,7 @@ public class BattlePanel extends Panel {
 		setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 
-		JPanel parteSuperior = new JPanel(new GridBagLayout());
+		parteSuperior = new JPanel(new GridBagLayout());
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weightx = 1.0;
@@ -49,7 +66,7 @@ public class BattlePanel extends Panel {
 
 		add(parteSuperior, gbc);
 
-		JPanel parteInferior = new JPanel();
+		parteInferior = new JPanel(new GridBagLayout());
 		gbc.gridy = 1;
 		gbc.weighty = 0.5; 
 		gbc.fill = GridBagConstraints.BOTH;
@@ -62,7 +79,7 @@ public class BattlePanel extends Panel {
 		GridBagConstraints gbcSup = new GridBagConstraints();
 		
 		
-		JPanel panelVidaEnemigo = new JPanel();
+		panelVidaEnemigo = new JPanel(null);
 		gbcSup.gridx = 0;
 		gbcSup.gridy = 0;
 		gbcSup.weightx = 0.5;
@@ -71,7 +88,7 @@ public class BattlePanel extends Panel {
 		parteSuperior.add(panelVidaEnemigo, gbcSup);
 		
 		
-		JPanel panelPokemonEnemigo = new JPanel(); 
+		panelPokemonEnemigo = new JPanel(); 
 		gbcSup.gridx = 1;
 		gbcSup.gridy = 0;
 		gbcSup.weightx = 0.5;
@@ -79,7 +96,7 @@ public class BattlePanel extends Panel {
 		gbcSup.fill = GridBagConstraints.BOTH;
 	    parteSuperior.add(panelPokemonEnemigo,gbcSup);
 		
-		JPanel panelPokemonAtacando = new JPanel(); 
+		panelPokemonAtacando = new JPanel(); 
 		gbcSup.gridx = 0;
 		gbcSup.gridy = 1;
 		gbcSup.weightx = 0.5;
@@ -87,7 +104,7 @@ public class BattlePanel extends Panel {
 		gbcSup.fill = GridBagConstraints.BOTH;
 	    parteSuperior.add(panelPokemonAtacando,gbcSup);
 	    
-		JPanel panelVidaAtacando = new JPanel(); 
+		panelVidaAtacando = new JPanel(null); 
 		gbcSup.gridx = 1;
 		gbcSup.gridy = 1;
 		gbcSup.weightx = 0.5;
@@ -103,48 +120,139 @@ public class BattlePanel extends Panel {
 		panelPokemonEnemigo.setLayout(null);
 		panelPokemonAtacando.setLayout(null);
 		
+		//IMAGEN POKEMONS
 		
-		ImageIcon enemyIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/0001.png"));
-        JLabel enemyLabel = new JLabel(escalarIcono(enemyIcon,250,250,panelPokemonEnemigo.getHeight()));
+		enemyIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/0009.png"));
+        enemyLabel = new JLabel(escalarIcono(enemyIcon,150,150));
         enemyLabel.setBounds(70, 20, 250, 250);
         panelPokemonEnemigo.add(enemyLabel); 
         
 	    setupKeyBindings();
 	    
-	    ImageIcon attackingIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/0321.png"));
-        JLabel attackingLabel = new JLabel(escalarIcono(attackingIcon,250,250,panelPokemonAtacando.getHeight()));
+	    attackingIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/0001.png"));
+        attackingLabel = new JLabel(escalarIcono(attackingIcon,150,150));
         attackingLabel.setBounds(70, -50, 250, 250);
         panelPokemonAtacando.add(attackingLabel); 
-	    
+        
+        //VIDA POKEMONS
+        enemyHealth = new HealthBar(100);
+        enemyHealth.setBounds(55,86, 230, 7);
+        panelVidaEnemigo.add(enemyHealth);
+
+        playerHealth = new HealthBar(100);
+        playerHealth.setBounds(56, 72, 230, 7);
+        panelVidaAtacando.add(playerHealth);
+        
+        //NOMBRE POKEMONS
+        
+        nombrePokemonEnemigo = new JLabel("Charizard");
+        nombrePokemonEnemigo.setFont(new Font("Arial", Font.BOLD, 20));
+        nombrePokemonEnemigo.setBounds(55,50, 230, 40);
+        panelVidaEnemigo.add(nombrePokemonEnemigo);
+        
+        nombrePokemonJugador = new JLabel("Pikachu");
+        nombrePokemonJugador.setFont(new Font("Arial", Font.BOLD, 20));
+        nombrePokemonJugador.setBounds(55,35, 230, 40);
+        panelVidaAtacando.add(nombrePokemonJugador);
+        
+        //PANEL INFERIOR
+        
+        GridBagConstraints gbcInf = new GridBagConstraints();
+        gbcInf.gridx = 0;
+        gbcInf.gridy = 0;
+        gbcInf.weightx = 0.65; 
+        gbcInf.weighty = 1.0;
+        gbcInf.fill = GridBagConstraints.BOTH;
+        panelIzquierdo = new JPanel(new CardLayout());
+        parteInferior.add(panelIzquierdo, gbcInf);
+
+        gbcInf.gridx = 1;
+        gbcInf.weightx = 0.6; 
+        panelDerecho = new JPanel(new GridLayout(2, 2));
+        parteInferior.add(panelDerecho, gbcInf);
+        
+        panelDerecho.setOpaque(false);
+        panelIzquierdo.setOpaque(false);
+        
+
+        attack = new JButton();
+        changePokemon = new JButton();
+        openBag = new JButton();
+        run = new JButton();
+             
+        attack.setContentAreaFilled(false); 
+        attack.setBorderPainted(false);    
+        attack.setBorder(null);     
+        
+        openBag.setContentAreaFilled(false); 
+        openBag.setBorderPainted(false);    
+        openBag.setBorder(null);    
+
+        changePokemon.setContentAreaFilled(false); 
+        changePokemon.setBorderPainted(false);    
+        changePokemon.setBorder(null);   
+
+        run.setContentAreaFilled(false); 
+        run.setBorderPainted(false);    
+        run.setBorder(null);    
+        
+        
+        panelDerecho.add(attack);
+        panelDerecho.add(openBag);
+        panelDerecho.add(changePokemon);
+        panelDerecho.add(run);
+        
+        //PANEL IZQUIERDA
+        
+        layoutMovimientos = (CardLayout) panelIzquierdo.getLayout();
+        
+        //TEXTO
+        texto = new JPanel(null);
+        texto.setOpaque(false);
+        msg = new JLabel("Que hará "+"Bulbasaur"+" ?");
+        msg.setFont(new Font("Arial", Font.BOLD, 20));
+        msg.setBounds(35,30, 230, 40);
+        texto.add(msg);
+        
+        panelIzquierdo.add(texto, "TEXTO");
+        
+        //MOVIMIENTOS
+        movimientos = new JPanel(null);
+        botonesMovimientos = new JPanel(new GridLayout(2, 2));
+        botonesMovimientos.setBounds(25, 20, 320, 84);
+        botonesMovimientos.setOpaque(true);
+        
+        for(JButton b : MovementButtons.getButtons()) {
+        	botonesMovimientos.add(b);
+        }
+        
+        movimientos.add(botonesMovimientos);
+        
+        movimientos.setOpaque(false);
+        panelIzquierdo.add(movimientos, "MOVIMIENTOS");
+        
+        
+        layoutMovimientos.show(panelIzquierdo, "TEXTO");
+      
 	}
-	
+
 	@Override
 	public void prepareActions() {
-		// TODO Auto-generated method stub
-		
+		attack.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            layoutMovimientos.show(panelIzquierdo, "MOVIMIENTOS"); 
+	        }
+	    });
 	}
+	public static ImageIcon escalarIcono(ImageIcon icon, int ancho, int alto) {
+        Image imagenOriginal = icon.getImage();
+        Image imagenEscalada = imagenOriginal.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+        return new ImageIcon(imagenEscalada);
+    }
 	
 	
-	public static ImageIcon escalarIcono(ImageIcon icon, int anchoMax, int altoMax, double panelHeight) {
-	    int anchoOriginal = icon.getIconWidth();
-	    int altoOriginal = icon.getIconHeight();
-
-	    double escalaAncho = (double) anchoMax / anchoOriginal;
-	    double escalaAlto = (double) altoMax / altoOriginal;
-	    double escala = Math.min(escalaAncho, escalaAlto);
-
-	    // Calculamos primero el tamaño que tendría escalado
-	    int nuevoAncho = (int) (anchoOriginal * escala);
-	    int nuevoAlto = (int) (altoOriginal * escala);
-
-	    // Si el nuevo ancho sigue siendo más grande que el panel, devolvemos el original
-	    if (nuevoAncho >= panelHeight) {
-	        return icon;
-	    }
-
-	    // Ahora sí escalamos
-	    Image imagenEscalada = icon.getImage().getScaledInstance(nuevoAncho, nuevoAlto, Image.SCALE_SMOOTH);
-	    return new ImageIcon(imagenEscalada);
-	}
-
 }
+
+	
+	
+

@@ -169,6 +169,13 @@ public class PoobkemonGame implements Serializable{
 		return null;
 	}
 	
+	public void saveGame(String route) {
+		PoobkemonUpload.saveGame(this, route );
+	}
+	
 
+	public void openGame(String route) {
+		PoobkemonUpload.openGame(route);
+	}
 	
 }

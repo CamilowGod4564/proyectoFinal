@@ -10,9 +10,9 @@ public class PoobkemonUpload {
     public static void saveGame(PoobkemonGame game, String ruta) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ruta))) {
             out.writeObject(game);
-            System.out.println("✅ Juego guardado en: " + ruta);
+            System.out.println("✅ Juego guardado en" + ruta);
         } catch (IOException e) {
-            System.err.println("Error al guardar:");
+            System.err.println("Error al guar");
             e.printStackTrace();
         }
     }
