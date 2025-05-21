@@ -243,7 +243,10 @@ public class BattlePanel extends Panel {
 	            layoutMovimientos.show(panelIzquierdo, "MOVIMIENTOS"); 
 	        }
 	    });
+		
+		
 	}
+	
 	public static ImageIcon escalarIcono(ImageIcon icon, int ancho, int alto) {
         Image imagenOriginal = icon.getImage();
         Image imagenEscalada = imagenOriginal.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);

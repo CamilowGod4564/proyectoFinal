@@ -63,7 +63,7 @@ public class PoobkemonGUIProvisional extends JFrame {
         playerPanel = new PlayerPanel(this, selectPanel, null, "/presentation/recursos/fondoPlayer.gif");
         pokedexPanel = new PokedexPanel(this, playerPanel, null, "/presentation/recursos/fondoPokedex.png");
         itemsPanel = new ItemsPanel(this, pokedexPanel, null, "/presentation/recursos/fondoItems.gif");
-        battlePanel = new BattlePanel(this, itemsPanel, null, "/presentation/recursos/BattallaPokemon.png");
+        battlePanel = new BattlePanel(this, itemsPanel, null, "/presentation/recursos/CampoBatallaPoobkemon.png");
 
         mainPanel.add(initPanel, INIT_PANEL);
         mainPanel.add(selectPanel, SELECT_PANEL);
