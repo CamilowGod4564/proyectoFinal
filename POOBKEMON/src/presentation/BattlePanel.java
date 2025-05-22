@@ -48,7 +48,8 @@ public class BattlePanel extends Panel {
 		super(gui, prevPanel, nextPanel, backgroundImage);
 	}
 	
-	public void battleReady() {
+	@Override
+	public void Ready() {
 		 prepareElements();
 		 prepareActions();
 	}

@@ -113,5 +113,10 @@ public abstract class Panel extends JPanel {
 		
 	}
 
+	public void Ready() {
+		
+		
+	}
+
     
 }

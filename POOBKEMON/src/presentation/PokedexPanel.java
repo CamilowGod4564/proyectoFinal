@@ -260,13 +260,12 @@ public class PokedexPanel extends Panel{
         butonContinue.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	if(isSurvival) {
-            		
             		PoobkemonGUIProvisional.juego.confirmPlayers();
-            		
+            		nextPanel.Ready();
             		gui.changePanel(PoobkemonGUIProvisional.BATTLE_PANEL);
+            	}else if () {
+            		gui.changePanel(PoobkemonGUIProvisional.ITEMS_PANEL);
             	}
-            
-            	gui.changePanel(PoobkemonGUIProvisional.ITEMS_PANEL);
             }
         });
         butonBack.addActionListener(new ActionListener() {
@@ -320,8 +319,6 @@ public class PokedexPanel extends Panel{
             	pokemonesJugador2 = new JPanel(new GridLayout(1,6));
             	pokemonesJugador1 = new JPanel(new GridLayout(1,6));
             	revalidate();
-            	
-
             }
         });
 
