@@ -104,6 +104,13 @@ public class PoobkemonGame implements Serializable{
 	public ArrayList<Pokemon> getPlayerPokemons(){
 		return duel.getPlayerTeam();
 	}
+	public ArrayList<String> getPlayerPokemonsNames(){
+		ArrayList<String> answerlist = new ArrayList<String>();
+		for(Pokemon p :duel.getPlayerTeam()) {
+			answerlist.add(p.getPokedexNumber());
+		}
+		return answerlist;
+	}
 
 	public String getCurrentPokemon() {
 		return duel.getPlayerPlayingPokemon().getName(); 

@@ -307,6 +307,7 @@ public class PokedexPanel extends Panel{
 
             }
         });
+
         eliminarPokemones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	pokemonesJugador2 = new JPanel(new GridLayout(1,6));
@@ -316,6 +317,8 @@ public class PokedexPanel extends Panel{
 
             }
         });
+
+
         
     }
 	
