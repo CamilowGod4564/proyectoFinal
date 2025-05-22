@@ -46,7 +46,6 @@ public class BattlePanel extends Panel {
 	
 	public BattlePanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
 		super(gui, prevPanel, nextPanel, backgroundImage);
-		battleReady();
 	}
 	
 	public void battleReady() {

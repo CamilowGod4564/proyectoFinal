@@ -259,6 +259,13 @@ public class PokedexPanel extends Panel{
         });
         butonContinue.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	if(isSurvival) {
+            		
+            		PoobkemonGUIProvisional.juego.confirmPlayers();
+            		
+            		gui.changePanel(PoobkemonGUIProvisional.BATTLE_PANEL);
+            	}
+            
             	gui.changePanel(PoobkemonGUIProvisional.ITEMS_PANEL);
             }
         });
