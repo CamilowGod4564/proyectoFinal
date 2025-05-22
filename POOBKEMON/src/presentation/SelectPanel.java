@@ -216,9 +216,11 @@ public class SelectPanel extends Panel{
 	public void prepareActions() {
 		butonContinue.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	nextPanel.repaint();
-            	nextPanel.revalidate();
-            	 gui.changePanel(PoobkemonGUIProvisional.POKEDEX_PANEL);
+            	nextPanel.removeAll();
+            	nextPanel.refresh();
+            	nextPanel.prepareElements();
+            	nextPanel.prepareActions();
+            	gui.changePanel(PoobkemonGUIProvisional.POKEDEX_PANEL);
             }
         });
         butonBack.addActionListener(new ActionListener() {
@@ -265,13 +267,11 @@ public class SelectPanel extends Panel{
    
    @Override
    public boolean getMaquina() {	
-	   System.out.print(this.maquina);
 	   return this.maquina;
    }
    
    @Override
    public boolean getJugador() {
-	   System.out.print(this.jugador);
 	   return this.jugador;
 	   
    }

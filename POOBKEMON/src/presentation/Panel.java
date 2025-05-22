@@ -108,5 +108,10 @@ public abstract class Panel extends JPanel {
 		this.nextPanel = nextPanel;
 	}
 
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
     
 }

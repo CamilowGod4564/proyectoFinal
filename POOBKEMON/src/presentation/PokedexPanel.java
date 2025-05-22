@@ -38,6 +38,8 @@ public class PokedexPanel extends Panel{
 	private JPanel pokemonesJugador2;
 	private boolean jugador;
 	private boolean maquina;
+	private JPanel agregarAJugador;
+	
 
 	
 	public PokedexPanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
@@ -56,6 +58,8 @@ public class PokedexPanel extends Panel{
 		
 			jugador = prevPanel.getJugador();
 			maquina = prevPanel.getMaquina();
+			
+			
 			
 		
 	        //DISTRIBUCION DE PANELES
@@ -133,23 +137,30 @@ public class PokedexPanel extends Panel{
 	        ataquesPokemon.add(ataquesSuperior);
 	        ataquesPokemon.add(ataquesInferior);
 	        
-	        agregarPlayer1 = new JButton("agregar a P1");
-            agregarPlayer2 = new JButton("agregar a P2");
 	        
-
+	       
+	        agregarPlayer1 = new JButton("agregar a P1");
+	        agregarPlayer2 = new JButton("agregar a P2");
+	        
+	        agregarAJugador = new JPanel(new GridLayout(0,2));
+	        agregarAJugador.setBackground(getBackground());
+	       
+			
 	        if(jugador && !maquina ){
-	            JPanel agregarPokemon = new JPanel(new GridLayout(0,2));
-	            agregarPlayer1 = new JButton("agregar a P1");
-	            agregarPlayer2 = new JButton("agregar a P2");
-	            agregarPokemon.setOpaque(false);        
-	            agregarPokemon.add(agregarPlayer1);
-	            agregarPokemon.add(agregarPlayer2);
-
-	            ataquesPokemon.add(agregarPokemon);
+	        	//PoobkemonGUIProvisional.juego.newPlayer("p1");
+	        	//PoobkemonGUIProvisional.juego.newPlayer("p2");
+	        	agregarAJugador.add(agregarPlayer1);
+	        	agregarAJugador.add(agregarPlayer2);
+	        		        		            	     	         
 	        } else if (jugador && maquina){
-	        	agregarPlayer1 = new JButton("agregar a P1");
-	            ataquesPokemon.add(agregarPlayer1);
+	        	//PoobkemonGUIProvisional.juego.newPlayer("p1");
+	        	//PoobkemonGUIProvisional.juego.newPlayer("maquina");
+	        	agregarAJugador.setLayout(new GridLayout(0,1));
+	        	agregarAJugador.add(agregarPlayer1);	    	                
 	        }
+	         	        
+	        
+	        ataquesPokemon.add(agregarAJugador);
 
 	        ataquesPokemon.setPreferredSize(new Dimension(getWidth()/3,0));
 
@@ -171,15 +182,19 @@ public class PokedexPanel extends Panel{
 	        personajes.setBorder(BorderFactory.createEmptyBorder(50, 20, 50, 10));
 
 
-	        personajes.add(new JButton());
-	        personajes.add(new JButton());
+	        personajes.add(new JLabel(imagenEscalada("/presentation/recursos/entrenador1.png",1,7,1,7)));
+	        personajes.add(new JLabel(imagenEscalada("/presentation/recursos/entrenador2.png",1,8,1,8)));
 
 	        personajes.setPreferredSize(new Dimension(getWidth()/6,0));
 	        
 	        personajes.setOpaque(false);
 	        JPanel pokemones = new JPanel(new GridLayout(2,1));
+	        
+	        pokemones.setOpaque(false);
 	        pokemonesJugador1 = new JPanel(new GridLayout(1,6));
+	        pokemonesJugador1.setOpaque(false);
 	        pokemonesJugador2 = new JPanel(new GridLayout(1,6));
+	        pokemonesJugador2.setOpaque(false);
 	        pokemones.add(pokemonesJugador1);
 	        pokemones.add(pokemonesJugador2);
 
@@ -192,12 +207,12 @@ public class PokedexPanel extends Panel{
 	        pokemones.setOpaque(false);
 
 	        JPanel botonesFinales = new JPanel(new GridLayout(2,0));
-	        eliminarPokemones = new JButton();
+	        eliminarPokemones = new JButton("ELIMINAR");
 	        eliminarPokemones.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
 	        JPanel atrasYcontinuar = new JPanel(new GridLayout(0,2));
-	        butonContinue = new JButton();
-	        butonBack = new JButton();
+	        butonContinue = new JButton("CONTINUAR");
+	        butonBack = new JButton("ATRAS");
 	        atrasYcontinuar.add(butonBack);
 	        atrasYcontinuar.add(butonContinue);
 
@@ -244,7 +259,7 @@ public class PokedexPanel extends Panel{
         });
         butonContinue.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	gui.changePanel(PoobkemonGUIProvisional.BATTLE_PANEL);
+            	gui.changePanel(PoobkemonGUIProvisional.ITEMS_PANEL);
             }
         });
         butonBack.addActionListener(new ActionListener() {
@@ -253,10 +268,14 @@ public class PokedexPanel extends Panel{
             }
         });
         agregarPlayer1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {        
+            public void actionPerformed(ActionEvent e) {      
+            	//DOMINIO
+            	//String nombrePokemon = PoobkemonGUIProvisional.juego.getPokemons().get(numeroPokemon);
+            	//PoobkemonGUIProvisional.juego.playerSelectPokemonForTeam("p1",nombrePokemon);
             	
-            	JLabel imagenPokemon = new JLabel(imagenEscalada("/presentation/recursos/frame2/"+numeroPokemon+".png",1,12,1,12));
+            	//GUI
             	
+            	JLabel imagenPokemon = new JLabel(imagenEscalada("/presentation/recursos/frame2/"+numeroPokemon+".png",1,15,1,15));
             	imagenPokemon.setOpaque(true);
             	imagenPokemon.setBackground(new Color(255, 0, 102, 100));
             	Border borde = BorderFactory.createLineBorder(new Color(255, 0, 102), 3);
@@ -272,7 +291,11 @@ public class PokedexPanel extends Panel{
         });
         agregarPlayer2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	JLabel imagenPokemon = new JLabel(imagenEscalada("/presentation/recursos/frame2/"+numeroPokemon+".png",1,12,1,12));
+            	//DOMINIO
+            	//String nombrePokemon = PoobkemonGUIProvisional.juego.getPokemons().get(numeroPokemon);
+            	//PoobkemonGUIProvisional.juego.playerSelectPokemonForTeam("p2",nombrePokemon);
+            	//GUI
+            	JLabel imagenPokemon = new JLabel(imagenEscalada("/presentation/recursos/frame2/"+numeroPokemon+".png",1,15,1,15));
             	
             	imagenPokemon.setOpaque(true);
             	imagenPokemon.setBackground(new Color(255, 0, 102, 100));
@@ -284,7 +307,15 @@ public class PokedexPanel extends Panel{
 
             }
         });
-        
+        eliminarPokemones.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	pokemonesJugador2 = new JPanel(new GridLayout(1,6));
+            	pokemonesJugador1 = new JPanel(new GridLayout(1,6));
+            	revalidate();
+            	
+
+            }
+        });
         
     }
 	
@@ -294,6 +325,24 @@ public class PokedexPanel extends Panel{
 	       Image jugadorVsjugadorEscalada = jugadorVsjugador.getScaledInstance((getWidth()*anchoN)/anchoD, (getHeight()*altoN)/altoD, Image.SCALE_SMOOTH);
 	       return new ImageIcon(jugadorVsjugadorEscalada);
 	   }
+	
+	@Override
+	public void refresh() {
+		
+		jugador = prevPanel.getJugador();
+		maquina = prevPanel.getMaquina();
+		
+		agregarPlayer1 = new JButton("agregar a P1");
+        agregarPlayer2 = new JButton("agregar a P2");
+        
+        
+        
+        agregarAJugador.setLayout(null);
+        agregarAJugador.setBackground(Color.BLUE);
+        
+        agregarAJugador.add(agregarPlayer2);
+	}
+	
 }
 
 
