@@ -104,5 +104,9 @@ public abstract class Panel extends JPanel {
 		return false;
 	}
 
+	public void setNextPanel(Panel nextPanel) {
+		this.nextPanel = nextPanel;
+	}
+
     
 }

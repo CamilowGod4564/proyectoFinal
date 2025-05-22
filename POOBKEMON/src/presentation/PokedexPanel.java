@@ -36,6 +36,8 @@ public class PokedexPanel extends Panel{
 	private JButton pokedexAnterior;
 	private JPanel pokemonesJugador1;
 	private JPanel pokemonesJugador2;
+	private boolean jugador;
+	private boolean maquina;
 
 	
 	public PokedexPanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
@@ -51,6 +53,9 @@ public class PokedexPanel extends Panel{
 
 	@Override
 	public void prepareElements() {
+		
+			jugador = prevPanel.getJugador();
+			maquina = prevPanel.getMaquina();
 			
 		
 	        //DISTRIBUCION DE PANELES
@@ -128,19 +133,21 @@ public class PokedexPanel extends Panel{
 	        ataquesPokemon.add(ataquesSuperior);
 	        ataquesPokemon.add(ataquesInferior);
 	        
+	        agregarPlayer1 = new JButton("agregar a P1");
+            agregarPlayer2 = new JButton("agregar a P2");
 	        
 
-	        if(prevPanel.getJugador() && !prevPanel.getMaquina()){
+	        if(jugador && !maquina ){
 	            JPanel agregarPokemon = new JPanel(new GridLayout(0,2));
-	            agregarPokemon.setOpaque(false);
 	            agregarPlayer1 = new JButton("agregar a P1");
 	            agregarPlayer2 = new JButton("agregar a P2");
+	            agregarPokemon.setOpaque(false);        
 	            agregarPokemon.add(agregarPlayer1);
 	            agregarPokemon.add(agregarPlayer2);
 
 	            ataquesPokemon.add(agregarPokemon);
-	        } else if (prevPanel.getJugador() && prevPanel.getMaquina()){
-	            agregarPlayer1 = new JButton("agregar a player");
+	        } else if (jugador && maquina){
+	        	agregarPlayer1 = new JButton("agregar a P1");
 	            ataquesPokemon.add(agregarPlayer1);
 	        }
 
@@ -157,6 +164,7 @@ public class PokedexPanel extends Panel{
 	        gbc.weighty = 0.4;
 	        gbc.weightx = 1.0;
 	        JPanel panelInferior = new JPanel(new BorderLayout());
+	        panelInferior.setOpaque(false);
 
 	        JPanel personajes = new JPanel();
 	        personajes.setLayout(new GridLayout(2,0));

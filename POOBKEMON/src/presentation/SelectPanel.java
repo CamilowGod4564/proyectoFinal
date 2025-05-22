@@ -30,8 +30,8 @@ public class SelectPanel extends Panel{
 	private JButton butonExpertTrainer;
 	private JButton butonJugadorVsMaquina;
 	private JButton butonMaquinaVsMaquina;
-	protected boolean jugador;
-	protected boolean maquina;
+	protected boolean jugador = true;
+	protected boolean maquina = true;
 
 	public SelectPanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
 		super(gui, prevPanel, nextPanel, backgroundImage);
@@ -44,10 +44,10 @@ public class SelectPanel extends Panel{
 
 	@Override
 	public void prepareElements() {
+		
+		
         //LAYOUT PRINCIPAL
         setLayout(new GridLayout(2,0));
-        jugador = false;
-        maquina = false;
 
         // LAYOUT SUPERIOR (parte de arriba)
         JPanel panelSuperior = new JPanel(new BorderLayout());
@@ -216,6 +216,8 @@ public class SelectPanel extends Panel{
 	public void prepareActions() {
 		butonContinue.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	nextPanel.repaint();
+            	nextPanel.revalidate();
             	 gui.changePanel(PoobkemonGUIProvisional.POKEDEX_PANEL);
             }
         });
