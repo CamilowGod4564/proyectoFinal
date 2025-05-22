@@ -46,12 +46,14 @@ public class BattlePanel extends Panel {
 	
 	public BattlePanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
 		super(gui, prevPanel, nextPanel, backgroundImage);
-		SwingUtilities.invokeLater(() -> {
-		    prepareElements();
-		    prepareActions();
-		});
+		battleReady();
 	}
-
+	
+	public void battleReady() {
+		 prepareElements();
+		 prepareActions();
+	}
+	
 	@Override
 	public void prepareElements() { 
 		
@@ -271,15 +273,14 @@ public class BattlePanel extends Panel {
 			}
 		});
 				
-		
 		//changePokemon
 		changePokemon.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	            
+	        	PokemonsDialog dialog = new PokemonsDialog((JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource()), 
+	            		PoobkemonGUIProvisional.juego.getPlayerPokemonsNames());
+	            dialog.setVisible(true); 
 	        }
 	    });
-		
-		
 		
 		run.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
@@ -317,6 +318,7 @@ public class BattlePanel extends Panel {
 	    repaint();
 	}
 	
+	
 	//para change pokemons se necesitan new healthbars change hace un actualizar de mas
 	
 
@@ -328,8 +330,7 @@ public class BattlePanel extends Panel {
         Image imagenOriginal = icon.getImage();
         Image imagenEscalada = imagenOriginal.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         return new ImageIcon(imagenEscalada);
-    }
-	
+    }	
 }
 
 	

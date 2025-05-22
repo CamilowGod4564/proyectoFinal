@@ -25,7 +25,7 @@ public class BagDialog extends JDialog{
 	
 	
 	public BagDialog(JFrame parent, ArrayList<String> bagItems) {
-        super(parent, "Maleta de Objetos", true);
+        super(parent, "Maleta de items", true);
         this.bagItems = bagItems;
         
         prepareElements();
@@ -35,13 +35,14 @@ public class BagDialog extends JDialog{
     
 	private void prepareElements() {
 		setLayout(new BorderLayout());
-	        
-		// Panel superior con título
+
 		panelTitulo = new JPanel();
 		titulo = new JLabel("Selecciona el item que usarás:");
 		titulo.setFont(titulo.getFont().deriveFont(Font.BOLD, 16f));
 		panelTitulo.add(titulo);
 
+		//botones por cada objeto que haya 
+		 
 		panelBotones = new JPanel();
 		panelBotones.setLayout(new GridLayout(0, 1, 5, 5)); 
 		panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -49,8 +50,7 @@ public class BagDialog extends JDialog{
 		scrollPane = new JScrollPane(panelBotones);
 	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	    scrollPane.setPreferredSize(new Dimension(400, 300));
-	        
-	    // Panel inferior con botón cerrar
+
 	    JPanel panelInferior = new JPanel(new FlowLayout());
 	    JButton btnCerrar = new JButton("Cerrar");
 
@@ -61,9 +61,10 @@ public class BagDialog extends JDialog{
 	}
 		
     private void prepareAcctions() {
-		// TODO Auto-generated method stub
-		
+		//guardar referencia cada boton para las acciones
+    	
+    	//despues de que un boton haga lo que tiene que hacer debe 
+    	//PoobkemonGUIProvisional.juego.nextTurn();
+        //actualizarGUI();
 	}
-	
-	
 }

@@ -285,7 +285,6 @@ public class PokedexPanel extends Panel{
             }
         });
         
-        
     }
 	
 	private ImageIcon imagenEscalada(String ruta,int anchoN,int anchoD,int altoN,int altoD){
