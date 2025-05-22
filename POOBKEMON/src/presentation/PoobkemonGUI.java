@@ -1,9 +1,11 @@
 package presentation;
 import domain.PoobkemonGame;
 
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 
 import java.awt.*;
@@ -45,6 +47,10 @@ public class PoobkemonGUI extends JFrame {
     private Boolean maquina;
     private JButton agregarPlayer1;
     private JButton agregarPlayer2;
+    private JPanel pokemonesP1;
+    private JPanel pokemonesP2;
+    
+    
     private JButton pokedexSiguiente;
     private JButton pokedexAnterior;
     private String numeroPokemon;
@@ -526,18 +532,18 @@ public class PoobkemonGUI extends JFrame {
 
         // PARTE DE SELECCIONAR ATAQUES POKEMON
         String[] movimientosPokemon = juego.getMovements().toArray(new String[0]);
-        
+
 
         JPanel ataquesPokemon = new JPanel(new GridLayout(3,1,0,10));
         ataquesPokemon.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         ataquesPokemon.setOpaque(false);
 
-        JPanel ataquesSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        JPanel ataquesSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 0));
         ataquesSuperior.setOpaque(false);
         ataquesSuperior.add(new JComboBox<>(movimientosPokemon));
         ataquesSuperior.add(new JComboBox<>(movimientosPokemon));
 
-        JPanel ataquesInferior = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        JPanel ataquesInferior = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 0));
         ataquesInferior.setOpaque(false);
         ataquesInferior.add(new JComboBox<>(movimientosPokemon));
         ataquesInferior.add(new JComboBox<>(movimientosPokemon));
@@ -583,20 +589,18 @@ public class PoobkemonGUI extends JFrame {
         personajes.setPreferredSize(new Dimension(getWidth()/6,0));
         personajes.setBackground(Color.cyan);
 
-        JPanel pokemones = new JPanel(new GridLayout(2,6));
+        JPanel pokemones = new JPanel(new GridLayout(2,0));
         pokemones.setBorder(BorderFactory.createEmptyBorder(50, 10, 50, 20));
-        pokemones.add(new JButton());
-        pokemones.add(new JButton());
-        pokemones.add(new JButton());
-        pokemones.add(new JButton());
-        pokemones.add(new JButton());
-        pokemones.add(new JButton());
-        pokemones.add(new JButton());
-        pokemones.add(new JButton());
-        pokemones.add(new JButton());
-        pokemones.add(new JButton());
-        pokemones.add(new JButton());
-        pokemones.add(new JButton());
+
+        pokemonesP1 = new JPanel(new GridLayout(1,6));
+        pokemonesP1.setBorder(new LineBorder(Color.RED, 2));
+        pokemonesP1.add(new JLabel(imagenEscalada(rutaPokemon,1,8,1,8)));        
+        pokemonesP2 = new JPanel(new GridLayout(1,6));
+        pokemonesP2.setBorder(new LineBorder(Color.RED, 2));
+
+        pokemones.add(pokemonesP1);
+        pokemones.add(pokemonesP2);
+
 
         pokemones.setBackground(Color.DARK_GRAY);
 
@@ -686,6 +690,19 @@ public class PoobkemonGUI extends JFrame {
                 }
             }
         });
+        agregarPlayer1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	
+            	
+                
+                JLabel pokemon = new JLabel(imagenEscalada(rutaPokemon,1,8,1,8));
+                pokemonesP1.add(pokemon);
+                pokemonesP1.revalidate(); 
+                pokemonesP1.repaint();  
+            }
+        });
+        
+        
 
     }
 
