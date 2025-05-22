@@ -29,8 +29,6 @@ public class PokedexPanel extends Panel{
 	private JButton butonBack;
 	private JButton agregarPlayer1;
 	private JButton agregarPlayer2;
-	private boolean jugador;
-	private boolean maquina;
 	private int posicionPokemon;
 	private Object numeroPokemon;
 	private String rutaPokemon;
@@ -40,12 +38,10 @@ public class PokedexPanel extends Panel{
 	private JPanel pokemonesJugador2;
 
 	
-	public PokedexPanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage,Boolean jugador, Boolean maquina) {
+	public PokedexPanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
 		
 		super(gui, prevPanel, nextPanel, backgroundImage);
 		SwingUtilities.invokeLater(() -> {
-			this.maquina = maquina;
-			this.jugador = jugador;
 		    prepareElements();
 		    prepareActions();
 		});
@@ -134,7 +130,7 @@ public class PokedexPanel extends Panel{
 	        
 	        
 
-	        if(prevPanel.getJugador() && !maquina){
+	        if(prevPanel.getJugador() && !prevPanel.getMaquina()){
 	            JPanel agregarPokemon = new JPanel(new GridLayout(0,2));
 	            agregarPokemon.setOpaque(false);
 	            agregarPlayer1 = new JButton("agregar a P1");
@@ -143,7 +139,7 @@ public class PokedexPanel extends Panel{
 	            agregarPokemon.add(agregarPlayer2);
 
 	            ataquesPokemon.add(agregarPokemon);
-	        } else if (jugador && maquina){
+	        } else if (prevPanel.getJugador() && prevPanel.getMaquina()){
 	            agregarPlayer1 = new JButton("agregar a player");
 	            ataquesPokemon.add(agregarPlayer1);
 	        }
@@ -171,15 +167,15 @@ public class PokedexPanel extends Panel{
 	        personajes.add(new JButton());
 
 	        personajes.setPreferredSize(new Dimension(getWidth()/6,0));
-	        personajes.setBackground(Color.cyan);
-
+	        
+	        personajes.setOpaque(false);
 	        JPanel pokemones = new JPanel(new GridLayout(2,1));
 	        pokemonesJugador1 = new JPanel(new GridLayout(1,6));
 	        pokemonesJugador2 = new JPanel(new GridLayout(1,6));
 	        pokemones.add(pokemonesJugador1);
 	        pokemones.add(pokemonesJugador2);
 
-	        Border borde = BorderFactory.createLineBorder(Color.BLACK, 3);
+	        Border borde = BorderFactory.createLineBorder(new Color(255, 0, 102), 3);
 	        pokemonesJugador1.setBorder(borde);
 	        pokemonesJugador2.setBorder(borde);
 
@@ -202,7 +198,7 @@ public class PokedexPanel extends Panel{
 
 	        botonesFinales.setPreferredSize(new Dimension(getWidth()/4,0));
 
-	        botonesFinales.setBackground(Color.GREEN);
+	        botonesFinales.setOpaque(false);
 
 	        panelInferior.add(personajes,BorderLayout.WEST);
 	        panelInferior.add(pokemones,BorderLayout.CENTER);
@@ -252,7 +248,10 @@ public class PokedexPanel extends Panel{
             public void actionPerformed(ActionEvent e) {        
             	
             	JLabel imagenPokemon = new JLabel(imagenEscalada("/presentation/recursos/frame2/"+numeroPokemon+".png",1,12,1,12));
-            	Border borde = BorderFactory.createLineBorder(Color.BLACK, 3);
+            	
+            	imagenPokemon.setOpaque(true);
+            	imagenPokemon.setBackground(new Color(255, 0, 102, 100));
+            	Border borde = BorderFactory.createLineBorder(new Color(255, 0, 102), 3);
             	imagenPokemon.setBorder(borde);
             	pokemonesJugador1.setBorder(null);
               
@@ -266,7 +265,10 @@ public class PokedexPanel extends Panel{
         agregarPlayer2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	JLabel imagenPokemon = new JLabel(imagenEscalada("/presentation/recursos/frame2/"+numeroPokemon+".png",1,12,1,12));
-            	Border borde = BorderFactory.createLineBorder(Color.BLACK, 3);
+            	
+            	imagenPokemon.setOpaque(true);
+            	imagenPokemon.setBackground(new Color(255, 0, 102, 100));
+            	Border borde = BorderFactory.createLineBorder(new Color(255, 0, 102), 3);
             	imagenPokemon.setBorder(borde);
             	pokemonesJugador2.setBorder(null);
             	pokemonesJugador2.add(imagenPokemon);

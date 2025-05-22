@@ -94,5 +94,15 @@ public abstract class Panel extends JPanel {
         });
     }
 
+	public boolean getJugador() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean getMaquina() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
     
 }

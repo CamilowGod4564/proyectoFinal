@@ -33,11 +33,10 @@ public class SelectPanel extends Panel{
 	protected boolean jugador;
 	protected boolean maquina;
 
-	public SelectPanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage,Boolean jugador, Boolean maquina) {
+	public SelectPanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
 		super(gui, prevPanel, nextPanel, backgroundImage);
 		SwingUtilities.invokeLater(() -> {
-			this.maquina = maquina;
-			this.jugador = jugador;
+
 		    prepareElements();
 		    prepareActions();
 		});
@@ -47,6 +46,8 @@ public class SelectPanel extends Panel{
 	public void prepareElements() {
         //LAYOUT PRINCIPAL
         setLayout(new GridLayout(2,0));
+        jugador = false;
+        maquina = false;
 
         // LAYOUT SUPERIOR (parte de arriba)
         JPanel panelSuperior = new JPanel(new BorderLayout());
@@ -260,12 +261,17 @@ public class SelectPanel extends Panel{
        return new ImageIcon(jugadorVsjugadorEscalada);
    }
    
-   public boolean getMaquina() {	   
+   @Override
+   public boolean getMaquina() {	
+	   System.out.print(this.maquina);
 	   return this.maquina;
    }
    
+   @Override
    public boolean getJugador() {
+	   System.out.print(this.jugador);
 	   return this.jugador;
+	   
    }
    
    
