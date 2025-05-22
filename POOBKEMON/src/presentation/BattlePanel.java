@@ -1,6 +1,7 @@
 package presentation;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -122,35 +124,35 @@ public class BattlePanel extends Panel {
 		
 		//IMAGEN POKEMONS
 		
-		enemyIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/0009.png"));
+		enemyIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/"+PoobkemonGUIProvisional.juego.getOtherPokemonPokedex()+".png"));
         enemyLabel = new JLabel(escalarIcono(enemyIcon,150,150));
         enemyLabel.setBounds(70, 20, 250, 250);
         panelPokemonEnemigo.add(enemyLabel); 
         
 	    setupKeyBindings();
 	    
-	    attackingIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/0001.png"));
+	    attackingIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/"+PoobkemonGUIProvisional.juego.getCurrentPokemonPokedex()+".png"));
         attackingLabel = new JLabel(escalarIcono(attackingIcon,150,150));
         attackingLabel.setBounds(70, -50, 250, 250);
         panelPokemonAtacando.add(attackingLabel); 
         
         //VIDA POKEMONS
-        enemyHealth = new HealthBar(100);
+        enemyHealth = new HealthBar(PoobkemonGUIProvisional.juego.getOtherPokemonTotalHealth());
         enemyHealth.setBounds(55,86, 230, 7);
         panelVidaEnemigo.add(enemyHealth);
 
-        playerHealth = new HealthBar(100);
+        playerHealth = new HealthBar(PoobkemonGUIProvisional.juego.getCurrentPokemonTotalHealth());
         playerHealth.setBounds(56, 72, 230, 7);
         panelVidaAtacando.add(playerHealth);
         
         //NOMBRE POKEMONS
         
-        nombrePokemonEnemigo = new JLabel("Charizard");
+        nombrePokemonEnemigo = new JLabel(PoobkemonGUIProvisional.juego.getOtherPokemon());
         nombrePokemonEnemigo.setFont(new Font("Arial", Font.BOLD, 20));
         nombrePokemonEnemigo.setBounds(55,50, 230, 40);
         panelVidaEnemigo.add(nombrePokemonEnemigo);
         
-        nombrePokemonJugador = new JLabel("Pikachu");
+        nombrePokemonJugador = new JLabel(PoobkemonGUIProvisional.juego.getCurrentPokemon());
         nombrePokemonJugador.setFont(new Font("Arial", Font.BOLD, 20));
         nombrePokemonJugador.setBounds(55,35, 230, 40);
         panelVidaAtacando.add(nombrePokemonJugador);
@@ -209,7 +211,7 @@ public class BattlePanel extends Panel {
         //TEXTO
         texto = new JPanel(null);
         texto.setOpaque(false);
-        msg = new JLabel("Que hará "+"Bulbasaur"+" ?");
+        msg = new JLabel("Que hará "+PoobkemonGUIProvisional.juego.getCurrentPokemon()+" ?");
         msg.setFont(new Font("Arial", Font.BOLD, 20));
         msg.setBounds(35,30, 230, 40);
         texto.add(msg);
@@ -222,6 +224,11 @@ public class BattlePanel extends Panel {
         botonesMovimientos.setBounds(25, 20, 320, 84);
         botonesMovimientos.setOpaque(true);
         
+        MovementButtons.actualizarNombresDeBotones(PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(0),
+        		PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(1),
+        		PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(2),
+        		PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(3));
+        
         for(JButton b : MovementButtons.getButtons()) {
         	botonesMovimientos.add(b);
         }
@@ -233,6 +240,11 @@ public class BattlePanel extends Panel {
         
         
         layoutMovimientos.show(panelIzquierdo, "TEXTO");
+        
+        
+        //ITEMS DE BAG
+        
+        
       
 	}
 
@@ -243,16 +255,80 @@ public class BattlePanel extends Panel {
 	            layoutMovimientos.show(panelIzquierdo, "MOVIMIENTOS"); 
 	        }
 	    });
+		for(JButton b : MovementButtons.getButtons()) {
+            b.addActionListener(e -> {
+                handleMovement((JButton) e.getSource());
+                PoobkemonGUIProvisional.juego.nextTurn();
+                actualizarGUI();
+            });
+        }
+
+		openBag.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	            BagDialog dialog = new BagDialog((JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource()), 
+	            		PoobkemonGUIProvisional.juego.getPlayerItems());
+	            dialog.setVisible(true); 
+			}
+		});
+				
+		
+		//changePokemon
+		changePokemon.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            
+	        }
+	    });
 		
 		
+		
+		run.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	        	PoobkemonGUIProvisional.juego.surrender();
+	        }
+	    });
 	}
 	
-	public static ImageIcon escalarIcono(ImageIcon icon, int ancho, int alto) {
+	private void actualizarGUI() {
+		// Update names
+	    nombrePokemonJugador.setText(PoobkemonGUIProvisional.juego.getCurrentPokemon());
+	    nombrePokemonEnemigo.setText(PoobkemonGUIProvisional.juego.getOtherPokemon());
+
+	    // Update health bars
+	    playerHealth.setHP(PoobkemonGUIProvisional.juego.getCurrentPokemonHealth());
+	    enemyHealth.setHP(PoobkemonGUIProvisional.juego.getCurrentPokemonHealth());
+
+	    // Update Pokémon images
+	    attackingIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/" +
+	            PoobkemonGUIProvisional.juego.getCurrentPokemonPokedex() + ".png"));
+	    enemyIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/" +
+	            PoobkemonGUIProvisional.juego.getOtherPokemonPokedex() + ".png"));
+
+	    attackingLabel.setIcon(escalarIcono(attackingIcon, 150, 150));
+	    enemyLabel.setIcon(escalarIcono(enemyIcon, 150, 150));
+
+	    // Update moves
+	    MovementButtons.actualizarNombresDeBotones(
+	            PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(0),
+	            PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(1),
+	            PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(2),
+	            PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(3)
+	    );
+	    revalidate();
+	    repaint();
+	}
+	
+	//para change pokemons se necesitan new healthbars change hace un actualizar de mas
+	
+
+	private void handleMovement(JButton button) {
+		PoobkemonGUIProvisional.juego.attack(button.getText());
+    }
+	
+	private static ImageIcon escalarIcono(ImageIcon icon, int ancho, int alto) {
         Image imagenOriginal = icon.getImage();
         Image imagenEscalada = imagenOriginal.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         return new ImageIcon(imagenEscalada);
     }
-	
 	
 }
 

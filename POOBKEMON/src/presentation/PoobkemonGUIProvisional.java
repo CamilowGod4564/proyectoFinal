@@ -20,7 +20,7 @@ import domain.*;
 public class PoobkemonGUIProvisional extends JFrame {
 
 	
-	public PoobkemonGame juego;
+	public static PoobkemonGame juego;
 	private ArrayList<String> llavesPokemones;
 
     private CardLayout cardLayout;

@@ -174,5 +174,9 @@ public abstract class Duel implements Serializable {
 		
 	}
 	
+	public ArrayList<String> getPlayerItems() {
+	    return new ArrayList<>(playingPlayer.getBag().getItems().keySet());
+	}
+	
 	
 }

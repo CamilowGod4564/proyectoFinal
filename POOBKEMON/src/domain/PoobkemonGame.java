@@ -106,21 +106,42 @@ public class PoobkemonGame implements Serializable{
 	}
 
 	public String getCurrentPokemon() {
-		return duel.getPlayerPlayingPokemon().getName(); //cambiar para cumplir mejor con Solid
+		return duel.getPlayerPlayingPokemon().getName(); 
 	}
+	
+	public int getCurrentPokemonTotalHealth() {
+		return duel.getPlayerPlayingPokemon().getHealth(); 
+	}
+	
+	public String getCurrentPokemonPokedex() {
+		return duel.getPlayerPlayingPokemon().getPokedexNumber();
+	}
+	
 	public int getCurrentPokemonHealth() {
-		return duel.getPlayerPlayingPokemon().getCurrentHealth(); //cambiar para cumplir mejor con Solid
+		return duel.getPlayerPlayingPokemon().getCurrentHealth();
 	}
 	
 	public ArrayList<String> getCurrentPokemonMovements(){
 		return new ArrayList<String> (duel.getPlayerPlayingPokemon().getMovements().keySet());
 	}
 	public String getOtherPokemon() {
-		return duel.getWaitingPlayer().getPlayingPokemon().getName(); //cambiar para cumplir mejor con Solid
+		return duel.getWaitingPlayer().getPlayingPokemon().getName(); 
+	}
+	
+	public int getOtherPokemonTotalHealth() {
+		return duel.getWaitingPlayerPlayingPokemon().getHealth(); 
+	}
+	
+	public String getOtherPokemonPokedex() {
+		return duel.getWaitingPlayerPlayingPokemon().getPokedexNumber();
 	}
 	
 	public int getOtherPokemonCurrentHealth() {
-		return duel.getWaitingPlayer().getPlayingPokemon().getCurrentHealth(); //cambiar para cumplir mejor con Solid
+		return duel.getWaitingPlayer().getPlayingPokemon().getCurrentHealth(); 
+	}
+	
+	public ArrayList<String> getPlayerItems(){
+		return duel.getPlayerItems();
 	}
 	
 	//Actions that the currentPlayer in Duel can do
