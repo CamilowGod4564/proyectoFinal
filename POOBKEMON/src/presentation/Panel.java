@@ -103,6 +103,10 @@ public abstract class Panel extends JPanel {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	public boolean getSurvival() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	public void setNextPanel(Panel nextPanel) {
 		this.nextPanel = nextPanel;

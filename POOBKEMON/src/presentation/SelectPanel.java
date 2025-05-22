@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class SelectPanel extends Panel{
 
@@ -30,6 +32,8 @@ public class SelectPanel extends Panel{
 	private JButton butonExpertTrainer;
 	private JButton butonJugadorVsMaquina;
 	private JButton butonMaquinaVsMaquina;
+	private JSlider seleccionarModo;
+	protected boolean isSurvival = false;
 	protected boolean jugador = true;
 	protected boolean maquina = true;
 
@@ -167,7 +171,7 @@ public class SelectPanel extends Panel{
         sliderModo.add(subNorthtInf,BorderLayout.NORTH);
 
 
-        JSlider seleccionarModo = new JSlider(0,1,0);
+        seleccionarModo = new JSlider(0,1,0);
         seleccionarModo.setOpaque(false);
 
         seleccionarModo.setMajorTickSpacing(1);
@@ -247,6 +251,12 @@ public class SelectPanel extends Panel{
                 maquina = false;
             }
         });
+        seleccionarModo.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+            	int valor = seleccionarModo.getValue();
+                isSurvival = (valor == 1);
+            }
+        });
 	}
 
 	/**
@@ -273,8 +283,13 @@ public class SelectPanel extends Panel{
    @Override
    public boolean getJugador() {
 	   return this.jugador;
-	   
+	
    }
+   public boolean getSurvival() {
+	   return this.isSurvival;
+	
+   }
+   
    
    
 }

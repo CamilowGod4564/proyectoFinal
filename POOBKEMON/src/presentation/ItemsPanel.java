@@ -31,6 +31,7 @@ public class ItemsPanel extends Panel{
 
 	        JPanel items = new JPanel(new GridLayout(numeroItems.size(),1));
 	        
+	        
 	        for (String i : numeroItems) {
 	            items.add(new JButton());
 	        }

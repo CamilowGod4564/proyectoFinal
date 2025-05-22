@@ -40,6 +40,8 @@ public class PoobkemonGame implements Serializable{
 	
 	
 	public void prepareTeams() {
+		
+		
 		duel.prepareTeams(pokemons,movements);
 	}
 	

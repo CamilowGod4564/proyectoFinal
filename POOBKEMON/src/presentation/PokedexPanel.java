@@ -39,6 +39,7 @@ public class PokedexPanel extends Panel{
 	private boolean jugador;
 	private boolean maquina;
 	private JPanel agregarAJugador;
+	private boolean isSurvival;
 	
 
 	
@@ -58,6 +59,7 @@ public class PokedexPanel extends Panel{
 		
 			jugador = prevPanel.getJugador();
 			maquina = prevPanel.getMaquina();
+			isSurvival = prevPanel.getSurvival();
 			
 			
 			
@@ -258,14 +260,17 @@ public class PokedexPanel extends Panel{
             }
         });
         butonContinue.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	if(isSurvival) {
+        	
+        	public void actionPerformed(ActionEvent e) {
+            	if(isSurvival) {		
             		PoobkemonGUIProvisional.juego.confirmPlayers();
-            		nextPanel.Ready();
             		gui.changePanel(PoobkemonGUIProvisional.BATTLE_PANEL);
-            	}else if () {
+            	}else {
             		gui.changePanel(PoobkemonGUIProvisional.ITEMS_PANEL);
+	
             	}
+            
+            	
             }
         });
         butonBack.addActionListener(new ActionListener() {
@@ -319,6 +324,8 @@ public class PokedexPanel extends Panel{
             	pokemonesJugador2 = new JPanel(new GridLayout(1,6));
             	pokemonesJugador1 = new JPanel(new GridLayout(1,6));
             	revalidate();
+            	
+
             }
         });
 
@@ -338,6 +345,7 @@ public class PokedexPanel extends Panel{
 		
 		jugador = prevPanel.getJugador();
 		maquina = prevPanel.getMaquina();
+		isSurvival = prevPanel.getSurvival();
 		
 		agregarPlayer1 = new JButton("agregar a P1");
         agregarPlayer2 = new JButton("agregar a P2");
