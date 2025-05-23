@@ -30,9 +30,9 @@ public class PoobkemonGame implements Serializable{
 	//Before duel
 	
 	public void setDuelMode(String mode) {
-		if("Normal".equals(mode)) {
+		if("Normal" == mode) {
 			duel = new NormalDuel();
-		}else if("Survival".equals(mode)){
+		}else if("Survival" == mode){
 			duel = new SurvivalDuel();
 			//duel.createPlayer(mode);
 		}
@@ -40,8 +40,6 @@ public class PoobkemonGame implements Serializable{
 	
 	
 	public void prepareTeams() {
-		
-		
 		duel.prepareTeams(pokemons,movements);
 	}
 	

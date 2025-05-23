@@ -53,6 +53,12 @@ public class PokedexPanel extends Panel{
 		
 
 	}
+	
+	@Override
+	public void Ready() {
+		PoobkemonGUIProvisional.juego.newPlayer("p1");
+    	PoobkemonGUIProvisional.juego.newPlayer("p2"); 
+	}
 
 	@Override
 	public void prepareElements() {
@@ -60,7 +66,6 @@ public class PokedexPanel extends Panel{
 			jugador = prevPanel.getJugador();
 			maquina = prevPanel.getMaquina();
 			isSurvival = prevPanel.getSurvival();
-			
 			
 			
 		
@@ -263,8 +268,11 @@ public class PokedexPanel extends Panel{
         	
         	public void actionPerformed(ActionEvent e) {
             	if(isSurvival) {		
+            		PoobkemonGUIProvisional.juego.prepareTeams();
             		PoobkemonGUIProvisional.juego.confirmPlayers();
+            		nextPanel.Ready();
             		gui.changePanel(PoobkemonGUIProvisional.BATTLE_PANEL);
+            		
             	}else {
             		gui.changePanel(PoobkemonGUIProvisional.ITEMS_PANEL);
 	
@@ -281,8 +289,10 @@ public class PokedexPanel extends Panel{
         agregarPlayer1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {      
             	//DOMINIO
-            	//String nombrePokemon = PoobkemonGUIProvisional.juego.getPokemons().get(numeroPokemon);
-            	//PoobkemonGUIProvisional.juego.playerSelectPokemonForTeam("p1",nombrePokemon);
+            	
+            	String nombrePokemon = PoobkemonGUIProvisional.juego.getPokemons().get(numeroPokemon);
+            	
+            	PoobkemonGUIProvisional.juego.playerSelectPokemonForTeam("p1",nombrePokemon);
             	
             	//GUI
             	
@@ -303,8 +313,9 @@ public class PokedexPanel extends Panel{
         agregarPlayer2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	//DOMINIO
-            	//String nombrePokemon = PoobkemonGUIProvisional.juego.getPokemons().get(numeroPokemon);
-            	//PoobkemonGUIProvisional.juego.playerSelectPokemonForTeam("p2",nombrePokemon);
+            	String nombrePokemon = PoobkemonGUIProvisional.juego.getPokemons().get(numeroPokemon);
+            	PoobkemonGUIProvisional.juego.playerSelectPokemonForTeam("p2",nombrePokemon);
+            	
             	//GUI
             	JLabel imagenPokemon = new JLabel(imagenEscalada("/presentation/recursos/frame2/"+numeroPokemon+".png",1,15,1,15));
             	

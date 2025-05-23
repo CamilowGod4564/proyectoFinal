@@ -255,6 +255,12 @@ public class SelectPanel extends Panel{
             public void stateChanged(ChangeEvent e) {
             	int valor = seleccionarModo.getValue();
                 isSurvival = (valor == 1);
+                if(isSurvival) {
+                	PoobkemonGUIProvisional.juego.setDuelMode("Survival");
+                	nextPanel.Ready();
+                }else {
+                	PoobkemonGUIProvisional.juego.setDuelMode("Normal");
+                }
             }
         });
 	}

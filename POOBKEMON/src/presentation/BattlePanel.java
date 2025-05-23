@@ -215,7 +215,7 @@ public class BattlePanel extends Panel {
         texto.setOpaque(false);
         msg = new JLabel("Que hará "+PoobkemonGUIProvisional.juego.getCurrentPokemon()+" ?");
         msg.setFont(new Font("Arial", Font.BOLD, 20));
-        msg.setBounds(35,30, 230, 40);
+        msg.setBounds(35,30, 260, 40);
         texto.add(msg);
         
         panelIzquierdo.add(texto, "TEXTO");
@@ -239,14 +239,12 @@ public class BattlePanel extends Panel {
         
         movimientos.setOpaque(false);
         panelIzquierdo.add(movimientos, "MOVIMIENTOS");
-        
+        msg.setText("¿Qué hará " + PoobkemonGUIProvisional.juego.getCurrentPokemon() + "?");
         
         layoutMovimientos.show(panelIzquierdo, "TEXTO");
         
         
         //ITEMS DE BAG
-        
-        
       
 	}
 
@@ -261,6 +259,7 @@ public class BattlePanel extends Panel {
             b.addActionListener(e -> {
                 handleMovement((JButton) e.getSource());
                 PoobkemonGUIProvisional.juego.nextTurn();
+                layoutMovimientos.show(panelIzquierdo, "TEXTO");
                 actualizarGUI();
             });
         }
@@ -296,7 +295,7 @@ public class BattlePanel extends Panel {
 
 	    // Update health bars
 	    playerHealth.setHP(PoobkemonGUIProvisional.juego.getCurrentPokemonHealth());
-	    enemyHealth.setHP(PoobkemonGUIProvisional.juego.getCurrentPokemonHealth());
+	    enemyHealth.setHP(PoobkemonGUIProvisional.juego.getOtherPokemonCurrentHealth());
 
 	    // Update Pokémon images
 	    attackingIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/" +
@@ -314,10 +313,10 @@ public class BattlePanel extends Panel {
 	            PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(2),
 	            PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(3)
 	    );
+	    msg.setText("¿Qué hará " + PoobkemonGUIProvisional.juego.getCurrentPokemon() + "?");
 	    revalidate();
 	    repaint();
 	}
-	
 	
 	//para change pokemons se necesitan new healthbars change hace un actualizar de mas
 	

@@ -33,8 +33,7 @@ public class PoobkemonGUIProvisional extends JFrame {
     private ItemsPanel itemsPanel;
     private BattlePanel battlePanel;
     
-    
-    // Constants for panel names
+
     public static final String INIT_PANEL = "InitPanel";
     public static final String SELECT_PANEL = "SelectPanel";
     public static final String PLAYER_PANEL = "PlayerPanel";
@@ -66,6 +65,7 @@ public class PoobkemonGUIProvisional extends JFrame {
         battlePanel = new BattlePanel(this, itemsPanel, null, "/presentation/recursos/CampoBatallaPoobkemon.png");
         
         selectPanel.setNextPanel(pokedexPanel);
+        pokedexPanel.setNextPanel(battlePanel);
 
         mainPanel.add(initPanel, INIT_PANEL);
         mainPanel.add(selectPanel, SELECT_PANEL);
