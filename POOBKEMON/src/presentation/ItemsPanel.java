@@ -129,6 +129,8 @@ public class ItemsPanel extends Panel{
                     
             	}
             	
+            	PoobkemonGUIProvisional.juego.confirmPlayers();
+            	nextPanel.Ready();
             	gui.changePanel(PoobkemonGUIProvisional.BATTLE_PANEL);
            
 

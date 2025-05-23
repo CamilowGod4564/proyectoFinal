@@ -260,7 +260,7 @@ public class BattlePanel extends Panel {
                 handleMovement((JButton) e.getSource());
                 PoobkemonGUIProvisional.juego.nextTurn();
                 layoutMovimientos.show(panelIzquierdo, "TEXTO");
-                actualizarGUI();
+                refresh();
             });
         }
 
@@ -276,7 +276,9 @@ public class BattlePanel extends Panel {
 		changePokemon.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	        	PokemonsDialog dialog = new PokemonsDialog((JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource()), 
-	            		PoobkemonGUIProvisional.juego.getPlayerPokemonsNames());
+	            		PoobkemonGUIProvisional.juego.getPlayerPokemonsNames(),
+	            		PoobkemonGUIProvisional.juego.getPlayerPokemons(),
+	            		BattlePanel.this);
 	            dialog.setVisible(true); 
 	        }
 	    });
@@ -288,7 +290,8 @@ public class BattlePanel extends Panel {
 	    });
 	}
 	
-	private void actualizarGUI() {
+	@Override
+	public void refresh() {
 		// Update names
 	    nombrePokemonJugador.setText(PoobkemonGUIProvisional.juego.getCurrentPokemon());
 	    nombrePokemonEnemigo.setText(PoobkemonGUIProvisional.juego.getOtherPokemon());

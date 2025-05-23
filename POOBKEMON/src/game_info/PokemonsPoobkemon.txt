@@ -1,5 +1,62 @@
+0001,Bulbasaur,100,2000,49,49,65,65,[Grass,Poison],{Tackle,Sludge Bomb,Leech Seed,Quick Attack}
+0002,Ivysaur,100,2000,62,63,80,80,[Grass,Poison],{Tackle,Sludge Bomb,Leech Seed,Quick Attack}
+0003,Venusaur,100,2000,82,83,100,100,[Grass,Poison],{Tackle,Sludge Bomb,Leech Seed,Quick Attack}
+0004,Charmander,100,2000,52,43,60,50,[Fire],{Flame Burst,Quick Attack,Slash,Dragon Breath}
+0005,Charmeleon,100,2000,64,58,80,65,[Fire],{Flame Burst,Quick Attack,Slash,Dragon Breath}
+0006,Charizard,100,2000,84,78,109,85,[Fire,Flying],{Flamethrower,Dragon Claw,Aerial Ace,Quick Attack}
+0007,Squirtle,100,2000,48,65,50,64,[Water],{Water Gun,Quick Attack,Headbutt,Iron Tail}
+0008,Wartortle,100,2000,63,80,65,80,[Water],{Water Gun,Quick Attack,Headbutt,Iron Tail}
+0009,Blastoise,100,2000,83,100,85,105,[Water],{Hydro Pump,Iron Tail,Rock Slide,Quick Attack}
+0010,Caterpie,100,2000,30,35,20,20,[Bug],{Tackle,Quick Attack,Headbutt,Slash}
+0011,Metapod,100,2000,20,55,25,25,[Bug],{Tackle,Quick Attack,Headbutt,Slash}
+0012,Butterfree,100,2000,45,50,90,80,[Bug,Flying],{Signal Beam,Aerial Ace,Swift,Quick Attack}
+0013,Weedle,100,2000,35,30,20,20,[Bug,Poison],{Poison Fang,Quick Attack,Headbutt,Slash}
+0014,Kakuna,100,2000,25,50,25,25,[Bug,Poison],{Poison Fang,Quick Attack,Headbutt,Slash}
+0015,Beedrill,100,2000,90,40,45,80,[Bug,Poison],{Poison Fang,Aerial Ace,Quick Attack,Slash}
+0016,Pidgey,100,2000,45,40,35,35,[Normal,Flying],{Quick Attack,Aerial Ace,Headbutt,Slash}
+0017,Pidgeotto,100,2000,60,55,50,50,[Normal,Flying],{Quick Attack,Aerial Ace,Headbutt,Slash}
+0018,Pidgeot,100,2000,80,75,70,70,[Normal,Flying],{Quick Attack,Aerial Ace,Headbutt,Slash}
+0019,Rattata,100,2000,56,35,25,35,[Normal],{Quick Attack,Headbutt,Slash,Iron Tail}
+0020,Raticate,100,2000,81,60,50,70,[Normal],{Quick Attack,Headbutt,Slash,Iron Tail}
+0021,Spearow,100,2000,60,30,31,31,[Normal,Flying],{Quick Attack,Aerial Ace,Headbutt,Slash}
+0022,Fearow,100,2000,90,65,61,61,[Normal,Flying],{Quick Attack,Aerial Ace,Headbutt,Slash}
+0023,Ekans,100,2000,60,44,40,54,[Poison],{Poison Fang,Quick Attack,Headbutt,Slash}
+0024,Arbok,100,2000,85,69,65,79,[Poison],{Poison Fang,Quick Attack,Headbutt,Slash}
 0025,Pikachu,100,2000,55,40,50,50,[Electric],{Thunderbolt,Iron Tail,Quick Attack,Surf}
-0001,Bulbasaur,100,2000,55,40,50,50,[Electric],{Thunderbolt,Iron Tail,Quick Attack,Surf}
-0257,Blaziken,100,160,120,70,110,70,[Fire,Fighting],{Flamethrower,Brick Break,Fire Fang,Double Kick}
-0282,Gardevoir,100,150,65,65,125,115,[Psychic,Fairy],{Psychic,Shadow Ball,Dream Eater,Hex}
-0254,Sceptile,100,145,105,85,105,85,[Grass],{Leaf Blade,Dragon Claw,Aerial Ace,Leech Seed}
+0026,Raichu,100,2000,90,55,90,80,[Electric],{Thunderbolt,Iron Tail,Quick Attack,Surf}
+0027,Sandshrew,100,2000,75,85,20,30,[Ground],{Rock Slide,Quick Attack,Headbutt,Slash}
+0028,Sandslash,100,2000,100,110,45,55,[Ground],{Rock Slide,Quick Attack,Headbutt,Slash}
+0029,Nidoran♀,100,2000,47,52,40,40,[Poison],{Poison Fang,Quick Attack,Headbutt,Slash}
+0030,Nidorina,100,2000,62,67,55,55,[Poison],{Poison Fang,Quick Attack,Headbutt,Slash}
+0031,Nidoqueen,100,2000,92,87,75,85,[Poison,Ground],{Poison Fang,Rock Slide,Quick Attack,Headbutt}
+0032,Nidoran♂,100,2000,57,40,40,40,[Poison],{Poison Fang,Quick Attack,Headbutt,Slash}
+0033,Nidorino,100,2000,72,57,55,55,[Poison],{Poison Fang,Quick Attack,Headbutt,Slash}
+0034,Nidoking,100,2000,102,77,85,75,[Poison,Ground],{Poison Fang,Rock Slide,Quick Attack,Headbutt}
+0035,Clefairy,100,2000,45,48,60,65,[Fairy],{Quick Attack,Headbutt,Slash,Iron Tail}
+0036,Clefable,100,2000,70,73,85,90,[Fairy],{Quick Attack,Headbutt,Slash,Iron Tail}
+0037,Vulpix,100,2000,41,40,50,65,[Fire],{Flame Burst,Quick Attack,Headbutt,Slash}
+0038,Ninetales,100,2000,76,75,81,100,[Fire],{Flamethrower,Quick Attack,Headbutt,Slash}
+0039,Jigglypuff,100,2000,45,20,45,25,[Normal,Fairy],{Quick Attack,Headbutt,Slash,Iron Tail}
+0040,Wigglytuff,100,2000,70,45,75,50,[Normal,Fairy],{Quick Attack,Headbutt,Slash,Iron Tail}
+0041,Zubat,100,2000,45,35,30,40,[Poison,Flying],{Poison Fang,Aerial Ace,Quick Attack,Headbutt}
+0042,Golbat,100,2000,80,70,65,75,[Poison,Flying],{Poison Fang,Aerial Ace,Quick Attack,Headbutt}
+0043,Oddish,100,2000,50,55,75,65,[Grass,Poison],{Sludge Bomb,Leech Seed,Quick Attack,Headbutt}
+0044,Gloom,100,2000,65,70,85,75,[Grass,Poison],{Sludge Bomb,Leech Seed,Quick Attack,Headbutt}
+0045,Vileplume,100,2000,80,85,110,90,[Grass,Poison],{Sludge Bomb,Leech Seed,Quick Attack,Headbutt}
+0046,Paras,100,2000,70,55,45,55,[Bug,Grass],{Leech Seed,Quick Attack,Headbutt,Slash}
+0047,Parasect,100,2000,95,80,60,80,[Bug,Grass],{Leech Seed,Quick Attack,Headbutt,Slash}
+0048,Venonat,100,2000,55,50,40,55,[Bug,Poison],{Poison Fang,Quick Attack,Headbutt,Slash}
+0049,Venomoth,100,2000,65,60,90,75,[Bug,Poison],{Poison Fang,Quick Attack,Headbutt,Slash}
+0050,Diglett,100,2000,55,25,35,45,[Ground],{Rock Slide,Quick Attack,Headbutt,Slash}
+0051,Dugtrio,100,2000,80,50,60,70,[Ground],{Rock Slide,Quick Attack,Headbutt,Slash}
+0052,Meowth,100,2000,45,35,40,40,[Normal],{Quick Attack,Headbutt,Slash,Iron Tail}
+0053,Persian,100,2000,70,60,65,65,[Normal],{Quick Attack,Headbutt,Slash,Iron Tail}
+0054,Psyduck,100,2000,52,48,65,50,[Water],{Water Gun,Quick Attack,Headbutt,Slash}
+0055,Golduck,100,2000,82,78,95,80,[Water],{Surf,Quick Attack,Headbutt,Slash}
+0056,Mankey,100,2000,80,35,35,45,[Fighting],{Brick Break,Quick Attack,Headbutt,Slash}
+0057,Primeape,100,2000,105,60,60,70,[Fighting],{Brick Break,Quick Attack,Headbutt,Slash}
+0058,Growlithe,100,2000,70,45,70,50,[Fire],{Flame Burst,Quick Attack,Headbutt,Slash}
+0059,Arcanine,100,2000,110,80,100,80,[Fire],{Flamethrower,Quick Attack,Headbutt,Slash}
+0060,Poliwag,100,2000,50,40,40,40,[Water],{Water Gun,Quick Attack,Headbutt,Slash}
+0061,Poliwhirl,100,2000,65,65,50,50,[Water],{Water Gun,Quick Attack,Headbutt,Slash}
+0062,Poliwrath,100,2000,95,95,70,90,[Water,Fighting],{Surf,Brick Break,Quick Attack,Headbutt}

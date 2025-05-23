@@ -260,6 +260,7 @@ public class SelectPanel extends Panel{
                 	nextPanel.Ready();
                 }else {
                 	PoobkemonGUIProvisional.juego.setDuelMode("Normal");
+                	nextPanel.Ready();
                 }
             }
         });

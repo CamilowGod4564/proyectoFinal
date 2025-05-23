@@ -65,6 +65,7 @@ public class PoobkemonGUIProvisional extends JFrame {
         battlePanel = new BattlePanel(this, itemsPanel, null, "/presentation/recursos/CampoBatallaPoobkemon.png");
         
         selectPanel.setNextPanel(pokedexPanel);
+        itemsPanel.setNextPanel(battlePanel);
         pokedexPanel.setNextPanel(battlePanel);
 
         mainPanel.add(initPanel, INIT_PANEL);
