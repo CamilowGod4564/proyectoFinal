@@ -32,6 +32,7 @@ public class PoobkemonGUIProvisional extends JFrame {
     private PokedexPanel pokedexPanel;
     private ItemsPanel itemsPanel;
     private BattlePanel battlePanel;
+	private WinnerPanel winnerPanel;
     
 
     public static final String INIT_PANEL = "InitPanel";
@@ -40,6 +41,7 @@ public class PoobkemonGUIProvisional extends JFrame {
     public static final String POKEDEX_PANEL = "PokedexPanel";
     public static final String ITEMS_PANEL = "ItemsPanel";
     public static final String BATTLE_PANEL = "BattlePanel";
+    public static final String WINNER_PANEL = "WinnerPanel";
     
     public PoobkemonGUIProvisional() throws ClassNotFoundException, FileNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException {
     	
@@ -59,14 +61,17 @@ public class PoobkemonGUIProvisional extends JFrame {
         
         initPanel = new InitPanel(this, null, null, "/presentation/recursos/fondoPrincipal.gif");
         selectPanel = new SelectPanel(this, initPanel, null, "/presentation/recursos/fondo1.png");
-        playerPanel = new PlayerPanel(this, selectPanel, null, "/presentation/recursos/fondoPlayer.gif");
-        pokedexPanel = new PokedexPanel(this, selectPanel, null, "/presentation/recursos/fondoPokedex.png");
+        playerPanel = new PlayerPanel(this, selectPanel, null, "/presentation/recursos/playerpanel.png");
+        pokedexPanel = new PokedexPanel(this, playerPanel, null, "/presentation/recursos/fondoPokedex.png");
         itemsPanel = new ItemsPanel(this, pokedexPanel, null, "/presentation/recursos/fondo1.png");
         battlePanel = new BattlePanel(this, itemsPanel, null, "/presentation/recursos/CampoBatallaPoobkemon.png");
+        winnerPanel = new WinnerPanel(this, itemsPanel, null, "/presentation/recursos/winner.png");
         
-        selectPanel.setNextPanel(pokedexPanel);
+        selectPanel.setNextPanel(playerPanel);
+        playerPanel.setNextPanel(pokedexPanel);
+        pokedexPanel.setNextPanel(itemsPanel);
         itemsPanel.setNextPanel(battlePanel);
-        pokedexPanel.setNextPanel(battlePanel);
+        battlePanel.setNextPanel(winnerPanel);
 
         mainPanel.add(initPanel, INIT_PANEL);
         mainPanel.add(selectPanel, SELECT_PANEL);
@@ -74,6 +79,7 @@ public class PoobkemonGUIProvisional extends JFrame {
         mainPanel.add(pokedexPanel, POKEDEX_PANEL);
         mainPanel.add(itemsPanel, ITEMS_PANEL);
         mainPanel.add(battlePanel, BATTLE_PANEL);
+        mainPanel.add(winnerPanel, WINNER_PANEL);
 
         cardLayout.show(mainPanel, INIT_PANEL);
 

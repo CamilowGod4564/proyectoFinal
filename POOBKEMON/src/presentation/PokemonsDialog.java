@@ -19,10 +19,12 @@ public class PokemonsDialog extends JDialog{
 	private JButton[] arrayTeam;
 	private ArrayList<Pokemon> playerPokemons;
 	private BattlePanel panel;
+	private ArrayList<String> pokemonsIds;
 
-	public PokemonsDialog(JFrame parent, ArrayList<String> pokemonsNames,ArrayList<Pokemon> playerPokemons, BattlePanel panel) {
+	public PokemonsDialog(JFrame parent, ArrayList<String> pokemonsNames,ArrayList<String> pokemonsIds,ArrayList<Pokemon> playerPokemons, BattlePanel panel) {
 		super(parent, "TU EQUIPO :D", true);
         this.pokemonsNames = pokemonsNames;
+        this.pokemonsIds = pokemonsIds;
         this.playerPokemons = playerPokemons;
         this.panel = panel;
         prepareElements();
@@ -41,7 +43,7 @@ public class PokemonsDialog extends JDialog{
                 String nombre = pokemonsNames.get(i); //La posicion del nombre del pokemon es la misma al objeto pokemon en playerPokemons por el diseño actual
                 botonPokemon = new JButton(nombre);
                 botonPokemon.putClientProperty("pokemon", playerPokemons.get(i));
-                String ruta = "/presentation/recursos/frame2/" + nombre + ".png";
+                String ruta = "/presentation/recursos/frame2/" + pokemonsIds.get(i) + ".png";
                 try {
                     botonPokemon.setIcon(new ImageIcon(getClass().getResource(ruta)));
                 } catch (Exception e) {
@@ -65,10 +67,26 @@ public class PokemonsDialog extends JDialog{
     	for(JButton b : arrayTeam) {
     		 b.addActionListener(e -> {
     			 JButton source = (JButton) e.getSource();
-    			 PoobkemonGUIProvisional.juego.changePlayingPokemon((Pokemon) source.getClientProperty("pokemon"));
-    			 PoobkemonGUIProvisional.juego.nextTurn();
-    			 panel.refresh();
-    			 dispose();   
+    			 if(PoobkemonGUIProvisional.juego.getCurrentActualPokemon() == ( (Pokemon) source.getClientProperty("pokemon")) ) {
+    				//ventanita de este pokemon ya esta en el campo!!
+    			 }else {
+    				 if(PoobkemonGUIProvisional.juego.pokemonIsFainted((Pokemon) source.getClientProperty("pokemon"))) {
+    					if(PoobkemonGUIProvisional.juego.getPlayerItems().get("REVIVE") != null) { //esto hay que mejorarlo para ser mas extensible
+    						if(PoobkemonGUIProvisional.juego.getPlayerItems().get("REVIVE") > 0) {
+    							PoobkemonGUIProvisional.juego.revivePokemon((Pokemon) source.getClientProperty("pokemon"));
+        						PoobkemonGUIProvisional.juego.changePlayingPokemon( (Pokemon) source.getClientProperty("pokemon"));
+        	        			PoobkemonGUIProvisional.juego.nextTurn();
+        	        			panel.refresh();
+        	        			dispose();   
+    						}
+    					}
+    				 }else if(!PoobkemonGUIProvisional.juego.pokemonIsFainted((Pokemon) source.getClientProperty("pokemon"))) {
+    					PoobkemonGUIProvisional.juego.changePlayingPokemon( (Pokemon) source.getClientProperty("pokemon"));
+ 	        			PoobkemonGUIProvisional.juego.nextTurn();
+ 	        			panel.refresh();
+ 	        			dispose();   
+    				 }
+    			 }	 
     		 });
     	}
     }

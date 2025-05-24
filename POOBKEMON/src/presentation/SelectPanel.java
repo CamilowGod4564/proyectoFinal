@@ -3,13 +3,18 @@ package presentation;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -32,7 +37,8 @@ public class SelectPanel extends Panel{
 	private JButton butonExpertTrainer;
 	private JButton butonJugadorVsMaquina;
 	private JButton butonMaquinaVsMaquina;
-	private JSlider seleccionarModo;
+	private JButton seleccionarPrimerModo;
+	private JButton seleccionarSegundoModo;
 	protected boolean isSurvival = false;
 	protected boolean jugador = true;
 	protected boolean maquina = true;
@@ -147,48 +153,51 @@ public class SelectPanel extends Panel{
         panelInferior.add(inferiorIzquierda, BorderLayout.WEST);
 
         // INFERIOR DERECHA (modo de juego y botones de continuar y atras)
-        JPanel inferiorDerecha = new JPanel(new GridLayout(2,0));
+        JPanel inferiorDerecha = new JPanel(new GridLayout(2,1,0,15));
         inferiorDerecha.setOpaque(false);
+        
+        JPanel modos = new JPanel(new GridBagLayout());
+        modos.setOpaque(false);
+        
 
-        // slider para modo de juego
-        JPanel sliderModo = new JPanel(new BorderLayout());
-        sliderModo.setOpaque(false);
+		GridBagConstraints gbcModos = new GridBagConstraints();
+		
+		gbcModos.gridx = 0;
+		gbcModos.anchor = GridBagConstraints.CENTER;
+		gbcModos.fill = GridBagConstraints.NONE;
+		gbcModos.insets = new Insets(10, 0, 10, 0);
+        
+        //Titulo modo
+        JLabel modo = new JLabel("Elige el modo de juego", SwingConstants.CENTER);
+        modo.setFont(new Font("Arial", Font.BOLD, 18));
+        gbcModos.weightx = 1.0;
+        gbcModos.weighty = 0.1;
+        gbcModos.gridy = 0;
+        gbcModos.fill = GridBagConstraints.BOTH; 
+        modos.add(modo,gbcModos);
+        
+        // MODO JUEGO
+        JPanel modosEspeciales = new JPanel(new GridLayout(1,2,20,0));
+        modosEspeciales.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        modosEspeciales.setOpaque(false);
 
-        JPanel subWestInf = new JPanel();
-        subWestInf.setOpaque(false);
-        subWestInf.setPreferredSize(new Dimension(getWidth()/20, 0));
-        sliderModo.add(subWestInf,BorderLayout.EAST);
+        seleccionarPrimerModo = new JButton("Survival");
+        seleccionarSegundoModo = new JButton("Normal");
+        seleccionarPrimerModo.setOpaque(false);
+        seleccionarSegundoModo.setOpaque(false);
 
-        JPanel subEastInf = new JPanel();
-        subEastInf.setOpaque(false);
-        subEastInf.setPreferredSize(new Dimension(getWidth()/20,0 ));
-        sliderModo.add(subEastInf,BorderLayout.WEST);
+        modosEspeciales.add(seleccionarPrimerModo);
+        modosEspeciales.add(seleccionarSegundoModo);
+        
+        gbcModos.weighty = 0.9; 
+        gbcModos.fill = GridBagConstraints.BOTH; 
+        gbcModos.gridy = 1;
+        modos.add(modosEspeciales,gbcModos);
+        
+        
+        inferiorDerecha.add(modos);
 
-        JLabel subNorthtInf = new JLabel("MODO DE JUEGO");
-        subNorthtInf.setHorizontalAlignment(SwingConstants.CENTER);
-        subNorthtInf.setOpaque(false);
-        subNorthtInf.setPreferredSize(new Dimension(0,getWidth()/20 ));
-        sliderModo.add(subNorthtInf,BorderLayout.NORTH);
-
-
-        seleccionarModo = new JSlider(0,1,0);
-        seleccionarModo.setOpaque(false);
-
-        seleccionarModo.setMajorTickSpacing(1);
-        seleccionarModo.setPaintTicks(true);
-        seleccionarModo.setSnapToTicks(true);
-        seleccionarModo.setPaintLabels(true);
-
-        Hashtable<Integer, JLabel> labelTable = new Hashtable<>();
-        labelTable.put(0, new JLabel("Normal"));
-        labelTable.put(1, new JLabel("Survival"));
-        seleccionarModo.setLabelTable(labelTable);
-
-        sliderModo.add(seleccionarModo,BorderLayout.CENTER);
-
-        inferiorDerecha.add(sliderModo);
-
-        JPanel opcionesFinales = new JPanel(new GridLayout(0,2));
+        JPanel opcionesFinales = new JPanel(new GridLayout(1,2));
         opcionesFinales.setOpaque(false);
 
         butonContinue = new JButton(imagenEscalada("/presentation/recursos/continuar.png",2,9,2,9));
@@ -199,6 +208,7 @@ public class SelectPanel extends Panel{
         opcionesFinales.add(butonContinue);
         opcionesFinales.add(butonBack);
 
+        
         inferiorDerecha.add(opcionesFinales);
 
         panelInferior.add(inferiorDerecha, BorderLayout.CENTER);
@@ -221,15 +231,15 @@ public class SelectPanel extends Panel{
 		butonContinue.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	nextPanel.removeAll();
-            	nextPanel.refresh();
-            	nextPanel.prepareElements();
-            	nextPanel.prepareActions();
-            	gui.changePanel(PoobkemonGUIProvisional.POKEDEX_PANEL);
+            	makeDuel();
+            	nextPanel.Ready();
+            	gui.changePanel(PoobkemonGUIProvisional.PLAYER_PANEL);
             }
         });
+		
         butonBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	gui.changePanel(PoobkemonGUIProvisional.INIT_PANEL); //cambiar eso a lo de opciones
+            	gui.changePanel(PoobkemonGUIProvisional.INIT_PANEL); 
             }
         });
         
@@ -251,17 +261,14 @@ public class SelectPanel extends Panel{
                 maquina = false;
             }
         });
-        seleccionarModo.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-            	int valor = seleccionarModo.getValue();
-                isSurvival = (valor == 1);
-                if(isSurvival) {
-                	PoobkemonGUIProvisional.juego.setDuelMode("Survival");
-                	nextPanel.Ready();
-                }else {
-                	PoobkemonGUIProvisional.juego.setDuelMode("Normal");
-                	nextPanel.Ready();
-                }
+        seleccionarPrimerModo.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+                isSurvival = true;
+            }
+        });
+        seleccionarSegundoModo.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+                isSurvival = false;
             }
         });
 	}
@@ -297,6 +304,12 @@ public class SelectPanel extends Panel{
 	
    }
    
-   
+   public void makeDuel() {
+	   if(isSurvival) {
+       	PoobkemonGUIProvisional.juego.setDuelMode("Survival");
+       }else {
+       	PoobkemonGUIProvisional.juego.setDuelMode("Normal");
+       }
+   }
    
 }

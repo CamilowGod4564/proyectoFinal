@@ -15,9 +15,13 @@ public class SurvivalDuel extends Duel{
 		ArrayList<Pokemon> available = new ArrayList<>(pokemons.values());
 		
 		for(int i = 0; i<7;i++) {
-			p2.addPokemon(available.get(random.nextInt(available.size())).copy());
+			p1.addPokemon(available.get(random.nextInt(available.size())).copy());
+			available.remove(i);
 		}
 		
+		for(int i = 0; i<7;i++) {
+			p2.addPokemon(available.get(random.nextInt(available.size())).copy());
+		}
 		//faltan movimientos aleatorios para cada pokemon >:p
 		
 	}

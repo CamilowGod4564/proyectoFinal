@@ -82,10 +82,7 @@ public class ItemsPanel extends Panel{
 	            item.add(panelitem);
 	            
 	            items.add(item);
-	        }
-	        
-	        
-	          
+	        }  
 	        
 	        
 	        topContainer.add(items, BorderLayout.CENTER);
@@ -108,31 +105,32 @@ public class ItemsPanel extends Panel{
 	public void prepareActions() {
 		botonContinuar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	int j = 0;
             	List<String> lista = new ArrayList<>(numeroItems);
 	
-            	for (JSpinner a : cantidadesJugador1) {
-            		Object valor = a.getValue();
-                    int valorInt = (int) valor;
+
+                int j = 0;
+                for (JSpinner a : cantidadesJugador1) {
+                    int valorInt = (int) a.getValue();
+                    String itemName = lista.get(j);
                     for (int i = 0; i < valorInt; i++) {
-                    	PoobkemonGUIProvisional.juego.playerSelectItem("p1",lista.get(j));
-                    }     	
-                    
-            	}
-            	int k = 0;
-            	for (JSpinner a : cantidadesJugador2) {
-            		Object valor = a.getValue();
-                    int valorInt = (int) valor;
+                        PoobkemonGUIProvisional.juego.playerSelectItem("p1", itemName); 
+                    }
+                    j++;
+                }
+
+                int k = 0;
+                for (JSpinner a : cantidadesJugador2) {
+                    int valorInt = (int) a.getValue();
+                    String itemName = lista.get(k);
                     for (int i = 0; i < valorInt; i++) {
-                    	PoobkemonGUIProvisional.juego.playerSelectItem("p1",lista.get(k));
-                    }     	
-                    
-            	}
+                        PoobkemonGUIProvisional.juego.playerSelectItem("p2", itemName); 
+                    }
+                    k++;
+                }
             	
             	PoobkemonGUIProvisional.juego.confirmPlayers();
             	nextPanel.Ready();
             	gui.changePanel(PoobkemonGUIProvisional.BATTLE_PANEL);
-           
 
             }
         });

@@ -86,5 +86,9 @@ public class Player implements Serializable{
 	public Bag getBag() {
 		return bag;
 	}
+
+	public void useItem(String itemName, Pokemon pokemon) {
+		bag.useItem(itemName, pokemon);
+	}
 	
 }

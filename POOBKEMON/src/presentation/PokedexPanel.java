@@ -44,20 +44,13 @@ public class PokedexPanel extends Panel{
 
 	
 	public PokedexPanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
-		
 		super(gui, prevPanel, nextPanel, backgroundImage);
-		SwingUtilities.invokeLater(() -> {
-		    prepareElements();
-		    prepareActions();
-		});
-		
-
 	}
 	
 	@Override
 	public void Ready() {
-		PoobkemonGUIProvisional.juego.newPlayer("p1");
-    	PoobkemonGUIProvisional.juego.newPlayer("p2"); 
+		 prepareElements();
+		 prepareActions();
 	}
 
 	@Override
@@ -146,8 +139,8 @@ public class PokedexPanel extends Panel{
 	        
 	        
 	       
-	        agregarPlayer1 = new JButton("agregar a P1");
-	        agregarPlayer2 = new JButton("agregar a P2");
+	        agregarPlayer1 = new JButton("AgregarP1");
+	        agregarPlayer2 = new JButton("AgregarP2");
 	        
 	        agregarAJugador = new JPanel(new GridLayout(0,2));
 	        agregarAJugador.setBackground(getBackground());
@@ -265,34 +258,21 @@ public class PokedexPanel extends Panel{
             }
         });
         butonContinue.addActionListener(new ActionListener() {
-        	
         	public void actionPerformed(ActionEvent e) {
-            	if(isSurvival) {		
-            		PoobkemonGUIProvisional.juego.prepareTeams();
-            		PoobkemonGUIProvisional.juego.confirmPlayers();
-            		nextPanel.Ready();
-            		gui.changePanel(PoobkemonGUIProvisional.BATTLE_PANEL);
-            		
-            	}else {
-            		gui.changePanel(PoobkemonGUIProvisional.ITEMS_PANEL);
-	
-            	}
-            
-            	
+            	gui.changePanel(PoobkemonGUIProvisional.ITEMS_PANEL);
             }
         });
         butonBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	gui.changePanel(PoobkemonGUIProvisional.SELECT_PANEL);
+            	PoobkemonGUIProvisional.juego.cleanPlayers();
+            	gui.changePanel(PoobkemonGUIProvisional.PLAYER_PANEL);
             }
         });
         agregarPlayer1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {      
             	//DOMINIO
-            	
             	String nombrePokemon = PoobkemonGUIProvisional.juego.getPokemons().get(numeroPokemon);
-            	
-            	PoobkemonGUIProvisional.juego.playerSelectPokemonForTeam("p1",nombrePokemon);
+            	PoobkemonGUIProvisional.juego.playerSelectPokemonForTeam(prevPanel.getPlayer1Name(),nombrePokemon);
             	
             	//GUI
             	
@@ -304,8 +284,6 @@ public class PokedexPanel extends Panel{
             	pokemonesJugador1.setBorder(null);
               
             	pokemonesJugador1.add(imagenPokemon);
-                
-                
                 revalidate();
 
             }
@@ -314,7 +292,7 @@ public class PokedexPanel extends Panel{
             public void actionPerformed(ActionEvent e) {
             	//DOMINIO
             	String nombrePokemon = PoobkemonGUIProvisional.juego.getPokemons().get(numeroPokemon);
-            	PoobkemonGUIProvisional.juego.playerSelectPokemonForTeam("p2",nombrePokemon);
+            	PoobkemonGUIProvisional.juego.playerSelectPokemonForTeam(prevPanel.getPlayer2Name(),nombrePokemon);
             	
             	//GUI
             	JLabel imagenPokemon = new JLabel(imagenEscalada("/presentation/recursos/frame2/"+numeroPokemon+".png",1,15,1,15));
@@ -326,7 +304,6 @@ public class PokedexPanel extends Panel{
             	pokemonesJugador2.setBorder(null);
             	pokemonesJugador2.add(imagenPokemon);
                 revalidate();
-
             }
         });
 
@@ -335,8 +312,6 @@ public class PokedexPanel extends Panel{
             	pokemonesJugador2 = new JPanel(new GridLayout(1,6));
             	pokemonesJugador1 = new JPanel(new GridLayout(1,6));
             	revalidate();
-            	
-
             }
         });
 

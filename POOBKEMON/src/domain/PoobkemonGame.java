@@ -104,12 +104,24 @@ public class PoobkemonGame implements Serializable{
 		return duel.getPlayerTeam();
 	}
 	
-	public ArrayList<String> getPlayerPokemonsNames(){
+	public ArrayList<String> getPlayerPokemonsIds(){
 		ArrayList<String> answerlist = new ArrayList<String>();
 		for(Pokemon p :duel.getPlayerTeam()) {
 			answerlist.add(p.getPokedexNumber());
 		}
 		return answerlist;
+	}
+	
+	public ArrayList<String> getPlayerPokemonsNames(){
+		ArrayList<String> answerlist = new ArrayList<String>();
+		for(Pokemon p :duel.getPlayerTeam()) {
+			answerlist.add(p.getName());
+		}
+		return answerlist;
+	}
+	
+	public Pokemon getCurrentActualPokemon() {
+		return duel.getPlayerPlayingPokemon(); 
 	}
 	
 	public String getCurrentPokemon() {
@@ -147,7 +159,7 @@ public class PoobkemonGame implements Serializable{
 		return duel.getWaitingPlayer().getPlayingPokemon().getCurrentHealth(); 
 	}
 	
-	public ArrayList<String> getPlayerItems(){
+	public TreeMap<String,Integer> getPlayerItems(){
 		return duel.getPlayerItems();
 	}
 	
@@ -206,5 +218,14 @@ public class PoobkemonGame implements Serializable{
 	public void openGame(String route) {
 		PoobkemonUpload.openGame(route);
 	}
+	
+	public boolean pokemonIsFainted(Pokemon pokemon) {
+		return pokemon.isFainteed();
+	}
+	
+	public void revivePokemon(Pokemon pokemon) {
+		duel.playingPlayer.useItem("REVIVE",pokemon); //mejorar esto
+	}
+	
 	
 }

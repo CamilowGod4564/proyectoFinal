@@ -171,12 +171,14 @@ public abstract class Duel implements Serializable {
 		}else if(p2.getName().equals(playerRemovingTheItem)) {
 			p2.delItem(item);
 		}
-		
 	}
 	
-	public ArrayList<String> getPlayerItems() {
-	    return new ArrayList<>(playingPlayer.getBag().getItems().keySet());
+	public TreeMap<String,Integer> getPlayerItems() {
+		TreeMap<String, Integer> answerTree = new TreeMap<>();
+		for(String s :playingPlayer.getBag().getItems().keySet()) {
+			answerTree.put(s, playingPlayer.getBag().getItemQuantity(s));
+		}
+	    return answerTree;
 	}
-	
 	
 }

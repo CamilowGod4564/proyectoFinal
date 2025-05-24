@@ -242,9 +242,7 @@ public class BattlePanel extends Panel {
         msg.setText("¿Qué hará " + PoobkemonGUIProvisional.juego.getCurrentPokemon() + "?");
         
         layoutMovimientos.show(panelIzquierdo, "TEXTO");
-        
-        
-        //ITEMS DE BAG
+
       
 	}
 
@@ -252,7 +250,7 @@ public class BattlePanel extends Panel {
 	public void prepareActions() {
 		attack.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	            layoutMovimientos.show(panelIzquierdo, "MOVIMIENTOS"); 
+	            layoutMovimientos.show(panelIzquierdo, "MOVIMIENTOS"); //se podria usar layoutMovimientos para mostrar que se uso x mov
 	        }
 	    });
 		for(JButton b : MovementButtons.getButtons()) {
@@ -267,7 +265,8 @@ public class BattlePanel extends Panel {
 		openBag.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 	            BagDialog dialog = new BagDialog((JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource()), 
-	            		PoobkemonGUIProvisional.juego.getPlayerItems());
+	            		PoobkemonGUIProvisional.juego.getPlayerItems(),
+	            		BattlePanel.this);
 	            dialog.setVisible(true); 
 			}
 		});
@@ -277,6 +276,7 @@ public class BattlePanel extends Panel {
 	        public void actionPerformed(ActionEvent e) {
 	        	PokemonsDialog dialog = new PokemonsDialog((JFrame) SwingUtilities.getWindowAncestor((Component) e.getSource()), 
 	            		PoobkemonGUIProvisional.juego.getPlayerPokemonsNames(),
+	            		PoobkemonGUIProvisional.juego.getPlayerPokemonsIds(),
 	            		PoobkemonGUIProvisional.juego.getPlayerPokemons(),
 	            		BattlePanel.this);
 	            dialog.setVisible(true); 
@@ -286,6 +286,8 @@ public class BattlePanel extends Panel {
 		run.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	        	PoobkemonGUIProvisional.juego.surrender();
+	        	nextPanel.Ready();
+	        	gui.changePanel(PoobkemonGUIProvisional.WINNER_PANEL);
 	        }
 	    });
 	}
@@ -319,10 +321,8 @@ public class BattlePanel extends Panel {
 	    msg.setText("¿Qué hará " + PoobkemonGUIProvisional.juego.getCurrentPokemon() + "?");
 	    revalidate();
 	    repaint();
+	    endBattle();
 	}
-	
-	//para change pokemons se necesitan new healthbars change hace un actualizar de mas
-	
 
 	private void handleMovement(JButton button) {
 		PoobkemonGUIProvisional.juego.attack(button.getText());
@@ -333,6 +333,14 @@ public class BattlePanel extends Panel {
         Image imagenEscalada = imagenOriginal.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         return new ImageIcon(imagenEscalada);
     }	
+	
+	public void endBattle() {
+		if (PoobkemonGUIProvisional.juego.getWinner() != null) {
+			PoobkemonGUIProvisional.juego.surrender();
+        	nextPanel.Ready();
+        	gui.changePanel(PoobkemonGUIProvisional.WINNER_PANEL);
+		}
+	}
 }
 
 	

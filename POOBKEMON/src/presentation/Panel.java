@@ -27,7 +27,7 @@ public abstract class Panel extends JPanel {
         this.prevPanel = prevPanel;
         this.nextPanel = nextPanel;
         this.backgroundImage = backgroundImage;
-        setLayout(new BorderLayout());
+        //setLayout(new BorderLayout());
     }
     
     /**
@@ -118,9 +118,22 @@ public abstract class Panel extends JPanel {
 	}
 
 	public void Ready() {
-		
-		
+		prepareElements();
+    	prepareActions();
+	}
+	
+	public Panel getNextPanel() {
+		return nextPanel;
 	}
 
-    
+	public String getPlayer1Name() {
+		return null;
+	}
+
+	public String getPlayer2Name() {
+
+		return null;
+	}
+
+	
 }
