@@ -226,6 +226,19 @@ public class PoobkemonGame implements Serializable{
 	public void revivePokemon(Pokemon pokemon) {
 		duel.playingPlayer.useItem("REVIVE",pokemon); //mejorar esto
 	}
-	
+
+	public ArrayList<String> getOtherPokemonStatus() {
+		return new ArrayList<>(duel.playingPlayer.getPlayingPokemon().getStatuses().keySet());
+	}
+
+	public ArrayList<String> getCurrentPokemonStatus() {
+		return new ArrayList<>(duel.waitingPlayer.getPlayingPokemon().getStatuses().keySet());
+	}
+	public String getMovementPP(Movement m) {
+		return Integer.toString(m.getCurrentPP());
+	}
+	public String getMovementTotalPP(Movement m) {
+		return Integer.toString(m.getTotalPP());
+	}
 	
 }

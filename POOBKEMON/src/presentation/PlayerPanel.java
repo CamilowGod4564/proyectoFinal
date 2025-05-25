@@ -13,7 +13,6 @@ public class PlayerPanel extends Panel {
     private JButton player2ImageButton;
     private JButton volverButton;
     private JButton continuarButton;
-
     private ImageIcon[] trainerIcons;
     private int player1SelectedIcon = 0;
     private int player2SelectedIcon = 1;
@@ -199,20 +198,20 @@ public class PlayerPanel extends Panel {
     @Override
     public String getPlayer1Name() {
     	return primerJugadorNameField.getText().trim().isEmpty() ? "P1" : primerJugadorNameField.getText().trim(); 
-    	}
+    }
     
     @Override
     public String getPlayer2Name() {
     	return segundoJugadorNameField.getText().trim().isEmpty() ? "P2" : segundoJugadorNameField.getText().trim(); 
-    	}
+    }
     
     public int getPlayer1SelectedIcon() { 
     	return player1SelectedIcon; 
-    	}
+    }
     
     public int getPlayer2SelectedIcon() { 
     	return player2SelectedIcon; 
-    	}
+    }
     
     public boolean getMaquina() {
 		return prevPanel.getMaquina();
@@ -226,9 +225,7 @@ public class PlayerPanel extends Panel {
 		return prevPanel.getSurvival();
 	}
     
-    
     private ImageIcon imagenEscalada(String ruta,int anchoN,int anchoD,int altoN,int altoD){
-
         Image jugadorVsjugador = new ImageIcon(getClass().getResource(ruta)).getImage();
         Image jugadorVsjugadorEscalada = jugadorVsjugador.getScaledInstance((getWidth()*anchoN)/anchoD, (getHeight()*altoN)/altoD, Image.SCALE_SMOOTH);
         return new ImageIcon(jugadorVsjugadorEscalada);

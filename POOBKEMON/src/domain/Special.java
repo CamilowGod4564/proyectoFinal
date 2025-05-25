@@ -32,6 +32,11 @@ public class Special extends DirectDamage{
 		
 		return totalDamage;
 	}
+	
+	@Override
+	public Special copy() {
+		return new Special(this.name, this.pp, this.type, this.power);
+	}
 
 
 }

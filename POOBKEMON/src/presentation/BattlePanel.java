@@ -9,6 +9,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,6 +45,10 @@ public class BattlePanel extends Panel {
 	private JLabel attackingLabel;
 	private HealthBar enemyHealth;
 	private HealthBar playerHealth;
+	private JLabel estadoJugador;
+	private JLabel estadoEnemigo;
+	private JLabel vidaPokemonEnemigo;
+	private JLabel vidaPokemonAtacando;
 	
 	public BattlePanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
 		super(gui, prevPanel, nextPanel, backgroundImage);
@@ -81,7 +87,6 @@ public class BattlePanel extends Panel {
 		parteInferior.setOpaque(false);
 		
 		GridBagConstraints gbcSup = new GridBagConstraints();
-		
 		
 		panelVidaEnemigo = new JPanel(null);
 		gbcSup.gridx = 0;
@@ -131,7 +136,7 @@ public class BattlePanel extends Panel {
         enemyLabel.setBounds(70, 20, 250, 250);
         panelPokemonEnemigo.add(enemyLabel); 
         
-	    setupKeyBindings();
+	    
 	    
 	    attackingIcon = new ImageIcon(getClass().getResource("/presentation/recursos/frame2/"+PoobkemonGUIProvisional.juego.getCurrentPokemonPokedex()+".png"));
         attackingLabel = new JLabel(escalarIcono(attackingIcon,150,150));
@@ -149,15 +154,38 @@ public class BattlePanel extends Panel {
         
         //NOMBRE POKEMONS
         
+        vidaPokemonEnemigo = new JLabel(Integer.toString(PoobkemonGUIProvisional.juego.getOtherPokemonCurrentHealth())+"/"+
+        		Integer.toString(PoobkemonGUIProvisional.juego.getOtherPokemonTotalHealth()));
+        
+        vidaPokemonEnemigo.setFont(new Font("Arial", Font.BOLD, 15));
+        vidaPokemonEnemigo.setBounds(215,50, 230, 40);
+        panelVidaEnemigo.add(vidaPokemonEnemigo);
+        
         nombrePokemonEnemigo = new JLabel(PoobkemonGUIProvisional.juego.getOtherPokemon());
         nombrePokemonEnemigo.setFont(new Font("Arial", Font.BOLD, 20));
         nombrePokemonEnemigo.setBounds(55,50, 230, 40);
         panelVidaEnemigo.add(nombrePokemonEnemigo);
         
+        vidaPokemonAtacando = new JLabel(Integer.toString(PoobkemonGUIProvisional.juego.getCurrentPokemonHealth())+"/"+
+        		Integer.toString(PoobkemonGUIProvisional.juego.getCurrentPokemonTotalHealth()));
+        vidaPokemonAtacando.setFont(new Font("Arial", Font.BOLD, 15));
+        vidaPokemonAtacando.setBounds(220,35, 230, 40);
+        panelVidaAtacando.add(vidaPokemonAtacando);
+        
         nombrePokemonJugador = new JLabel(PoobkemonGUIProvisional.juego.getCurrentPokemon());
         nombrePokemonJugador.setFont(new Font("Arial", Font.BOLD, 20));
         nombrePokemonJugador.setBounds(55,35, 230, 40);
         panelVidaAtacando.add(nombrePokemonJugador);
+        
+        estadoJugador = new JLabel(formatearEstados(PoobkemonGUIProvisional.juego.getCurrentPokemonStatus()));
+        estadoJugador.setFont(new Font("Arial", Font.PLAIN, 14));
+        estadoJugador.setBounds(55, 95, 230, 20);
+        panelVidaAtacando.add(estadoJugador);
+        
+        estadoEnemigo = new JLabel(formatearEstados(PoobkemonGUIProvisional.juego.getOtherPokemonStatus()));
+        estadoEnemigo.setFont(new Font("Arial", Font.PLAIN, 14));
+        estadoEnemigo.setBounds(55, 110, 230, 20);
+        panelVidaEnemigo.add(estadoEnemigo);
         
         //PANEL INFERIOR
         
@@ -242,12 +270,14 @@ public class BattlePanel extends Panel {
         msg.setText("¿Qué hará " + PoobkemonGUIProvisional.juego.getCurrentPokemon() + "?");
         
         layoutMovimientos.show(panelIzquierdo, "TEXTO");
-
       
 	}
 
 	@Override
 	public void prepareActions() {
+		
+		setupKeyBindings();
+		
 		attack.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	            layoutMovimientos.show(panelIzquierdo, "MOVIMIENTOS"); //se podria usar layoutMovimientos para mostrar que se uso x mov
@@ -294,9 +324,16 @@ public class BattlePanel extends Panel {
 	
 	@Override
 	public void refresh() {
-		// Update names
+	    // Update names
 	    nombrePokemonJugador.setText(PoobkemonGUIProvisional.juego.getCurrentPokemon());
 	    nombrePokemonEnemigo.setText(PoobkemonGUIProvisional.juego.getOtherPokemon());
+
+	    // Update health text (FIXED)
+	    vidaPokemonAtacando.setText(PoobkemonGUIProvisional.juego.getCurrentPokemonHealth() + "/" +
+	                                PoobkemonGUIProvisional.juego.getCurrentPokemonTotalHealth());
+	    
+	    vidaPokemonEnemigo.setText(PoobkemonGUIProvisional.juego.getOtherPokemonCurrentHealth() + "/" +
+	                               PoobkemonGUIProvisional.juego.getOtherPokemonTotalHealth());
 
 	    // Update health bars
 	    playerHealth.setHP(PoobkemonGUIProvisional.juego.getCurrentPokemonHealth());
@@ -311,13 +348,18 @@ public class BattlePanel extends Panel {
 	    attackingLabel.setIcon(escalarIcono(attackingIcon, 150, 150));
 	    enemyLabel.setIcon(escalarIcono(enemyIcon, 150, 150));
 
+	    // Update states
+	    estadoJugador.setText(formatearEstados(PoobkemonGUIProvisional.juego.getCurrentPokemonStatus()));
+	    estadoEnemigo.setText(formatearEstados(PoobkemonGUIProvisional.juego.getOtherPokemonStatus()));
+
 	    // Update moves
 	    MovementButtons.actualizarNombresDeBotones(
-	            PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(0),
-	            PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(1),
-	            PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(2),
-	            PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(3)
+	        PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(0),
+	        PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(1),
+	        PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(2),
+	        PoobkemonGUIProvisional.juego.getCurrentPokemonMovements().get(3)
 	    );
+
 	    msg.setText("¿Qué hará " + PoobkemonGUIProvisional.juego.getCurrentPokemon() + "?");
 	    revalidate();
 	    repaint();
@@ -341,6 +383,11 @@ public class BattlePanel extends Panel {
         	gui.changePanel(PoobkemonGUIProvisional.WINNER_PANEL);
 		}
 	}
+	
+	private String formatearEstados(ArrayList<String> estados) {
+	    if (estados == null || estados.isEmpty()) return "Estados: Ninguno!";
+	    return "Estados: " + String.join(", ", estados);
+	}	
 }
 
 	

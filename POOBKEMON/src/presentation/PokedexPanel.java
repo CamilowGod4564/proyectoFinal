@@ -41,8 +41,6 @@ public class PokedexPanel extends Panel{
 	private JPanel agregarAJugador;
 	private boolean isSurvival;
 	
-
-	
 	public PokedexPanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
 		super(gui, prevPanel, nextPanel, backgroundImage);
 	}

@@ -34,7 +34,6 @@ public class PoobkemonGUIProvisional extends JFrame {
     private BattlePanel battlePanel;
 	private WinnerPanel winnerPanel;
     
-
     public static final String INIT_PANEL = "InitPanel";
     public static final String SELECT_PANEL = "SelectPanel";
     public static final String PLAYER_PANEL = "PlayerPanel";
@@ -91,7 +90,8 @@ public class PoobkemonGUIProvisional extends JFrame {
                 exit();
             }
         });
-      //Game Logic
+        
+     //Game Logic
     	juego = new PoobkemonGame();
     	llavesPokemones = new ArrayList<>(juego.getPokemons().keySet());
     }
@@ -137,4 +137,5 @@ public class PoobkemonGUIProvisional extends JFrame {
 	public ArrayList<String> getLlavesPokemones() {
 		return llavesPokemones;
 	}
+	
 }

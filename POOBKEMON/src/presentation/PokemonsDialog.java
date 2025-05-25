@@ -31,7 +31,6 @@ public class PokemonsDialog extends JDialog{
         prepareActions();
     }
 
-
     private void prepareElements() {
         
         JPanel panel = new JPanel(new GridLayout(2, 3, 10, 10));
@@ -61,7 +60,6 @@ public class PokemonsDialog extends JDialog{
         pack();  
         setLocationRelativeTo(getParent());
     }
-
 
 	private void prepareActions() {
     	for(JButton b : arrayTeam) {

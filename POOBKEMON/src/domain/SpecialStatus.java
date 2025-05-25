@@ -23,5 +23,11 @@ public class SpecialStatus extends Special {
 	        	targetPokemon.addStatus(status.copy());
 	        }
 	}
+	        
+	@Override
+	public SpecialStatus copy() {
+		return new SpecialStatus(this.name, this.currentPP, this.type, this.power, this.chanceOfApplying, this.status);
+	}
+	
 	
 }

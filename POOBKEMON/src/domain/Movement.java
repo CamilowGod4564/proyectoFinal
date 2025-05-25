@@ -30,6 +30,9 @@ public abstract class Movement implements Serializable {
 	public String getName() {
 		return name;
 	}
+	public int getTotalPP() {
+		return pp;
+	}
 
 	public int getCurrentPP() {
 		return currentPP;
