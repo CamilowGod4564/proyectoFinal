@@ -24,4 +24,13 @@ public class StatusMovement extends Movement {
 		return new StatusMovement(this.name,this.pp , this.type, this.status);
 	}
 
+	@Override
+	public double evaluateEffectiveness(Pokemon self, Pokemon target) {
+		double effectiveness = 0;
+		if(!target.getStatuses().containsKey(this.name)) {
+			effectiveness = 50; 
+		}
+		return effectiveness;
+	}
+
 }

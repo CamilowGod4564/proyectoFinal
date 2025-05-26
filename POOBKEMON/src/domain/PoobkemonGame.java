@@ -47,6 +47,17 @@ public class PoobkemonGame implements Serializable{
 		duel.createPlayer(trainerName);
 	}
 	
+	public void newMachine(String name, String type) {
+	    Class<? extends Player> clazz = switch (type.toLowerCase()) {
+	        case "aggressive" -> AttackingMachine.class;
+	        case "defensive" -> DefensiveMachine.class;
+	        case "alternating" -> ChangingMachine.class;
+	        case "expert" -> ExpertMachine.class;
+	        default -> throw new IllegalArgumentException("Tipo de máquina desconocido: " + type);
+	    };
+	    duel.createPlayer(name, clazz);
+	}
+	
 	public void confirmPlayers() {
 		duel.assignPlayers();
 	}

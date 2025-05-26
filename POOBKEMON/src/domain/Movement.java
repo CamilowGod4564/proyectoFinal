@@ -46,4 +46,6 @@ public abstract class Movement implements Serializable {
 
 	public abstract Movement copy();
 
+	public abstract double evaluateEffectiveness(Pokemon self, Pokemon target);
+
 }

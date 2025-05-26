@@ -39,6 +39,19 @@ public abstract class Duel implements Serializable {
 		}
 	}
 	
+	public void createPlayer(String name, Class<? extends Player> playerClass) {
+	    try {
+	        Player player = playerClass.getDeclaredConstructor(String.class).newInstance(name);
+	        if (p1 == null) {
+	            p1 = player;
+	        } else if (p2 == null) {
+	            p2 = player;
+	        }
+	    } catch (Exception e) {
+	        throw new RuntimeException("Error creating player: " + e.getMessage(), e);
+	    }
+	}
+	
 	public void assignPlayers() { //assign randomly the player who stars
 		Random random = new Random();
         boolean p1Starts = random.nextBoolean(); 

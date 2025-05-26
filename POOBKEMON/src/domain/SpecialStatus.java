@@ -28,6 +28,9 @@ public class SpecialStatus extends Special {
 	public SpecialStatus copy() {
 		return new SpecialStatus(this.name, this.currentPP, this.type, this.power, this.chanceOfApplying, this.status);
 	}
-	
+	@Override
+	public double evaluateEffectiveness(Pokemon self, Pokemon target) {
+		return super.calculateDamage(self, target);
+	}
 	
 }
