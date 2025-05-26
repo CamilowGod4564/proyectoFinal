@@ -18,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import domain.Player;
+
 public class BattlePanel extends Panel {
 
 	private JPanel panelDerecho;
@@ -49,6 +51,8 @@ public class BattlePanel extends Panel {
 	private JLabel estadoEnemigo;
 	private JLabel vidaPokemonEnemigo;
 	private JLabel vidaPokemonAtacando;
+	private Player jugadorActual;
+	private Player jugadorEnemigo;
 	
 	public BattlePanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
 		super(gui, prevPanel, nextPanel, backgroundImage);
@@ -270,6 +274,9 @@ public class BattlePanel extends Panel {
         msg.setText("¿Qué hará " + PoobkemonGUIProvisional.juego.getCurrentPokemon() + "?");
         
         layoutMovimientos.show(panelIzquierdo, "TEXTO");
+        
+        jugadorActual = PoobkemonGUIProvisional.juego.getPlayingPlayer();
+        jugadorEnemigo= PoobkemonGUIProvisional.juego.getWaitingPlayer();
       
 	}
 
@@ -324,11 +331,16 @@ public class BattlePanel extends Panel {
 	
 	@Override
 	public void refresh() {
+		
+		//UPDATE PLAYERS
+		jugadorActual = PoobkemonGUIProvisional.juego.getPlayingPlayer();
+        jugadorEnemigo= PoobkemonGUIProvisional.juego.getWaitingPlayer();
+		
 	    // Update names
 	    nombrePokemonJugador.setText(PoobkemonGUIProvisional.juego.getCurrentPokemon());
 	    nombrePokemonEnemigo.setText(PoobkemonGUIProvisional.juego.getOtherPokemon());
 
-	    // Update health text (FIXED)
+	    // Update health text 
 	    vidaPokemonAtacando.setText(PoobkemonGUIProvisional.juego.getCurrentPokemonHealth() + "/" +
 	                                PoobkemonGUIProvisional.juego.getCurrentPokemonTotalHealth());
 	    

@@ -135,5 +135,9 @@ public abstract class Panel extends JPanel {
 		return null;
 	}
 
+	public String getMachineType() {
+		return null;
+	}
+
 	
 }

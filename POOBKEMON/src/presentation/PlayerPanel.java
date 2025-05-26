@@ -1,6 +1,9 @@
 package presentation;
 
 import javax.swing.*;
+
+import domain.PoobkemonGame;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -177,13 +180,33 @@ public class PlayerPanel extends Panel {
             	PoobkemonGUIProvisional.juego.newPlayer(getPlayer2Name());
             	
             	if(prevPanel.getSurvival()) {
+            		PoobkemonGUIProvisional.juego.newPlayer(getPlayer1Name());
+                	PoobkemonGUIProvisional.juego.newPlayer(getPlayer2Name());
             		PoobkemonGUIProvisional.juego.confirmPlayers();
             		PoobkemonGUIProvisional.juego.prepareTeams();
             		nextPanel.getNextPanel().getNextPanel().Ready();
             		gui.changePanel(PoobkemonGUIProvisional.BATTLE_PANEL);
             	}else {
-            		nextPanel.Ready();
-            		gui.changePanel(PoobkemonGUIProvisional.POKEDEX_PANEL);
+            		if(!getMaquina() && !getJugador()) {
+            			PoobkemonGUIProvisional.juego.setDuelMode("Survival");
+            			PoobkemonGUIProvisional.juego.newMachine(getPlayer1Name(),getMachineType());
+            			PoobkemonGUIProvisional.juego.newMachine(getPlayer2Name(),getMachineType());
+            			PoobkemonGUIProvisional.juego.confirmPlayers();
+                		PoobkemonGUIProvisional.juego.prepareTeams();
+                		nextPanel.getNextPanel().getNextPanel().Ready();
+                		gui.changePanel(PoobkemonGUIProvisional.BATTLE_PANEL);
+            		}else if(getMaquina() && getJugador()) {
+            			PoobkemonGUIProvisional.juego.newPlayer(getPlayer1Name());
+            			PoobkemonGUIProvisional.juego.newMachine(getPlayer2Name(),getMachineType());
+            			PoobkemonGUIProvisional.juego.prepareTeams(); //solo prepara el team de la maquina
+            			nextPanel.Ready();
+                    	gui.changePanel(PoobkemonGUIProvisional.POKEDEX_PANEL);
+            		}else {
+                		PoobkemonGUIProvisional.juego.newPlayer(getPlayer1Name());
+                    	PoobkemonGUIProvisional.juego.newPlayer(getPlayer2Name());
+                    	nextPanel.Ready();
+                    	gui.changePanel(PoobkemonGUIProvisional.POKEDEX_PANEL);
+            		}
             	}
             }
         });
@@ -195,7 +218,11 @@ public class PlayerPanel extends Panel {
         });
     }
 
-    @Override
+    public String getMachineType() {
+		return prevPanel.getMachineType().toLowerCase();
+	}
+
+	@Override
     public String getPlayer1Name() {
     	return primerJugadorNameField.getText().trim().isEmpty() ? "P1" : primerJugadorNameField.getText().trim(); 
     }

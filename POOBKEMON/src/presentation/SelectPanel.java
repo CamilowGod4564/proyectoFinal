@@ -42,6 +42,7 @@ public class SelectPanel extends Panel{
 	protected boolean isSurvival = false;
 	protected boolean jugador = true;
 	protected boolean maquina = true;
+	private String machineType;
 
 	public SelectPanel(PoobkemonGUIProvisional gui, Panel prevPanel, Panel nextPanel, String backgroundImage) {
 		super(gui, prevPanel, nextPanel, backgroundImage);
@@ -271,6 +272,31 @@ public class SelectPanel extends Panel{
                 isSurvival = false;
             }
         });
+        
+        butonDefensiveTrainer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                machineType = "Defensive";
+            }
+        });
+
+        butonAttackingTrainer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                machineType = "Attacking";
+            }
+        });
+
+        butonChangingTrainer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                machineType = "Changing";
+            }
+        });
+
+        butonExpertTrainer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                machineType = "Expert";
+            }
+        });
+        
 	}
 
 	/**
@@ -310,6 +336,11 @@ public class SelectPanel extends Panel{
        }else {
        	PoobkemonGUIProvisional.juego.setDuelMode("Normal");
        }
+   }
+   
+   @Override
+   public String getMachineType() {
+	return machineType; 
    }
    
 }

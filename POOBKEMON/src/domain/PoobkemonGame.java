@@ -49,9 +49,9 @@ public class PoobkemonGame implements Serializable{
 	
 	public void newMachine(String name, String type) {
 	    Class<? extends Player> clazz = switch (type.toLowerCase()) {
-	        case "aggressive" -> AttackingMachine.class;
+	        case "attacking" -> AttackingMachine.class;
 	        case "defensive" -> DefensiveMachine.class;
-	        case "alternating" -> ChangingMachine.class;
+	        case "changing" -> ChangingMachine.class;
 	        case "expert" -> ExpertMachine.class;
 	        default -> throw new IllegalArgumentException("Tipo de máquina desconocido: " + type);
 	    };
@@ -250,6 +250,13 @@ public class PoobkemonGame implements Serializable{
 	}
 	public String getMovementTotalPP(Movement m) {
 		return Integer.toString(m.getTotalPP());
+	}
+	public Player getPlayingPlayer() {
+	    return duel.getPlayingPlayer();
+	}
+
+	public Player getWaitingPlayer() {
+	    return duel.getWaitingPlayer();
 	}
 	
 }
